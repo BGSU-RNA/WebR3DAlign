@@ -1,0 +1,9 @@
+body {
+  padding-top: 40px;
+}
+.container > footer p {
+  text-align: center; /* center align it with the container */
+}
+.content {
+  min-height: 500px;
+}
