@@ -9,7 +9,7 @@ class Results extends CI_Controller {
         $data['basepair_table'] = $this->Results_model->get_basepair_comparison($query_id);
         $data['alignment'] = $this->Results_model->get_alignment($query_id);
 
-		$this->load->view('header');
+		$this->load->view('header', $data);
 		$this->load->view('menu');
 		$this->load->view('results_view', $data);
 		$this->load->view('footer');
