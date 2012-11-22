@@ -51,4 +51,3 @@ application/config/database.php
 application/cache/*
 
 # project specific
-data/*

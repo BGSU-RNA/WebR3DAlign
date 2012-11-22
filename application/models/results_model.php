@@ -9,21 +9,35 @@ class Results_model extends CI_Model {
 
     function get_basepair_comparison($query_id)
     {
-        $filename = "/Servers/rna.bgsu.edu/r3dalign_dev/data/spreadsheets/{$query_id}/{$query_id}.csv";
+        $filename = "/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/{$query_id}.csv";
         $table = '';
         if (($handle = fopen($filename, "r")) !== FALSE) {
+            $isFirstLine = True;
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $num = count($data);
+                if ($isFirstLine) {
+                    $table .= '<thead>';
+                }
                 $table .= '<tr>';
+                $num = count($data);
                 for ($i = 0; $i < $num; $i++) {
-                    if ( $i == 1 or $i == 4 ) {
-                        $table .= "<td class='{$data[$i]}'>" . $data[$i] . '</td>';
+                    if ( $isFirstLine ) {
+                        $tag = 'th';
                     } else {
-                        $table .= '<td>' . $data[$i] . '</td>';
+                        $tag = 'td';
+                    }
+                    if ( $i == 1 or $i == 4 ) {
+                        $table .= "<$tag class='{$data[$i]}'>" . $data[$i] . "</$tag>";
+                    } else {
+                        $table .= "<$tag>" . $data[$i] . "</$tag>";
                     }
                 }
                 $table .= '</tr>';
+                if ($isFirstLine) {
+                    $table .= '</thead><tbody>';
+                    $isFirstLine = False;
+                }
             }
+            $table .= '</tbody>';
             fclose($handle);
         }
         return $table;
@@ -31,7 +45,7 @@ class Results_model extends CI_Model {
 
     function get_alignment($query_id)
     {
-        $filename = "/Servers/rna.bgsu.edu/r3dalign_dev/data/fasta/{$query_id}.fasta";
+        $filename = "/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/{$query_id}.fasta";
         $lines = file($filename);
 
         $num = count($lines) - 1; // the last line is empty

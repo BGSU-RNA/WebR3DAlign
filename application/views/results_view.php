@@ -26,7 +26,7 @@
           <script type="text/javascript">
             jmolInitialize(" /jmol");
             jmolSetAppletColor("#f3f3f3");
-            jmolApplet(450, "load <?php echo base_url(); ?>data/pdb/<?=$query_id?>/<?=$query_id?>.pdb; hide a1l; spacefill off; frame all; select 1.1; color lime; select 1.2; color darkolivegreen; select 1.3; color red; select 1.4; color darkred; select all; display all;");
+            jmolApplet(450, "load <?php echo base_url(); ?>data/results/<?=$query_id?>/<?=$query_id?>.pdb; hide a1l; spacefill off; frame all; select 1.1; color lime; select 1.2; color darkolivegreen; select 1.3; color red; select 1.4; color darkred; select all; display all;");
             jmolBr();
             jmolLink("move 0 360 0 0 0 0 0 0 2", "Rotate once about the Y axis");
           </script>
@@ -53,7 +53,13 @@
 
             <div class="tab-content">
               <div class="tab-pane active" id="overview">
-                <h4>Bar diagram</h4>
+                <h4>
+                  Bar diagram
+                  <small>
+                    <i class="icon-info-sign" rel="tooltip"
+                    data-original-title="Bar diagram help text here"></i>
+                  </small>
+                </h4>
 
                 <ul class="thumbnails">
                   <li>
@@ -92,6 +98,10 @@
 
 
 <script>
+    // activate tooltips
+    $('i').tooltip()
+
+    // activate tab navigation
     $('#nav a').click(function (e) {
       e.preventDefault();
       $(this).tab('show');
