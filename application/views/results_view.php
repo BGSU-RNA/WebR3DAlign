@@ -1,3 +1,6 @@
+<?php
+    $baseurl = base_url();
+?>
   <div class="container r3dalign-results">
     <div class="content">
 
@@ -11,10 +14,29 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#">3D alignment (.pdb)</a></li>
-              <li><a href="#">3D alignment (.fasta)</a></li>
-              <li><a href="#">Alignment spreadsheet (.csv) </a></li>
-              <li><a href="#">Bar diagram (.pdf)</a></li>
+              <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.pdb")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb"
+                       target='_blank' download="<?=$query_id?>.pdb">3D alignment (.pdb)</a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.fasta")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.fasta"
+                       target='_blank' download="<?=$query_id?>.pdb">3D alignment (.fasta)</a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.pdf")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdf"
+                       target='_blank' download="<?=$query_id?>.pdb">Bar diagram (.pdf)</a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.csv")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.csv"
+                       target='_blank' download="<?=$query_id?>.pdb">Basepair comparison (.csv)</a>
+                </li>
+              <?php endif; ?>
             </ul>
           </div>
         </small>
@@ -26,7 +48,7 @@
           <script type="text/javascript">
             jmolInitialize(" /jmol");
             jmolSetAppletColor("#f3f3f3");
-            jmolApplet(450, "load <?php echo base_url(); ?>data/results/<?=$query_id?>/<?=$query_id?>.pdb; hide a1l; spacefill off; frame all; select 1.1; color lime; select 1.2; color darkolivegreen; select 1.3; color red; select 1.4; color darkred; select all; display all;");
+            jmolApplet(450, "load <?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb; hide a1l; spacefill off; frame all; select 1.1; color lime; select 1.2; color darkolivegreen; select 1.3; color red; select 1.4; color darkred; select all; display all;");
             jmolBr();
             jmolLink("move 0 360 0 0 0 0 0 0 2", "Rotate once about the Y axis");
           </script>
@@ -64,7 +86,7 @@
                 <ul class="thumbnails">
                   <li>
                     <a href="#" class="thumbnail">
-                      <img src="<?php echo base_url(); ?>data/bar_diagrams/<?=$query_id?>/<?=$query_id?>.jpg">
+                      <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.jpg" class="fancybox r3dalign-results-crop">
                     </a>
                   </li>
                 </ul>
@@ -100,6 +122,15 @@
 <script>
     // activate tooltips
     $('i').tooltip()
+
+    $('.fancybox').fancybox({
+        afterClose: function(){
+            $('img').css('display', 'inline');
+        },
+        wrapCSS: 'r3dalign-results-crop',
+        height: '500',
+        autoSize: false
+    });
 
     // activate tab navigation
     $('#nav a').click(function (e) {
