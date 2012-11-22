@@ -7,3 +7,58 @@ body {
 .content {
   min-height: 500px;
 }
+.r3dalign-results #basepairs, .r3dalign-results pre {
+  max-height: 470px;
+  overflow:auto;
+}
+.r3dalign-results pre {
+  font-size: 0.6em;
+  font-family: monospace;
+}
+.r3dalign-results .basepair-table td {
+    border-top: 0px;
+}
+.r3dalign-results .cWW {
+    background-color: rgb(31, 183, 20);
+}
+.r3dalign-results .tWW {
+    background-color: rgb(242, 243, 5);
+}
+.r3dalign-results .cWH, .r3dalign-results .cHW {
+    background-color: rgb(255, 204, 153);
+}
+.r3dalign-results .tWH, .r3dalign-results .tHW {
+    background-color: rgb(255, 153, 0);
+}
+.r3dalign-results .cWS, .r3dalign-results .cSW {
+    background-color: rgb(0, 204, 255);
+}
+.r3dalign-results .tWS, .r3dalign-results .tSW {
+    background-color: rgb(51, 102, 255);
+}
+.r3dalign-results .cHS, .r3dalign-results .cSH {
+    background-color: rgb(242, 8, 132);
+}
+.r3dalign-results .tHS, .r3dalign-results .tSH {
+    background-color: rgb(255, 153, 204);
+}
+.r3dalign-results .cSS {
+    background-color: rgb(255, 255, 153);
+}
+.r3dalign-results .tSS {
+    background-color: rgb(254, 167, 70);
+}
+.r3dalign-results .cHH {
+    background-color: rgb(144, 0, 0);
+}
+.r3dalign-results .tHH {
+    background-color: rgb(144, 113, 58);
+}
+
+
+
+
+
+
+
+

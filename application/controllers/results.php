@@ -2,27 +2,16 @@
 
 class Results extends CI_Controller {
 
-	public function index()
+	public function view($query_id)
 	{
-        $row = 1;
-        if (($handle = fopen("/Servers/rna.bgsu.edu/r3dalign_dev/data/spreadsheets/4d24d95bee03d/4d24d95bee03d.csv", "r")) !== FALSE) {
-            $results['data'] = '<table class="table table-bordered table-hover table-condensed">';
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $num = count($data);
-                $row++;
-                $results['data'] .= '<tr>';
-                for ($c=0; $c < $num; $c++) {
-                    $results['data'] .= '<td>' . $data[$c] . '</td>';
-                }
-                $results['data'] .= '</tr>';
-            }
-            $results['data'] .= '</table>';
-            fclose($handle);
-        }
+        $this->load->model('Results_model');
+        $data['query_id'] = $query_id;
+        $data['basepair_table'] = $this->Results_model->get_basepair_comparison($query_id);
+        $data['alignment'] = $this->Results_model->get_alignment($query_id);
 
 		$this->load->view('header');
 		$this->load->view('menu');
-		$this->load->view('results_view', $results);
+		$this->load->view('results_view', $data);
 		$this->load->view('footer');
 	}
 }
