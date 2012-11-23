@@ -11,7 +11,7 @@
         <div class="nav-collapse collapse">
           <ul class="nav">
             <li><a href="#tutorial">Tutorial</a></li>
-            <li><a href="#featured">Featured Results</a></li>
+            <li><a href="#featured">Featured Molecules</a></li>
             <li><a href="#">Standalone Program</a></li>
             <li><a href="http://rna.bgsu.edu/main/contact-us">Contact Us</a></li>
             <li class="dropdown">

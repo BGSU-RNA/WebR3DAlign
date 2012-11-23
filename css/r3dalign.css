@@ -92,3 +92,22 @@ footer {
 .r3dalign-results .tHH {
     background-color: rgb(144, 113, 58);
 }
+
+/* Home page styling */
+.r3dalign-homepage .advanced-options,
+.r3dalign-homepage #mol1_info, .r3dalign-homepage #mol2_info{
+  display: none;
+}
+.r3dalign-homepage .advanced-options, .r3dalign-homepage .advanced-options label,
+.r3dalign-homepage .advanced-options input, .r3dalign-homepage .advanced-options legend {
+    font-size: 12px;
+}
+.r3dalign-input-mini {
+  width: 20px;
+}
+.r3dalign-homepage .small {
+  font-size: 12px;
+}
+.r3dalign-homepage #iteration1 {
+  margin-left: 0px;
+}
