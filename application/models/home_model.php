@@ -10,16 +10,10 @@ class Home_model extends CI_Model {
 
     function get_all_pdbs()
     {
-        $this->db->select('structureId')
-                 ->from('pdb_info')
-                 ->distinct();
-        $query = $this->db->get();
-
-        foreach($query->result() as $row) {
-            $pdbs[] = $row->structureId;
-        }
-
-        return $pdbs;
+        $url = 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_all_rna_pdb_ids';
+        $response = file_get_contents($url);
+        $pdbs = json_decode($response);
+        return $pdbs->pdb_ids;
     }
 
 }
