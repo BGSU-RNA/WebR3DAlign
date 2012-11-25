@@ -95,19 +95,44 @@ footer {
 
 /* Home page styling */
 .r3dalign-homepage .advanced-options,
-.r3dalign-homepage #mol1_info, .r3dalign-homepage #mol2_info{
+.r3dalign-homepage .mol1_info,
+.r3dalign-homepage .mol2_info,
+.r3dalign-homepage .iteration2,
+.r3dalign-homepage .iteration3 {
   display: none;
 }
-.r3dalign-homepage .advanced-options, .r3dalign-homepage .advanced-options label,
-.r3dalign-homepage .advanced-options input, .r3dalign-homepage .advanced-options legend {
-    font-size: 12px;
+.r3dalign-homepage .advanced-options,
+.r3dalign-homepage .advanced-options label,
+.r3dalign-homepage .advanced-options input,
+.r3dalign-homepage .advanced-options legend,
+.r3dalign-homepage input,
+.r3dalign-homepage select,
+.r3dalign-homepage button,
+.r3dalign-homepage .small {
+  font-size: 13px;
 }
 .r3dalign-input-mini {
   width: 20px;
 }
-.r3dalign-homepage .small {
-  font-size: 12px;
+.r3dalign-homepage .mol1_info_fragments .btn-toolbar,
+.r3dalign-homepage .mol2_info_fragments .btn-toolbar {
+  display: inline;
 }
-.r3dalign-homepage #iteration1 {
-  margin-left: 0px;
+.r3dalign-homepage .mol1_info_fragments input,
+.r3dalign-homepage .mol2_info_fragments input {
+  margin: auto 10px auto 10px;
+}
+.r3dalign-homepage .alert {
+  margin: 10px auto 0px auto;
+}
+.pdb_info {
+  border-bottom: 1px dotted;
+}
+.pdb_info:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+.advanced-options input {
+  padding: 1px;
+  margin-bottom: 2px;
 }
