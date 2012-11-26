@@ -124,6 +124,7 @@ footer {
 }
 .r3dalign-homepage .alert {
   margin: 10px auto 0px auto;
+  color: black;
 }
 .pdb_info {
   border-bottom: 1px dotted;
@@ -132,7 +133,12 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
-.advanced-options input {
+.r3dalign-homepage .advanced-options input {
   padding: 1px;
   margin-bottom: 2px;
+}
+.r3dalign-homepage .iteration1,
+.r3dalign-homepage .iteration2,
+.r3dalign-homepage .iteration3 {
+  margin-left: 0px;
 }

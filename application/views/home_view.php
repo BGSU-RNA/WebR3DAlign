@@ -22,7 +22,7 @@
       <div class="row"> <!-- structure 1 controls -->
 
         <div class="span5"> <!-- pdb selection -->
-          <select class="pdb1" data-placeholder="Choose a structure from PDB">
+          <select class="pdb1 span3" data-placeholder="Choose a structure from PDB">
             <option></option>
             <?php foreach ($pdbs as $pdb): ?>
               <option value="<?=$pdb?>"><?=$pdb?></option>
@@ -48,7 +48,7 @@
       <div class="row"> <!-- structure 2 controls -->
 
         <div class="span5"> <!-- pdb selection -->
-          <select class="pdb2" data-placeholder="Choose a structure from PDB">
+          <select class="pdb2 span3" data-placeholder="Choose a structure from PDB">
             <option></option>
             <?php foreach ($pdbs as $pdb): ?>
               <option value="<?=$pdb?>"><?=$pdb?></option>
@@ -67,41 +67,31 @@
 
     </div> <!-- row structure 2 -->
 
-
-    <div class="row well well-small form-inline"> <!-- form controls -->
-      <button type="button" class="btn" id="toggle_advanced">Show advanced options</button>
-      <button type="button" class="btn" id="reset">Reset</button>
-      <div class="btn-group">
-        <a class="btn dropdown-toggle small" data-toggle="dropdown" href="#">
-          Examples
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a>16S</a></li>
-          <li><a>23S</a></li>
-        </ul>
-      </div>
-      <input type="text" class="" placeholder="Email (optional)"></input>
-      <button type="submit" class="btn btn-primary span2 pull-right">Submit</button>
-    </div> <!-- row form controls -->
-
    <!-- Advanced options-->
-   <div class="advanced-options">
-   <div class="row well well-small iteration1" id="iteration1">
+   <div class="advanced-options row">
+   <div class="row well well-small iteration1 span12" id="iteration1">
      <fieldset>
        <div class="span3">
          <strong>Iteration 1</strong><br>
 
          <input type="text" class="r3dalign-input-mini" value="0.5">
-         <span class="help-inline">Discrepancy (d) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">
+           Discrepancy (d)
+           <i class="icon-info-sign" data-original-title="Enter a number between 0 and 0.7"></i>
+         </span>
          <br>
 
          <input type="text" class="r3dalign-input-mini" value="7">
-         <span class="help-inline">Neighborhoods (p) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">
+           Neighborhoods (p)
+           <i class="icon-info-sign" data-original-title="Enter an integer between 2 and 10"></i></span>
          <br>
 
          <input type="text" class="r3dalign-input-mini" value="60">
-         <span class="help-inline">Alignment bandwidth (&beta;) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">
+           Alignment bandwidth (&beta;)
+           <i class="icon-info-sign" data-original-title="Enter a positive integer"></i>
+         </span>
           <br>
         </div>
         <div class="span3">
@@ -135,24 +125,24 @@
       </fieldset>
     </div>
 
-   <div class="row well well-small iteration2" id="iteration2">
+   <div class="row well well-small iteration2 span12" id="iteration2">
      <fieldset>
        <div class="span3">
          <strong>Iteration 2</strong><br>
 
          <input type="text" class="r3dalign-input-mini" value="0.5">
-         <span class="help-inline">Discrepancy (d) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">Discrepancy (d)</span>
          <br>
 
          <input type="text" class="r3dalign-input-mini" value="7">
-         <span class="help-inline">Neighborhoods (p) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">Neighborhoods (p)</span>
          <br>
 
          <input type="text" class="r3dalign-input-mini" value="60">
-         <span class="help-inline">Alignment bandwidth (&beta;) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">Alignment bandwidth (&beta;)</span>
         </div>
         <div class="span3">
-            <strong>Final clique-finding method:</strong> <i class="icon-info-sign"></i>
+            <strong>Final clique-finding method:</strong>
             <label class="radio">
               <input type="radio" name="cliqueMethod2" value="greedy" checked>
               Greedy (Faster)
@@ -163,7 +153,7 @@
             </label>
         </div>
         <div class="span3">
-            <strong>Seed alignment:</strong> <i class="icon-info-sign"></i>
+            <strong>Seed alignment:</strong>
             <label class="radio">
               <input type="radio" name="seed2" id="optionsRadios1" value="NWseed" checked>
               Internally produced alignment
@@ -182,24 +172,24 @@
       </fieldset>
     </div>
 
-   <div class="row well well-small iteration3" id="iteration3">
+   <div class="row well well-small iteration3 span12" id="iteration3">
      <fieldset>
        <div class="span3">
          <strong>Iteration 3</strong><br>
 
          <input type="text" class="r3dalign-input-mini" value="0.5">
-         <span class="help-inline">Discrepancy (d) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">Discrepancy (d)</span>
          <br>
 
          <input type="text" class="r3dalign-input-mini" value="7">
-         <span class="help-inline">Neighborhoods (p) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">Neighborhoods (p)</span>
          <br>
 
          <input type="text" class="r3dalign-input-mini" value="60">
-         <span class="help-inline">Alignment bandwidth (&beta;) <i class="icon-info-sign"></i></span>
+         <span class="help-inline">Alignment bandwidth (&beta;)</span>
         </div>
         <div class="span3">
-            <strong>Final clique-finding method:</strong> <i class="icon-info-sign"></i>
+            <strong>Final clique-finding method:</strong>
             <label class="radio">
               <input type="radio" name="cliqueMethod3" value="greedy" checked>
               Greedy (Faster)
@@ -212,7 +202,25 @@
       </fieldset>
     </div>
 
-    </div>
+    </div> <!-- advanced options -->
+
+
+    <div class="row well well-small form-inline"> <!-- form controls -->
+      <button type="button" class="btn" id="toggle_advanced">Show advanced options</button>
+      <button type="button" class="btn" id="reset">Reset</button>
+      <div class="btn-group dropup">
+        <a class="btn dropdown-toggle small" data-toggle="dropdown" href="#">
+          Examples
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a>16S</a></li>
+          <li><a>23S</a></li>
+        </ul>
+      </div>
+      <input type="text" class="" placeholder="Email (optional)"></input>
+      <button type="submit" class="btn btn-primary span2 pull-right">Submit</button>
+    </div> <!-- row form controls -->
 
     </form>
     </div> <!-- content -->
@@ -225,62 +233,24 @@
 
 <script>
 
+$(function() {
+
     $(".pdb1").chosen().change(function(){
-        var div_id = ".mol1_info";
+        var div = ".mol1_info";
         var pdb_id = this.options[this.selectedIndex].text;
-        UTIL.load_structure_data(div_id, pdb_id);
+        UTIL.load_structure_data(div, pdb_id);
     });
+
     $(".pdb2").chosen().change(function(){
-        var div_id = ".mol2_info";
+        var div = ".mol2_info";
         var pdb_id = this.options[this.selectedIndex].text;
-        UTIL.load_structure_data(div_id, pdb_id);
+        UTIL.load_structure_data(div, pdb_id);
     });
 
-    $("#toggle_advanced").toggle(function(){
-        $(this).html('Hide advanced options');
-        $('.advanced-options').slideDown();
-    }, function(){
-        $(this).html('Show advanced options');
-        $('.advanced-options').slideUp();
-    });
+    UTIL.bind_events();
 
-    $("#toggle_iteration2").on('click', function(){
-        if ( this.checked ) {
-            $("#iteration2").show();
-        } else {
-            $("#iteration2").hide();
-            $("#iteration3").hide();
-            $("#toggle_iteration3").prop('checked', false);
-        }
-    });
+    $('.icon-info-sign').tooltip();
 
-    $("#toggle_iteration3").on('click', function(){
-        if ( this.checked ) {
-            $("#iteration3").show();
-        } else {
-            $("#iteration3").hide();
-        }
-    });
-
-    $("#reset").on('click', function(){
-        $("#mol1_info").hide();
-        $("#mol2_info").hide();
-        $(".mol1_info_fragments").children().remove();
-        $(".mol2_info_fragments").children().remove();
-        $(".pdb1").selectedIndex = 0;
-        $(".pdb2").selectedIndex = 0;
-    });
-
-    $(".plus-fragment").live("click", function(e){
-        event.preventDefault();
-        var parent_div = $(this).parents('.fragment');
-        var clone = parent_div.clone();
-        parent_div.parent().append(clone);
-    });
-
-    $(".minus-fragment").live("click", function(e){
-        e.preventDefault();
-        $(this).parents('.fragment').remove();
-    });
+});
 
 </script>

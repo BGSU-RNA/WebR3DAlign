@@ -29,9 +29,9 @@ var UTIL = (function($) {
     my.update_fragment_selection = function()
     {
         var url = urls.get_structure_info + my.pdb_id;
-        var div = $(my.div_id);
+        var div = $(my.div);
         $.get(url, function(data) {
-            my.create_select_dropdown_for_chains(my.div_id.replace('#','.') + '_fragments', data);
+            my.create_select_dropdown_for_chains(my.div.replace('#','.') + '_fragments', data);
         }, "json");
     }
 
@@ -139,27 +139,90 @@ var UTIL = (function($) {
             text = my.generate_is_regular_member_text(data);
         }
 
-        $(my.div_id).append(text);
+        $(my.div).append(text);
 
         // enable popovers
         $('.' + my.popover_class).click(LookUpPDBInfo);
     }
 
-    my.load_structure_data = function(div_id, pdb_id)
+    my.load_structure_data = function(div, pdb_id)
     {
-        my.div_id = div_id;
+        my.div = div;
         my.pdb_id = pdb_id;
 
         // clear fragments
-        $(div_id.replace('#','.') + '_fragments').children().remove();
+        $(div.replace('#','.') + '_fragments').children().remove();
 
         // clear previously loaded tips
-        $(div_id).children().remove();
+        $(div).children().remove();
 
         my.update_fragment_selection();
         my.get_similar_structures();
 
-        $(my.div_id).show();
+        $(my.div).show();
+    }
+
+    my.events_advanced_interactions = function()
+    {
+        $("#toggle_advanced").toggle(function(){
+            $(this).html('Hide advanced options');
+            $('.advanced-options').slideDown();
+        }, function(){
+            $(this).html('Show advanced options');
+            $('.advanced-options').slideUp();
+        });
+
+        $("#toggle_iteration2").on('click', function(){
+            if ( this.checked ) {
+                $("#iteration2").slideDown();
+            } else {
+                $("#iteration2").slideUp();
+                $("#iteration3").slideUp();
+                $("#toggle_iteration3").prop('checked', false);
+            }
+        });
+
+        $("#toggle_iteration3").on('click', function(){
+            if ( this.checked ) {
+                $("#iteration3").slideDown();
+            } else {
+                $("#iteration3").slideUp();
+            }
+        });
+    }
+
+    my.events_plus_minus_fragments = function()
+    {
+        $(".plus-fragment").live("click", function(e){
+            event.preventDefault();
+            var parent_div = $(this).parents('.fragment');
+            var clone = parent_div.clone();
+            parent_div.parent().append(clone);
+        });
+
+        $(".minus-fragment").live("click", function(e){
+            e.preventDefault();
+            $(this).parents('.fragment').remove();
+        });
+    }
+
+    my.events_reset = function()
+    {
+        $("#reset").on('click', function(){
+            $("#mol1_info").hide();
+            $("#mol2_info").hide();
+            $(".mol1_info_fragments").children().remove();
+            $(".mol2_info_fragments").children().remove();
+            $(".pdb1").selectedIndex = 0;
+            $(".pdb2").selectedIndex = 0;
+         });
+    }
+
+    my.bind_events = function()
+    {
+        my.events_advanced_interactions();
+        my.events_plus_minus_fragments();
+        my.events_reset();
     }
 
     return my;
