@@ -9,10 +9,11 @@ class Home extends CI_Controller {
 
         $data['pdbs'] = $this->Home_model->get_all_pdbs();
 
+        $data['verbose_footer'] = False;
 		$this->load->view('header', $data);
 		$this->load->view('menu');
 		$this->load->view('home_view', $data);
-		$this->load->view('footer');
+		$this->load->view('footer', $data);
 	}
 }
 
