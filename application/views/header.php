@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title><?=$title?></title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="<?=$baseurl?>css/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

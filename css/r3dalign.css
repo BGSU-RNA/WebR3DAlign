@@ -95,8 +95,9 @@ footer {
 
 /* Home page styling */
 .r3dalign-homepage .advanced-options,
-.r3dalign-homepage .mol1_info,
-.r3dalign-homepage .mol2_info,
+.r3dalign-homepage .mol1,
+.r3dalign-homepage .mol2,
+.r3dalign-homepage .results,
 .r3dalign-homepage .iteration2,
 .r3dalign-homepage .iteration3 {
   display: none;
@@ -114,12 +115,12 @@ footer {
 .r3dalign-input-mini {
   width: 20px;
 }
-.r3dalign-homepage .mol1_info_fragments .btn-toolbar,
-.r3dalign-homepage .mol2_info_fragments .btn-toolbar {
+.r3dalign-homepage .mol1_fragments .btn-toolbar,
+.r3dalign-homepage .mol2_fragments .btn-toolbar {
   display: inline;
 }
-.r3dalign-homepage .mol1_info_fragments input,
-.r3dalign-homepage .mol2_info_fragments input {
+.r3dalign-homepage .mol1_fragments input,
+.r3dalign-homepage .mol2_fragments input {
   margin: auto 10px auto 10px;
 }
 .r3dalign-homepage .alert {
@@ -141,4 +142,14 @@ footer {
 .r3dalign-homepage .iteration2,
 .r3dalign-homepage .iteration3 {
   margin-left: 0px;
+}
+.r3dalign-homepage .dropdown-menu li {
+  cursor: pointer;
+}
+.r3dalign-homepage .mol1,
+.r3dalign-homepage .mol2 {
+  margin-top: 5px;
+}
+.r3dalign-homepage input[type="file"] {
+  width: 206px;
 }

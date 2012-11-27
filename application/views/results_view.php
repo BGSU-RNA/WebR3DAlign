@@ -80,7 +80,7 @@
                 <ul class="thumbnails">
                   <li>
                     <a href="#" class="thumbnail">
-                      <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.jpg" class="fancybox r3dalign-results-crop">
+                      <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.jpg" class="fancybox r3dalign-results-crop span6">
                     </a>
                   </li>
                 </ul>
