@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'motifversions';
-$db['default']['password'] = 'sfbXeUvc';
-$db['default']['database'] = 'motifversions';
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'bioinfo';
+$db['default']['database'] = 'r3dalign_dev';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

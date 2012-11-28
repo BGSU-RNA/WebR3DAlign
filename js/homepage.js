@@ -1,12 +1,11 @@
-var UTIL = (function($) {
+var Util = (function($) {
     var my = {},
              urls = {
                         get_structure_info: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_structure_info/',
                         get_equivalent_structures: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_equivalent_structures/',
                         equivalence_class: 'http://rna.bgsu.edu/rna3dhub/nrlist/view/',
                         rna3dhub_pdb: 'http://rna.bgsu.edu/rna3dhub/pdb/',
-                        pdb_img: 'http://www.pdb.org/pdb/images/',
-                        results: 'http://rna.bgsu.edu/r3dalign_dev/results/'
+                        pdb_img: 'http://www.pdb.org/pdb/images/'
                      };
 
     my.popover_class = "pdb_info";
@@ -34,8 +33,8 @@ var UTIL = (function($) {
 
         // create new select
         var s = $("<select />", {
-            name: data.div.replace('.', '') + '_chain' + selects.length,
-            id:   data.div.replace('.', '') + '_chain' + selects.length
+//             id:   data.div.replace('.', '') + '_chains' + selects.length,
+            name: data.div.replace('.', '') + '_chains[]'
         });
         $.each(data.rna_compounds, function(key, value){
             $("<option />", {
@@ -50,8 +49,8 @@ var UTIL = (function($) {
             type: 'text',
             placeholder: 'nucleotides',
             class: 'input-medium',
-            name: data.div.replace('.', '') + '_nts' + selects.length,
-            id:   data.div.replace('.', '') + '_nts' + selects.length
+//             id:   data.div.replace('.', '') + '_nts' + selects.length,
+            name: data.div.replace('.', '') + '_nts[]'
         }).appendTo(d);
 
         // plus and minus button group
@@ -194,7 +193,7 @@ var UTIL = (function($) {
         my.update_fragment_selection(div, pdb_id);
         my.get_similar_structures(div, pdb_id);
 
-        $(div).show();
+        $(div).slideDown();
     }
 
     my.events_advanced_interactions = function()
@@ -233,16 +232,7 @@ var UTIL = (function($) {
             var parent_div = $(this).parents('.fragment');
             var clone = parent_div.clone();
 
-            // TODO
-            clone.children()
-                 .filter('select')
-                 .attr('id', 'test')
-                 .attr('name', 'test');
-
-            clone.children()
-                 .filter('input')
-                 .attr('id', 'test2')
-                 .attr('name', 'test2');
+            clone.children().filter('input[type="text"]'). val('');
 
             parent_div.parent().append(clone);
         });
@@ -253,24 +243,21 @@ var UTIL = (function($) {
         });
     }
 
-    my.events_reset = function()
+    my.reset = function()
     {
-        $("#reset").on('click', function(){
-            $(".mol1").children().remove();
-            $(".mol2").children().remove();
-            $(".mol1_fragments").children().remove();
-            $(".mol2_fragments").children().remove();
-            my.select_pdb_id('.pdb1', '');
-            my.select_pdb_id('.pdb2', '');
-            $("#email").val('');
-            $(".results").hide();
-         });
+        $(".mol1").children().remove();
+        $(".mol2").children().remove();
+        $(".mol1_fragments").children().remove();
+        $(".mol2_fragments").children().remove();
+        my.select_pdb_id('.pdb1', '');
+        my.select_pdb_id('.pdb2', '');
+        $("#email").val('');
+        $(".results").hide();
     }
 
-    my.events_examples = function()
+    my.events_reset = function()
     {
-        $("#rnase_p").on('click', my.examples_rnase_p);
-
+        $("#reset").on('click', my.reset);
     }
 
     my.bind_events = function()
@@ -278,7 +265,6 @@ var UTIL = (function($) {
         my.events_advanced_interactions();
         my.events_plus_minus_fragments();
         my.events_reset();
-        my.events_examples();
     }
 
     my.select_pdb_id = function(target, pdb_id)
@@ -300,8 +286,93 @@ var UTIL = (function($) {
         return index;
     }
 
-    my.examples_rnase_p = function()
+    return my;
+
+}(jQuery));
+
+
+
+var Validator = (function($) {
+    var my = {},
+             urls = {
+                        get_structure_info: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_structure_info/',
+                        get_equivalent_structures: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_equivalent_structures/',
+                     };
+
+    my.popover_class = "";
+
+
+    my.check_iterations = function(data)
     {
+        for (var i = 1; i <= 3; i++) {
+            if ( $("#iteration" + i).is(":visible") ) {
+                $("#iteration_enabled" + i).val(1);
+            } else {
+                $("#iteration_enabled" + i).val(0);
+            }
+        }
+    }
+
+    my.replace_empty_nucleotide_fields = function()
+    {
+        for (var i = 1; i <= 2; i++) {
+            $("input[name='mol" + i + "_nts[]']").each(function(){
+                $this = $(this);
+                if ( $this.val() == '' ) {
+                    $this.val('all');
+                }
+            });
+        }
+    }
+
+    return my;
+
+}(jQuery));
+
+
+var Examples = (function($) {
+
+    var my = {};
+
+    my.url_results = 'http://rna.bgsu.edu/r3dalign_dev/results/';
+
+
+    my._set_results_url = function(query_id)
+    {
+        var $results = $('.results'),
+            a = '<a href="' + my.url_results + query_id + '">View precomputed results</a>';
+
+        $results.children().remove();
+        $results.append(a).show();
+    }
+
+    my._set_nucleotides = function(mol, nts)
+    {
+        var selector = 'input[name="' + mol + '_nts[]"]';
+        if ( $(selector).length > 0 ) {
+            $(selector).first().val(nts);
+        }
+    }
+
+    my._set_chain = function(mol, chain)
+    {
+        var id = 'select[name="' + mol + '_chains[]"]',
+            index = -1;
+        if ( $(id).length > 0 ) {
+            $(id).children().each(function(i, option) {
+                if ( chain == option.value ) {
+                    index = i;
+                    return false;
+                }
+            });
+            $(id)[0].selectedIndex = index;
+        }
+    }
+
+    my.rnase_p = function()
+    {
+        Util.reset();
+
 	    $("#discrepancy1").val("0.5");
 	    $("#neighborhoods1").val("3");
 	    $("#bandwidth1").val("200");
@@ -320,24 +391,151 @@ var UTIL = (function($) {
         $("#iteration2").show();
         $("#iteration3").hide();
 
-        $(".results").children().remove();
-        $(".results").append('<a href="' + urls.results + '4d1269ba996fc">View precomputed results</a>')
-                     .show();
+        my._set_results_url('4d1269ba996fc');
 
-        my.select_pdb_id('.pdb1', '1U9S');
-        my.load_structure_data(".mol1", '1U9S');
-        // use chain A
-
-        my.select_pdb_id('.pdb2', '1NBS');
-        // select chain B
-        $('.mol2').ajaxComplete(function() {
-            $('#mol2_chain0').children().filter('select')[0].selectedIndex = 1;
+        $('.mol1').ajaxComplete(function() {
+            my._set_chain('mol1', 'A');
+            my._set_nucleotides('mol1', 'all');
         });
-        my.load_structure_data(".mol2", '1NBS');
+
+        $('.mol2').ajaxComplete(function() {
+            my._set_chain('mol2', 'B');
+            my._set_nucleotides('mol2', 'all');
+        });
+
+        Util.select_pdb_id('.pdb1', '1U9S');
+        Util.load_structure_data(".mol1", '1U9S');
+
+        Util.select_pdb_id('.pdb2', '1NBS');
+        Util.load_structure_data(".mol2", '1NBS');
 
 	    $("#email").val("");
-	    $("#submit").removeClass('disabled').focus();
+	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
     }
 
+    my.rrna_16s = function()
+    {
+        Util.reset();
+
+	    $("#discrepancy1").val("0.5");
+	    $("#neighborhoods1").val("3");
+	    $("#bandwidth1").val("60");
+
+	    $("#discrepancy2").val("0.5");
+	    $("#neighborhoods2").val("9");
+	    $("#bandwidth2").val("20");
+
+        $("#clique_method_full1").prop('checked', true);
+        $("#clique_method_greedy2").prop('checked', true);
+
+        $("#toggle_iteration2").prop('checked', true);
+        $("#toggle_advanced").html('Hide advanced options');
+        $(".advanced-options").show();
+        $("#iteration1").show();
+        $("#iteration2").show();
+        $("#iteration3").hide();
+
+        my._set_results_url('4d24d95bee03d');
+
+        $('.mol1').ajaxComplete(function() {
+            my._set_chain('mol1', 'A');
+            my._set_nucleotides('mol1', 'all');
+        });
+
+        $('.mol2').ajaxComplete(function() {
+            my._set_chain('mol2', 'A');
+            my._set_nucleotides('mol2', 'all');
+        });
+
+        Util.select_pdb_id('.pdb1', '1J5E');
+        Util.load_structure_data(".mol1", '1J5E');
+
+        Util.select_pdb_id('.pdb2', '2AVY');
+        Util.load_structure_data(".mol2", '2AVY');
+
+	    $("#email").val("");
+	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
+    }
+
+    my.rrna_5s_partial = function()
+    {
+        Util.reset();
+
+	    $("#discrepancy1").val("0.5");
+	    $("#neighborhoods1").val("7");
+	    $("#bandwidth1").val("50");
+
+        $("#clique_method_greedy1").prop('checked', true);
+
+        $("#toggle_advanced").html('Hide advanced options');
+        $(".advanced-options").show();
+        $("#iteration1").show();
+        $("#iteration2").hide();
+        $("#iteration3").hide();
+
+        my._set_results_url('4d24dbc864984');
+
+        $('.mol1').ajaxComplete(function() {
+            my._set_chain('mol1', 'A');
+            my._set_nucleotides('mol1', '2:20,62:69,109:118');
+        });
+
+        $('.mol2').ajaxComplete(function() {
+            my._set_chain('mol2', 'B');
+            my._set_nucleotides('mol2', '2:20,62:69,110:119');
+        });
+
+        Util.select_pdb_id('.pdb1', '2AW4');
+        Util.load_structure_data(".mol1", '2AW4');
+
+        Util.select_pdb_id('.pdb2', '2J01');
+        Util.load_structure_data(".mol2", '2J01');
+
+	    $("#email").val("");
+	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
+    }
+
+    my.rrna_5s_complete = function()
+    {
+        Util.reset();
+
+        $("#toggle_advanced").html('Show advanced options');
+        $(".advanced-options").hide();
+        $("#iteration1").hide();
+        $("#iteration2").hide();
+        $("#iteration3").hide();
+
+        my._set_results_url('4d24dbc864984');
+
+        $('.mol1').ajaxComplete(function() {
+            my._set_chain('mol1', 'A');
+            my._set_nucleotides('mol1', 'all');
+        });
+
+        $('.mol2').ajaxComplete(function() {
+            my._set_chain('mol2', 'B');
+            my._set_nucleotides('mol2', 'all');
+        });
+
+        Util.select_pdb_id('.pdb1', '2AW4');
+        Util.load_structure_data(".mol1", '2AW4');
+
+        Util.select_pdb_id('.pdb2', '2J01');
+        Util.load_structure_data(".mol2", '2J01');
+
+	    $("#email").val("");
+	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
+    }
+
+    my.bind_events = function()
+    {
+        $("#rnase_p").on('click', my.rnase_p);
+        $("#rrna_16s").on('click', my.rrna_16s);
+        $("#rrna_5s_partial").on('click', my.rrna_5s_partial);
+        $("#rrna_5s_complete").on('click', my.rrna_5s_complete);
+    }
+
+
     return my;
-}(jQuery));
+
+ }(jQuery));

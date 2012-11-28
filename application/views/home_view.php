@@ -15,14 +15,14 @@
       </p>
 
       <p>
-        <span class="label label-info">New feature</span>
+        <span class="label label-info">Redundancy report</span>
         R3DAlign is integrated with the <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a>
         of RNA 3D structures.
       </p>
 
     </div>
 
-    <form>
+    <form enctype="multipart/form-data" action="<?php echo base_url();?>query/new" name="main" method="post">
 
     <!-- structure 1 -->
     <div class="row well well-small">
@@ -31,12 +31,12 @@
         <h4 class="span12">First Structure</h4>
       </div>
 
-      <div class="row">
+      <div class="row small">
 
         <!-- pdb selection -->
         <div class="span5">
 
-          <select class="pdb1 span2" tabIndex="1" data-placeholder="Choose PDB id">
+          <select class="pdb1 span2" tabIndex="1" data-placeholder="Choose PDB id" name="pdb1">
             <option></option>
             <?php foreach ($pdbs as $pdb): ?>
               <option value="<?=$pdb?>"><?=$pdb?></option>
@@ -69,12 +69,12 @@
       </div>
 
       <!-- structure 2 controls -->
-      <div class="row">
+      <div class="row small">
 
         <!-- pdb selection -->
         <div class="span5">
 
-          <select class="pdb2 span2" tabIndex="2" data-placeholder="Choose PDB id">
+          <select class="pdb2 span2" tabIndex="2" data-placeholder="Choose PDB id" name="pdb2">
             <option></option>
             <?php foreach ($pdbs as $pdb): ?>
               <option value="<?=$pdb?>"><?=$pdb?></option>
@@ -130,7 +130,7 @@
 
         <div class="span3">
           <strong>Final clique-finding method:</strong>
-          <i class="icon-info-sign"></i>
+          <i class="icon-info-sign" data-original-title="Help text here"></i>
           <label class="radio">
             <input type="radio" name="clique_method1" value="greedy" id="clique_method_greedy1" checked>
             Greedy (Faster)
@@ -143,16 +143,16 @@
 
         <div class="span3">
           <strong>Seed alignment:</strong>
-          <i class="icon-info-sign"></i>
+          <i class="icon-info-sign" data-original-title="Help text here"></i>
           <label class="radio">
-            <input type="radio" name="seed1" id="seed_default1" value="NWseed" checked>
+            <input type="radio" name="seed" id="seed_default" value="NWseed" checked>
               Internally produced alignment
           </label>
           <label class="radio">
-            <input type="radio" name="seed1" id="seed_upload1" value="Manual">
+            <input type="radio" name="seed" id="seed_upload" value="Manual">
             Upload seed alignment (fasta)
           </label>
-          <input type="file" name="upload_seed1" id="upload_seed1" size="20" />
+          <input type="file" name="upload_seed" id="upload_seed" size="20" />
         </div>
 
         <div class="span2">
@@ -160,6 +160,8 @@
             <input type="checkbox" id="toggle_iteration2"> Use this alignment as the seed for next iteration?
           </label>
         </div>
+
+        <input type="hidden" id="iteration_enabled1" name="iteration_enabled1">
 
       </fieldset>
     </div>
@@ -193,16 +195,6 @@
       </div>
 
       <div class="span3">
-        <strong>Seed alignment:</strong>
-        <label class="radio">
-          <input type="radio" name="seed2" id="seed_default2" value="NWseed" checked>
-          Internally produced alignment
-        </label>
-        <label class="radio">
-          <input type="radio" name="seed2" id="seed_upload2" value="Manual">
-          Upload seed alignment (fasta)
-        </label>
-        <input type="file" name="upload_seed2" id="upload_seed2" size="20" />
       </div>
 
       <div class="span2">
@@ -210,6 +202,9 @@
           <input type="checkbox" id="toggle_iteration3"> Use this alignment as the seed for next iteration?
         </label>
       </div>
+
+      <input type="hidden" id="iteration_enabled2" name="iteration_enabled2">
+
       </fieldset>
    </div>
 
@@ -241,6 +236,8 @@
           </label>
         </div>
 
+        <input type="hidden" id="iteration_enabled3" name="iteration_enabled3">
+
       </fieldset>
     </div>
 
@@ -256,16 +253,16 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a id="16s">16S</a></li>
-          <li><a id="5s_partial">5S rRNA (partial chains)</a></li>
-          <li><a id="5s_complete">5S rRNA (complete chains)</a></li>
+          <li><a id="rrna_16s">16S</a></li>
+          <li><a id="rrna_5s_partial">5S rRNA (partial chains)</a></li>
+          <li><a id="rrna_5s_complete">5S rRNA (complete chains)</a></li>
           <li><a id="rnase_p">RNase P</a></li>
         </ul>
       </div>
 
       <input type="text" placeholder="Email (optional)" id="email" name="email">
       <span class="alert alert-info small results"></span>
-      <button type="submit" class="btn btn-primary span2 pull-right disabled" id="submit">Submit</button>
+      <button type="submit" class="btn btn-primary span2 pull-right disabled" id="submit" disabled="disabled">Submit</button>
     </div> <!-- row form controls -->
 
 
@@ -284,28 +281,42 @@
 <script>
 
 $(function() {
-   $('form').submit(function(e) {
-      e.preventDefault();
-      $.ajaxFileUpload({
-         url         :'<?php echo base_url(); ?>/upload/upload_file/',
-         secureuri      :false,
-         fileElementId  :'upload1',
-         dataType    : 'json',
-         data        : {
-            'title'           : 'test'
-         },
-         success  : function (data, status)
-         {
-            if(data.status != 'error')
-            {
-               $('.results').html('Done');
-            }
-            alert(data.msg);
-         }
-      });
-      return false;
-   });
+    $('form').submit(function(e) {
+//         e.preventDefault();
+
+        Validator.check_iterations();
+        Validator.replace_empty_nucleotide_fields();
+
+//         return false;
+
+//         $(this).unbind('submit').submit();
+    });
 });
+
+
+// $(function() {
+//    $('form').submit(function(e) {
+//       e.preventDefault();
+//       $.ajaxFileUpload({
+//          url         :'<?php echo base_url(); ?>/upload/upload_file/',
+//          secureuri      :false,
+//          fileElementId  :'upload1',
+//          dataType    : 'json',
+//          data        : {
+//             'title'           : 'test'
+//          },
+//          success  : function (data, status)
+//          {
+//             if(data.status != 'error')
+//             {
+//                $('.results').html('Done');
+//             }
+//             alert(data.msg);
+//          }
+//       });
+//       return false;
+//    });
+// });
 
 
 $(function() {
@@ -313,16 +324,17 @@ $(function() {
     $(".pdb1").chosen().change(function(){
         var div = ".mol1";
         var pdb_id = this.options[this.selectedIndex].text;
-        UTIL.load_structure_data(div, pdb_id);
+        Util.load_structure_data(div, pdb_id);
     });
 
     $(".pdb2").chosen().change(function(){
         var div = ".mol2";
         var pdb_id = this.options[this.selectedIndex].text;
-        UTIL.load_structure_data(div, pdb_id);
+        Util.load_structure_data(div, pdb_id);
     });
 
-    UTIL.bind_events();
+    Util.bind_events();
+    Examples.bind_events();
 
     $('.icon-info-sign').tooltip();
 
