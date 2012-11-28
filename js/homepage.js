@@ -239,7 +239,17 @@ var Util = (function($) {
 
         $(".minus-fragment").live("click", function(e){
             e.preventDefault();
-            $(this).parents('.fragment').remove();
+            var parent_div = $(this).parents('.fragment');
+            if ( parent_div.siblings().filter('.fragment').length == 0 ) {
+                if (parent_div.parents('.mol1_fragments').length != 0 ) {
+                    $('.pdb1')[0].selectedIndex = 0;
+                    $('.pdb1').trigger("liszt:updated");
+                } else {
+                    $('.pdb2')[0].selectedIndex = 0;
+                    $('.pdb2').trigger("liszt:updated");
+                }
+            }
+            parent_div.remove();
         });
     }
 
@@ -249,8 +259,7 @@ var Util = (function($) {
         $(".mol2").children().remove();
         $(".mol1_fragments").children().remove();
         $(".mol2_fragments").children().remove();
-        my.select_pdb_id('.pdb1', '');
-        my.select_pdb_id('.pdb2', '');
+        my.set_pdb_ids('', '');
         $("#email").val('');
         $(".results").hide();
     }
@@ -267,23 +276,33 @@ var Util = (function($) {
         my.events_reset();
     }
 
-    my.select_pdb_id = function(target, pdb_id)
+    my.set_pdb_ids = function(pdb_id1, pdb_id2)
     {
-        var index = 0,
-            $target = $(target);
+        var index1 = 0,
+            index2 = 0,
+            target1 = '.pdb1',
+            target2 = '.pdb2',
+            $target1 = $(target1),
+            $target2 = $(target2);
 
-        if ( pdb_id != '' ) {
-            $(target).children().each(function(i, option) {
-                if ( pdb_id == option.value ) {
-                    index = i;
+        if ( pdb_id1 != '' && pdb_id2 != '' ) {
+            $target1.children().each(function(i, option) {
+                if ( pdb_id1 == option.value ) {
+                    index1 = i;
+                } else if ( pdb_id2 == option.value ) {
+                    index2 = i;
+                }
+                // break from the loop when both indexes are found
+                if ( index1 != 0 && index2 != 0 ) {
                     return false;
                 }
             });
         }
 
-        $target[0].selectedIndex = index;
-        $target.trigger("liszt:updated");
-        return index;
+        $target1[0].selectedIndex = index1;
+        $target1.trigger("liszt:updated");
+        $target2[0].selectedIndex = index2;
+        $target2.trigger("liszt:updated");
     }
 
     return my;
@@ -373,6 +392,9 @@ var Examples = (function($) {
     {
         Util.reset();
 
+        Util.load_structure_data(".mol1", '1U9S');
+        Util.load_structure_data(".mol2", '1NBS');
+
 	    $("#discrepancy1").val("0.5");
 	    $("#neighborhoods1").val("3");
 	    $("#bandwidth1").val("200");
@@ -403,11 +425,7 @@ var Examples = (function($) {
             my._set_nucleotides('mol2', 'all');
         });
 
-        Util.select_pdb_id('.pdb1', '1U9S');
-        Util.load_structure_data(".mol1", '1U9S');
-
-        Util.select_pdb_id('.pdb2', '1NBS');
-        Util.load_structure_data(".mol2", '1NBS');
+        my._set_pdb_ids('1U9S', '1NBS');
 
 	    $("#email").val("");
 	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
@@ -416,6 +434,9 @@ var Examples = (function($) {
     my.rrna_16s = function()
     {
         Util.reset();
+
+        Util.load_structure_data(".mol1", '1J5E');
+        Util.load_structure_data(".mol2", '2AVY');
 
 	    $("#discrepancy1").val("0.5");
 	    $("#neighborhoods1").val("3");
@@ -447,11 +468,7 @@ var Examples = (function($) {
             my._set_nucleotides('mol2', 'all');
         });
 
-        Util.select_pdb_id('.pdb1', '1J5E');
-        Util.load_structure_data(".mol1", '1J5E');
-
-        Util.select_pdb_id('.pdb2', '2AVY');
-        Util.load_structure_data(".mol2", '2AVY');
+        Util.set_pdb_ids('1J5E', '2AVY');
 
 	    $("#email").val("");
 	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
@@ -460,6 +477,9 @@ var Examples = (function($) {
     my.rrna_5s_partial = function()
     {
         Util.reset();
+
+        Util.load_structure_data(".mol1", '2AW4');
+        Util.load_structure_data(".mol2", '2J01');
 
 	    $("#discrepancy1").val("0.5");
 	    $("#neighborhoods1").val("7");
@@ -485,11 +505,7 @@ var Examples = (function($) {
             my._set_nucleotides('mol2', '2:20,62:69,110:119');
         });
 
-        Util.select_pdb_id('.pdb1', '2AW4');
-        Util.load_structure_data(".mol1", '2AW4');
-
-        Util.select_pdb_id('.pdb2', '2J01');
-        Util.load_structure_data(".mol2", '2J01');
+        Util.set_pdb_ids('2AW4', '2J01');
 
 	    $("#email").val("");
 	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
@@ -498,6 +514,9 @@ var Examples = (function($) {
     my.rrna_5s_complete = function()
     {
         Util.reset();
+
+        Util.load_structure_data(".mol1", '2AW4');
+        Util.load_structure_data(".mol2", '2J01');
 
         $("#toggle_advanced").html('Show advanced options');
         $(".advanced-options").hide();
@@ -517,11 +536,7 @@ var Examples = (function($) {
             my._set_nucleotides('mol2', 'all');
         });
 
-        Util.select_pdb_id('.pdb1', '2AW4');
-        Util.load_structure_data(".mol1", '2AW4');
-
-        Util.select_pdb_id('.pdb2', '2J01');
-        Util.load_structure_data(".mol2", '2J01');
+        Util.set_pdb_ids('2AW4', '2J01');
 
 	    $("#email").val("");
 	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
