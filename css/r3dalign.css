@@ -107,21 +107,27 @@ footer {
 .r3dalign-homepage .advanced-options input,
 .r3dalign-homepage .advanced-options legend,
 .r3dalign-homepage input,
-.r3dalign-homepage select,
 .r3dalign-homepage button,
 .r3dalign-homepage .small {
   font-size: 13px;
 }
+.r3dalign-homepage select {
+  font-size: 12px;
+}
 .r3dalign-input-mini {
-  width: 20px;
+  width: 30px;
 }
-.r3dalign-homepage .mol1_fragments .btn-toolbar,
-.r3dalign-homepage .mol2_fragments .btn-toolbar {
-  display: inline;
+.r3dalign-homepage .fragment .add-on {
+  margin-left: 10px;
 }
-.r3dalign-homepage .mol1_fragments input,
-.r3dalign-homepage .mol2_fragments input {
-  margin: auto 10px auto 10px;
+.r3dalign-homepage .fragment {
+  margin-bottom: 5px;
+}
+.r3dalign-homepage .about p {
+  margin-bottom: 2px;
+}
+.r3dalign-homepage .well {
+  margin-bottom: 10px;
 }
 .r3dalign-homepage .alert {
   margin: 10px auto 0px auto;

@@ -2,11 +2,10 @@
   <div class="container r3dalign-homepage">
     <div class="content">
 
-    <div class="row well well-small small"> <!-- row structure 1 -->
+    <div class="row well well-small small about"> <!-- row structure 1 -->
 
       <p>
-       <span class="label label-info">Instructions</span>
-        Specify two RNA 3D structures that you would like to superimpose and hit submit.
+        <strong>Specify two RNA 3D structures that you would like to superimpose and hit submit.</strong>
         You will be redirected to an interstitial page that you can bookmark.
         Processing usually takes 3-10 minutes.
         You can leave your email address if you wish to be notified once the results are ready.
@@ -15,9 +14,15 @@
       </p>
 
       <p>
-        <span class="label label-info">Redundancy report</span>
+        <strong>
         R3DAlign is integrated with the <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a>
-        of RNA 3D structures.
+        </strong>
+        where all RNA 3D structures are organized into <strong><em>equivalence classes</em></strong>
+        according to organism, sequence and 3D similarity, and structure quality considerations.
+        Each class is <strong><em>represented</em></strong> by a single structure.
+        When a PDB id is selected, its
+        <span class="label label-info">Redundancy report</span>
+        is dynamically loaded from the <a href="http://rna.bgsu.edu/rna3dhub">RNA 3D Hub</a>.
       </p>
 
     </div>
@@ -34,7 +39,7 @@
       <div class="row small">
 
         <!-- pdb selection -->
-        <div class="span5">
+        <div class="span4">
 
           <select class="pdb1 span2" tabIndex="1" data-placeholder="Choose PDB id" name="pdb1">
             <option></option>
@@ -43,7 +48,7 @@
             <?php endforeach; ?>
           </select>
 
-          or upload a file
+          <em>or upload a file</em>
 
           <br>
 
@@ -52,7 +57,7 @@
         </div> <!-- pdb selection -->
 
         <!-- fragment selection -->
-        <div class="span7 mol1_fragments"></div>
+        <div class="span8 mol1_fragments"></div>
 
       </div>
 
@@ -72,7 +77,7 @@
       <div class="row small">
 
         <!-- pdb selection -->
-        <div class="span5">
+        <div class="span4">
 
           <select class="pdb2 span2" tabIndex="2" data-placeholder="Choose PDB id" name="pdb2">
             <option></option>
@@ -81,7 +86,7 @@
             <?php endforeach; ?>
           </select>
 
-          or upload a file
+          <em>or upload a file</em>
 
           <br>
 
@@ -90,7 +95,7 @@
         </div> <!-- pdb selection -->
 
         <!-- fragment selection -->
-        <div class="span7 mol2_fragments"></div>
+        <div class="span8 mol2_fragments"></div>
 
       </div> <!-- structure 2 controls -->
 
@@ -109,28 +114,28 @@
           <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy1" name="discrepancy1">
           <span class="help-inline">
             Discrepancy (d)
-            <i class="icon-info-sign" data-original-title="Enter a number between 0 and 0.7"></i>
+            <i class="icon-question-sign" data-original-title="Enter a number between 0 and 0.7"></i>
           </span>
           <br>
 
           <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods1" name="neighborhoods1">
           <span class="help-inline">
             Neighborhoods (p)
-            <i class="icon-info-sign" data-original-title="Enter an integer between 2 and 10"></i>
+            <i class="icon-question-sign" data-original-title="Enter an integer between 2 and 10"></i>
           </span>
           <br>
 
           <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth1" name="bandwidth1">
           <span class="help-inline">
             Alignment bandwidth (&beta;)
-            <i class="icon-info-sign" data-original-title="Enter a positive integer"></i>
+            <i class="icon-question-sign" data-original-title="Enter a positive integer"></i>
           </span>
           <br>
         </div>
 
         <div class="span3">
           <strong>Final clique-finding method:</strong>
-          <i class="icon-info-sign" data-original-title="Help text here"></i>
+          <i class="icon-question-sign" data-original-title="Help text here"></i>
           <label class="radio">
             <input type="radio" name="clique_method1" value="greedy" id="clique_method_greedy1" checked>
             Greedy (Faster)
@@ -143,7 +148,7 @@
 
         <div class="span3">
           <strong>Seed alignment:</strong>
-          <i class="icon-info-sign" data-original-title="Help text here"></i>
+          <i class="icon-question-sign" data-original-title="Help text here"></i>
           <label class="radio">
             <input type="radio" name="seed" id="seed_default" value="NWseed" checked>
               Internally produced alignment
@@ -260,9 +265,9 @@
         </ul>
       </div>
 
-      <input type="text" placeholder="Email (optional)" id="email" name="email">
-      <span class="alert alert-info small results"></span>
-      <button type="submit" class="btn btn-primary span2 pull-right disabled" id="submit" disabled="disabled">Submit</button>
+      <input type="email" placeholder="Email (optional)" id="email" name="email">
+      <span class="alert alert-success small results"></span>
+      <button type="submit" class="btn btn-primary pull-right span2 disabled" id="submit" disabled="disabled"><i class="icon-ok icon-white"></i> Submit</button>
     </div> <!-- row form controls -->
 
 
@@ -336,7 +341,7 @@ $(function() {
     Util.bind_events();
     Examples.bind_events();
 
-    $('.icon-info-sign').tooltip();
+    $('.icon-question-sign').tooltip();
 
 });
 

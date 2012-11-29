@@ -34,7 +34,8 @@ var Util = (function($) {
         // create new select
         var s = $("<select />", {
 //             id:   data.div.replace('.', '') + '_chains' + selects.length,
-            name: data.div.replace('.', '') + '_chains[]'
+            name: data.div.replace('.', '') + '_chains[]',
+            class: "span4"
         });
         $.each(data.rna_compounds, function(key, value){
             $("<option />", {
@@ -45,18 +46,20 @@ var Util = (function($) {
         s.appendTo(d);
 
         // nucleotides input
-        var i = $("<input>", {
-            type: 'text',
-            placeholder: 'nucleotides',
-            class: 'input-medium',
-//             id:   data.div.replace('.', '') + '_nts' + selects.length,
-            name: data.div.replace('.', '') + '_nts[]'
-        }).appendTo(d);
 
-        // plus and minus button group
-        var buttons = $("<div class='btn-toolbar'><div class='btn-group'><a class='btn btn-small plus-fragment' href='#'><i class='icon-plus'></i></a><a class='btn btn-small minus-fragment' href='#'><i class='icon-minus'></i></a></div></div>")
-                      .appendTo(d);
+        var help = 'Enter nucleotides to align.<br>Ranges can be specified using a colon<br> and can be separated by commas.<br>Example: 2:20,62:69,110:119';
+
+        var nts = $('<div class="input-append input-prepend">' +
+          '<span class="add-on"><i class="icon-question-sign" data-html="true" data-original-title="' + help + '"></i></span>' +
+          '<input class="input-medium" name="' +
+          data.div.replace('.', '') + '_nts[]' + '" type="text" placeholder="leave blank to use all">' +
+          '<button class="btn minus-fragment" type="button"><i class="icon-minus-sign"></i></button>' +
+          '<button class="btn plus-fragment" type="button"><i class="icon-plus-sign"></i></button>' +
+        '</div>').appendTo(d);
+
         d.appendTo(data.div + "_fragments");
+
+        $('.fragment .icon-question-sign').tooltip();
     }
 
     my.update_fragment_selection = function(div, pdb_id)
@@ -193,7 +196,7 @@ var Util = (function($) {
         my.update_fragment_selection(div, pdb_id);
         my.get_similar_structures(div, pdb_id);
 
-        $(div).slideDown();
+        $(div).slideDown('slow');
     }
 
     my.events_advanced_interactions = function()
@@ -232,9 +235,10 @@ var Util = (function($) {
             var parent_div = $(this).parents('.fragment');
             var clone = parent_div.clone();
 
-            clone.children().filter('input[type="text"]'). val('');
+            clone.find('input').val('');
 
             parent_div.parent().append(clone);
+            $('.fragment .icon-question-sign').tooltip();
         });
 
         $(".minus-fragment").live("click", function(e){
@@ -406,12 +410,13 @@ var Examples = (function($) {
         $("#clique_method_full1").prop('checked', true);
         $("#clique_method_full2").prop('checked', true);
 
-        $("#toggle_iteration2").prop('checked', true);
-        $("#toggle_advanced").html('Hide advanced options');
-        $(".advanced-options").show();
-        $("#iteration1").show();
+        if ( !$('#iteration1').is(':visible') ) {
+            $('#toggle_advanced').trigger('click');
+        }
         $("#iteration2").show();
         $("#iteration3").hide();
+        $("#toggle_iteration2").prop('checked', true);
+        $("#toggle_iteration3").prop('checked', false);
 
         my._set_results_url('4d1269ba996fc');
 
@@ -449,12 +454,13 @@ var Examples = (function($) {
         $("#clique_method_full1").prop('checked', true);
         $("#clique_method_greedy2").prop('checked', true);
 
-        $("#toggle_iteration2").prop('checked', true);
-        $("#toggle_advanced").html('Hide advanced options');
-        $(".advanced-options").show();
-        $("#iteration1").show();
+        if ( !$('#iteration1').is(':visible') ) {
+            $('#toggle_advanced').trigger('click');
+        }
         $("#iteration2").show();
         $("#iteration3").hide();
+        $("#toggle_iteration2").prop('checked', true);
+        $("#toggle_iteration3").prop('checked', false);
 
         my._set_results_url('4d24d95bee03d');
 
@@ -487,11 +493,13 @@ var Examples = (function($) {
 
         $("#clique_method_greedy1").prop('checked', true);
 
-        $("#toggle_advanced").html('Hide advanced options');
-        $(".advanced-options").show();
-        $("#iteration1").show();
+        if ( !$('#iteration1').is(':visible') ) {
+            $('#toggle_advanced').trigger('click');
+        }
         $("#iteration2").hide();
         $("#iteration3").hide();
+        $("#toggle_iteration2").prop('checked', false);
+        $("#toggle_iteration3").prop('checked', false);
 
         my._set_results_url('4d24dbc864984');
 
@@ -518,11 +526,13 @@ var Examples = (function($) {
         Util.load_structure_data(".mol1", '2AW4');
         Util.load_structure_data(".mol2", '2J01');
 
-        $("#toggle_advanced").html('Show advanced options');
-        $(".advanced-options").hide();
-        $("#iteration1").hide();
+        if ( !$('#iteration1').is(':visible') ) {
+            $('#toggle_advanced').trigger('click');
+        }
         $("#iteration2").hide();
         $("#iteration3").hide();
+        $("#toggle_iteration2").prop('checked', false);
+        $("#toggle_iteration3").prop('checked', false);
 
         my._set_results_url('4d24dbc864984');
 
