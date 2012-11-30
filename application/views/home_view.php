@@ -13,6 +13,8 @@
         and feel free to <a href="">contact us</a> if you have questions.
       </p>
 
+      <input type="text" data-provide="typeahead" class="typeahead" autocomplete="off" placeholder="Choose PDB id">
+
       <p>
         <strong>
         R3DAlign is integrated with the <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a>
@@ -279,8 +281,84 @@
 
 <script type="text/javascript" src="<?php echo base_url(); ?>css/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/handlebars-1.0.rc.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/main.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/homepage.js"></script>
+
+<script>
+    Handlebars.registerHelper('pdbList', function() {
+      var out = "";
+
+      for(var i=0, l=this.related_pdbs.length; i<l; i++) {
+        out = out + '<a class="' + this.popoverClass + '">' + this.related_pdbs[i] + "</a>";
+        if ( i != l-1 ) {
+            out += ', ';
+        }
+      }
+      return new Handlebars.SafeString(out);
+    });
+</script>
+
+<!-- Handlebars templates -->
+<script id="representative-structure" type="text/x-handlebars-template">
+  <div>
+    <span class="label label-info">Redundancy report</span>
+    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    represents
+    {{numStructures}}
+    other structures ({{pdbList}})
+    together forming an
+    <a href="{{url}}" target="_blank">equivalence class</a>.
+  </div>
+</script>
+
+<script id="single-member" type="text/x-handlebars-template">
+  <div>
+    <span class="label label-info">Redundancy report</span>
+    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    is a single member of an
+    <a href="{{url}}" target="_blank">equivalence class</a>.
+  </div>
+</script>
+
+<script id="the-only-other-member" type="text/x-handlebars-template">
+  {{! 1A4D is represented by 1A51, which together form NR_all_39400.1 }}
+  <div>
+    <span class="label label-info">Redundancy report</span>
+    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    is represented by
+    <a class="{{popoverClass}}">{{representative}}</a>,
+    which together form an
+    <a href="{{url}}" target="_blank">equivalence class</a>.
+  </div>
+</script>
+
+<script id="regular-member" type="text/x-handlebars-template">
+  {{! special case 3KLV }}
+  <div>
+    <span class="label label-info">Redundancy report</span>
+    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    is represented by
+    <a class="{{popoverClass}}">{{representative}}</a>
+    along with
+    {{numStructures}} other
+    structure{{#if manyStructures}}s{{/if}}
+    ({{pdbList}}),
+    which together form an
+    <a href="{{url}}" target="_blank">equivalence class</a>.
+  </div>
+</script>
+
+<script id="no-equivalence-class" type="text/x-handlebars-template">
+  <div class="alert alert-error">
+    <span class="label label-info">Redundancy report</span>
+    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    hasn't been included in the
+    <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a>.
+    Either it does not have any complete nucleotides,
+    or it hasn't been processed yet.
+  </div>
+</script>
 
 
 <script>
@@ -343,6 +421,14 @@ $(function() {
 
     $('.icon-question-sign').tooltip();
 
+});
+
+$('.typeahead').typeahead({
+    source: function (query, process) {
+        return $.get('http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_all_rna_pdb_ids', { query: query }, function (data) {
+            return process(data.pdb_ids);
+        });
+    }
 });
 
 </script>

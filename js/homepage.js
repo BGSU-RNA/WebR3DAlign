@@ -84,84 +84,51 @@ var Util = (function($) {
 
     my.generate_no_equivalence_class_text = function(data)
     {
-        return $('<div>', {
-            class : "fade in alert alert-important"
-        }).append('<span class="label label-info">Redundancy report</span> ')
-          .append('<a class="' + my.popover_class + '">' + data.pdb_id + '</a> ' +
-                  " hasn't been included in the Non-redundant Atlas." +
-                  " Either it doesnt't have any complete nucleotides, or it hasn't been processed yet.");
+        var source   = $("#no-equivalence-class").html();
+        var template = Handlebars.compile(source);
+        return template(data);
     }
 
     my.generate_is_representative_text = function(data)
     {
-        // prepare the list of similar structures
-        var links = $.map(data.related_pdbs, function(val) {
-            return '<a class="' + my.popover_class + '">' + val + '</a>';
-        });
-
-        return $('<div>', {
-            class: "fade in ",
-        }).append('<span class="label label-info">Redundancy report</span> ')
-          .append('<a class="' + my.popover_class + '">' + data.pdb_id + '</a>')
-          .append(' represents ')
-          .append('<a target="_blank" href="' + urls.equivalence_class + data.eq_class +
-                  '">' + data.related_pdbs.length + ' structures</a>')
-          .append(', including ')
-          .append(links.join(', ') + '.');
+        var source   = $("#representative-structure").html();
+        var template = Handlebars.compile(source);
+        return template(data);
     }
 
     my.generate_is_single_member_text = function(data)
     {
-        return $('<div>', {
-            class : "fade in "
-        }).append('<span class="label label-info">Redundancy report</span> ')
-          .append('<a class="' + my.popover_class + '">' + data.pdb_id + '</a>')
-          .append(' is a single member of ')
-          .append('<a target="_blank" href="' + urls.equivalence_class + data.pdb_id + '">' +
-                   data.eq_class + '</a>');
+        var source   = $("#single-member").html();
+        var template = Handlebars.compile(source);
+        return template(data);
     }
 
     my.generate_is_regular_member_text = function(data)
     {
         // remove the first element, which is the representative
         data.related_pdbs = data.related_pdbs.slice(1, data.related_pdbs.length);
+        data.numStructures = data.related_pdbs.length;
+        data.manyStructures = data.numStructures == 1 ? false : true;
 
-        // prepare the list of similar structures
-        var links = $.map(data.related_pdbs, function(val) {
-            return '<a class="' + my.popover_class + '">' + val + '</a>';
-        });
-
-        return $('<div>', {
-                class: "fade in "
-        }).append('<span class="label label-info">Redundancy report</span> ')
-          .append('<a class="' + my.popover_class + '">' + data.pdb_id + '</a>')
-          .append(' is represented by ')
-          .append('<a class="' + my.popover_class + '">' + data.representative + '</a>')
-          .append(' along with ')
-          .append('<a href="' + urls.equivalence_class +
-                   data.eq_class + '" target="_blank">' + data.related_pdbs.length +
-                  ' other structure' + (data.related_pdbs.length == 1 ? '' : 's') +
-                  '</a>')
-          .append(', including ' + links.join(', ') + '.');
+        var source   = $("#regular-member").html();
+        var template = Handlebars.compile(source);
+        return template(data);
     }
 
     my.generate_is_the_only_other_member_text = function(data)
     {
-        // 1A4D is represented by 1A51, which together form NR_all_39400.1
-        return $('<div>', {
-                class: "fade in "
-        }).append('<span class="label label-info">Redundancy report</span> ')
-          .append('<a class="' + my.popover_class + '">' + data.pdb_id + '</a>')
-          .append(' is represented by ')
-          .append('<a class="' + my.popover_class + '">' + data.representative + '</a>')
-          .append(', which together form ')
-          .append('<a href="' + urls.equivalence_class +
-                   data.eq_class + '" target="_blank">' + data.eq_class + '</a>');
+        var source   = $("#the-only-other-member").html();
+        var template = Handlebars.compile(source);
+        return template(data);
     }
 
     my.update_similar_structures_template = function(data)
     {
         var text = '';
+
+        data.url = urls.equivalence_class + data.eq_class;
+        data.popoverClass = my.popover_class;
+        data.numStructures = data.related_pdbs.length;
 
         if ( data.related_pdbs.length == 0 && data.representative == null) {
             text = my.generate_no_equivalence_class_text(data)
@@ -196,7 +163,7 @@ var Util = (function($) {
         my.update_fragment_selection(div, pdb_id);
         my.get_similar_structures(div, pdb_id);
 
-        $(div).slideDown('slow');
+        $(div).slideDown();
     }
 
     my.events_advanced_interactions = function()

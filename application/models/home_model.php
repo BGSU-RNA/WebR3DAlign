@@ -5,7 +5,6 @@ class Home_model extends CI_Model {
     {
         $CI = & get_instance();
         parent::__construct();
-        $this->load->database();
     }
 
     function get_all_pdbs()
