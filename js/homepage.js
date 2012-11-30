@@ -232,8 +232,12 @@ var Util = (function($) {
         $('#clique_method_greedy' + iterationId).attr('checked', true);
         if ( iterationId == 1 ) {
             $('#seed_default').attr('checked', true);
-            $('#upload_seed').remove();
-            $('#seed_upload').parent().after('<input type="file" name="upload_seed" id="upload_seed" size="20" />');
+            $('#seed_upload_file').remove();
+            $('#seed_upload_toggle').parent()
+                                    .after('<input type="file" ' +
+                                                  'name="seed_upload_file" ' +
+                                                  'id="seed_upload_file" ' +
+                                                  'size="20" disabled/>');
         }
     }
 
@@ -266,6 +270,14 @@ var Util = (function($) {
         my.events_advanced_interactions();
         my.events_plus_minus_fragments();
         my.events_reset();
+
+        $('#seed_upload_toggle').click(function(){
+            $('#seed_upload_file').prop('disabled', '');
+        });
+        $('#seed_default').click(function(){
+            $('#seed_upload_file').prop('disabled', 'disabled');
+        });
+
     }
 
     my.set_pdb_ids = function(pdb_id1, pdb_id2)

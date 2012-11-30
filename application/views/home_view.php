@@ -156,10 +156,10 @@
               Internally produced alignment
           </label>
           <label class="radio">
-            <input type="radio" name="seed" id="seed_upload" value="Manual">
+            <input type="radio" name="seed" id="seed_upload_toggle" value="Manual">
             Upload seed alignment (fasta)
           </label>
-          <input type="file" name="upload_seed" id="upload_seed" size="20" />
+          <input type="file" name="seed_upload_file" id="seed_upload_file" size="20" disabled/>
         </div>
 
         <div class="span2">
