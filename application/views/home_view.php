@@ -309,6 +309,31 @@
 </script>
 
 <!-- Handlebars templates -->
+<script id="chain-fragment" type="text/x-handlebars-template">
+  <div class="form-inline fragment">
+
+    <select name="{{chainSelectName}}" class="span4">
+      {{#each rna_compounds}}
+        <option value="{{chain}}">{{chain}}: {{compound}} ({{length}} nts)</option>
+      {{/each}}
+    </select>
+
+    <div class="input-append input-prepend">
+      <span class="add-on">
+        <i class="icon-question-sign" data-html="true"
+           data-original-title="Enter nucleotides to align.<br>
+                                Ranges can be specified using a colon<br>
+                                and can be separated by commas.<br>
+                                Example: 2:20,62:69,110:119"></i>
+      </span>
+      <input class="input-medium" name="{{ntsInputName}}" type="text" placeholder="leave blank to use all">
+      <button class="btn minus-fragment" type="button"><i class="icon-minus-sign"></i></button>
+      <button class="btn plus-fragment" type="button"><i class="icon-plus-sign"></i></button>
+    </div>
+
+  </div>
+</script>
+
 <script id="representative-structure" type="text/x-handlebars-template">
   <div>
     <span class="label label-info">Redundancy report</span>

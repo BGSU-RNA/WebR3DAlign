@@ -10,54 +10,17 @@ var Util = (function($) {
 
     my.popover_class = "pdb_info";
 
-    my.nodes = {
-                    iteration1: $('#iteration1'),
-                    iteration2: $('#iteration2'),
-                    iteration3: $('#iteration3'),
-
-
-                };
-
-//     my.dom.examples = {rnase_p: '#rnase_p'};
-
 
     my.create_select_dropdown_for_chains = function(data)
     {
-        // get existing selects
-        var selects = $(data.div + ' select');
+        data.chainSelectName = data.div.replace('.', '') + '_chains[]';
+        data.ntsInputName = data.div.replace('.', '') + '_nts[]';
 
-        // create wrapper div
-        var d = $("<div>", {
-            class: 'form-inline fragment',
-        });
+        var source   = $("#chain-fragment").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
 
-        // create new select
-        var s = $("<select />", {
-//             id:   data.div.replace('.', '') + '_chains' + selects.length,
-            name: data.div.replace('.', '') + '_chains[]',
-            class: "span4"
-        });
-        $.each(data.rna_compounds, function(key, value){
-            $("<option />", {
-                value: value.chain,
-                text: 'Chain ' + value.chain + ': ' + value.compound + ' (' + value.length + ' nts)'
-            }).appendTo(s);
-        });
-        s.appendTo(d);
-
-        // nucleotides input
-
-        var help = 'Enter nucleotides to align.<br>Ranges can be specified using a colon<br> and can be separated by commas.<br>Example: 2:20,62:69,110:119';
-
-        var nts = $('<div class="input-append input-prepend">' +
-          '<span class="add-on"><i class="icon-question-sign" data-html="true" data-original-title="' + help + '"></i></span>' +
-          '<input class="input-medium" name="' +
-          data.div.replace('.', '') + '_nts[]' + '" type="text" placeholder="leave blank to use all">' +
-          '<button class="btn minus-fragment" type="button"><i class="icon-minus-sign"></i></button>' +
-          '<button class="btn plus-fragment" type="button"><i class="icon-plus-sign"></i></button>' +
-        '</div>').appendTo(d);
-
-        d.appendTo(data.div + "_fragments");
+        $(data.div + "_fragments").append(html);
 
         $('.fragment .icon-question-sign').tooltip();
     }
