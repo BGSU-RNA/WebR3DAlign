@@ -13,8 +13,6 @@
         and feel free to <a href="">contact us</a> if you have questions.
       </p>
 
-      <input type="text" data-provide="typeahead" class="typeahead" autocomplete="off" placeholder="Choose PDB id">
-
       <p>
         <strong>
         R3DAlign is integrated with the <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a>
@@ -43,14 +41,10 @@
         <!-- pdb selection -->
         <div class="span4">
 
-          <select class="pdb1 span2" tabIndex="1" data-placeholder="Choose PDB id" name="pdb1">
-            <option></option>
-            <?php foreach ($pdbs as $pdb): ?>
-              <option value="<?=$pdb?>"><?=$pdb?></option>
-            <?php endforeach; ?>
-          </select>
-
-          <em>or upload a file</em>
+          <input type="text" tabIndex="1" data-provide="typeahead" class="typeahead span2"
+                 autocomplete="off" placeholder="Enter PDB id" id="pdb1" name="pdb1"
+                 data-structure="1">
+          <span class="help-inline"><em>or upload a file</em></span>
 
           <br>
 
@@ -81,14 +75,10 @@
         <!-- pdb selection -->
         <div class="span4">
 
-          <select class="pdb2 span2" tabIndex="2" data-placeholder="Choose PDB id" name="pdb2">
-            <option></option>
-            <?php foreach ($pdbs as $pdb): ?>
-              <option value="<?=$pdb?>"><?=$pdb?></option>
-            <?php endforeach; ?>
-          </select>
-
-          <em>or upload a file</em>
+          <input type="text" tabIndex="2" data-provide="typeahead" class="typeahead span2"
+                 autocomplete="off" placeholder="Enter PDB id" id="pdb2" name="pdb2"
+                 data-structure="2">
+          <span class="help-inline"><em>or upload a file</em></span>
 
           <br>
 
@@ -288,7 +278,6 @@
 </div> <!-- wrap -->
 
 
-<script type="text/javascript" src="<?php echo base_url(); ?>css/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/handlebars-1.0.rc.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/main.js"></script>
@@ -337,7 +326,7 @@
 <script id="representative-structure" type="text/x-handlebars-template">
   <div>
     <span class="label label-info">Redundancy report</span>
-    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    <a class="{{popoverClass}}">{{pdbId}}</a>
     represents
     {{numStructures}}
     other structures ({{pdbList}})
@@ -349,7 +338,7 @@
 <script id="single-member" type="text/x-handlebars-template">
   <div>
     <span class="label label-info">Redundancy report</span>
-    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    <a class="{{popoverClass}}">{{pdbId}}</a>
     is the single member of an
     <a href="{{url}}" target="_blank">equivalence class</a>.
   </div>
@@ -359,7 +348,7 @@
   {{! 1A4D is represented by 1A51, which together form NR_all_39400.1 }}
   <div>
     <span class="label label-info">Redundancy report</span>
-    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    <a class="{{popoverClass}}">{{pdbId}}</a>
     is represented by
     <a class="{{popoverClass}}">{{representative}}</a>,
     which together form an
@@ -371,7 +360,7 @@
   {{! special case 3KLV }}
   <div>
     <span class="label label-info">Redundancy report</span>
-    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    <a class="{{popoverClass}}">{{pdbId}}</a>
     is represented by
     <a class="{{popoverClass}}">{{representative}}</a>
     along with
@@ -386,7 +375,7 @@
 <script id="no-equivalence-class" type="text/x-handlebars-template">
   <div class="alert alert-error">
     <span class="label label-info">Redundancy report</span>
-    <a class="{{popoverClass}}">{{pdb_id}}</a>
+    <a class="{{popoverClass}}">{{pdbId}}</a>
     hasn't been included in the
     <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a>.
     Either it does not have any complete nucleotides,
@@ -438,32 +427,20 @@ $(function() {
 
 $(function() {
 
-    $(".pdb1").chosen().change(function(){
-        var div = ".mol1";
-        var pdb_id = this.options[this.selectedIndex].text;
-        Util.load_structure_data(div, pdb_id);
-    });
-
-    $(".pdb2").chosen().change(function(){
-        var div = ".mol2";
-        var pdb_id = this.options[this.selectedIndex].text;
-        Util.load_structure_data(div, pdb_id);
-    });
-
-    Util.bind_events();
+    Events.bind_events();
     Examples.bind_events();
 
     $('.icon-question-sign').tooltip();
     $('.reset-advanced').tooltip();
 
-});
+    $('.typeahead').typeahead({
+        source: function (query, process) {
+            return $.get('http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_all_rna_pdb_ids', { query: query }, function (data) {
+                return process(data.pdb_ids);
+            });
+        }
+    });
 
-$('.typeahead').typeahead({
-    source: function (query, process) {
-        return $.get('http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_all_rna_pdb_ids', { query: query }, function (data) {
-            return process(data.pdb_ids);
-        });
-    }
 });
 
 </script>

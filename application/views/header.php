@@ -10,7 +10,6 @@
     <link href="<?=$baseurl?>css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?=$baseurl?>css/r3dalign.css" rel="stylesheet">
     <link rel="stylesheet" href="<?=$baseurl?>css/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="<?=$baseurl?>css/chosen/chosen.css" type="text/css" media="screen" />
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="<?=$baseurl?>css/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
