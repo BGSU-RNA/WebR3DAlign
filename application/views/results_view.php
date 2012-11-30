@@ -39,7 +39,7 @@
                 <ul class="dropdown-menu" role="menu">
                   <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.pdb")): ?>
                     <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb"
-                           target='_blank' download="<?=$query_id?>.pdb">3D alignment (.pdb)</a>
+                           target='_blank' download="<?=$query_id?>.pdb">3D superposition (.pdb)</a>
                     </li>
                   <?php endif; ?>
 

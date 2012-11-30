@@ -5,7 +5,7 @@
     <div class="row well well-small small about"> <!-- row structure 1 -->
 
       <p>
-        <strong>Specify two RNA 3D structures that you would like to superimpose and hit submit.</strong>
+        <strong>Specify two RNA 3D structures that you would like to align and hit submit.</strong>
         You will be redirected to an interstitial page that you can bookmark.
         Processing usually takes 3-10 minutes.
         You can leave your email address if you wish to be notified once the results are ready.
@@ -316,7 +316,7 @@
   <div>
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdb_id}}</a>
-    is a single member of an
+    is the single member of an
     <a href="{{url}}" target="_blank">equivalence class</a>.
   </div>
 </script>
