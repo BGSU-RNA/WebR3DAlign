@@ -148,7 +148,7 @@ var Util = (function($) {
 
         $(data.div).append(text);
 
-        // enable popovers
+        // enable popovers on the newly created elements
         $('.' + my.popover_class).click(LookUpPDBInfo);
     }
 
@@ -163,7 +163,7 @@ var Util = (function($) {
         my.update_fragment_selection(div, pdb_id);
         my.get_similar_structures(div, pdb_id);
 
-        $(div).slideDown();
+        $(div).slideDown('slow');
     }
 
     my.events_advanced_interactions = function()
@@ -224,6 +224,19 @@ var Util = (function($) {
         });
     }
 
+    my.resetAdvancedParameters = function(iterationId)
+    {
+        $('#neighborhoods' + iterationId).val(7);
+        $('#discrepancy' + iterationId).val(0.5);
+        $('#bandwidth' + iterationId).val(60);
+        $('#clique_method_greedy' + iterationId).attr('checked', true);
+        if ( iterationId == 1 ) {
+            $('#seed_default').attr('checked', true);
+            $('#upload_seed').remove();
+            $('#seed_upload').parent().after('<input type="file" name="upload_seed" id="upload_seed" size="20" />');
+        }
+    }
+
     my.reset = function()
     {
         $(".mol1").children().remove();
@@ -233,11 +246,19 @@ var Util = (function($) {
         my.set_pdb_ids('', '');
         $("#email").val('');
         $(".results").hide();
+        my.resetAdvancedParameters(1);
+        my.resetAdvancedParameters(2);
+        my.resetAdvancedParameters(3);
     }
 
     my.events_reset = function()
     {
         $("#reset").on('click', my.reset);
+
+        $('.reset-advanced').on('click', function(evt){
+            evt.preventDefault();
+            my.resetAdvancedParameters($(this).data('iteration'));
+        });
     }
 
     my.bind_events = function()

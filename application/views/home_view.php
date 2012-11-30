@@ -168,6 +168,9 @@
           </label>
         </div>
 
+        <button class="btn btn-mini reset-advanced pull-right" data-iteration="1" data-original-title="Reset default values for this iteration">
+          <i class="icon-refresh"></i>
+        </button>
         <input type="hidden" id="iteration_enabled1" name="iteration_enabled1">
 
       </fieldset>
@@ -211,6 +214,9 @@
       </div>
 
       <input type="hidden" id="iteration_enabled2" name="iteration_enabled2">
+      <button class="btn btn-mini reset-advanced pull-right" data-iteration="2" data-original-title="Reset default values for this iteration">
+        <i class="icon-refresh"></i>
+      </button>
 
       </fieldset>
    </div>
@@ -244,6 +250,9 @@
         </div>
 
         <input type="hidden" id="iteration_enabled3" name="iteration_enabled3">
+        <button class="btn btn-mini reset-advanced pull-right" data-iteration="3" data-original-title="Reset default values for this iteration">
+          <i class="icon-refresh"></i>
+        </button>
 
       </fieldset>
     </div>
@@ -420,6 +429,7 @@ $(function() {
     Examples.bind_events();
 
     $('.icon-question-sign').tooltip();
+    $('.reset-advanced').tooltip();
 
 });
 
