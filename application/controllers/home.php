@@ -4,10 +4,9 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-        $this->load->model('Home_model');
         $data['title'] = 'R3DAlign';
-
         $data['verbose_footer'] = False;
+
 		$this->load->view('header', $data);
 		$this->load->view('menu');
 		$this->load->view('home_view');

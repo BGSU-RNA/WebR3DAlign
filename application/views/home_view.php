@@ -37,28 +37,19 @@
       </div>
 
       <div class="row small">
-
-        <!-- pdb selection -->
         <div class="span4">
-
           <input type="text" tabIndex="1" data-provide="typeahead" class="typeahead span2"
                  autocomplete="off" placeholder="Enter PDB id" id="pdb1" name="pdb1"
                  data-structure="1">
           <span class="help-inline"><em>or upload a file</em></span>
-
           <br>
-
-          <input type="file" name="upload_pdb1" id="upload_pdb1" size="20" />
-
+          <input type="file" name="upload_pdb1" id="upload_pdb1" />
         </div> <!-- pdb selection -->
 
-        <!-- fragment selection -->
-        <div class="span8 mol1_fragments"></div>
-
+        <div class="span8 mol1_fragments"></div> <!-- fragment selection -->
       </div>
 
-      <!-- structure 1 info -->
-      <div class="small mol1"></div>
+      <div class="small mol1"></div> <!-- structure 1 info -->
 
     </div> <!-- structure 1 -->
 
@@ -71,28 +62,20 @@
 
       <!-- structure 2 controls -->
       <div class="row small">
-
         <!-- pdb selection -->
         <div class="span4">
-
           <input type="text" tabIndex="2" data-provide="typeahead" class="typeahead span2"
                  autocomplete="off" placeholder="Enter PDB id" id="pdb2" name="pdb2"
                  data-structure="2">
           <span class="help-inline"><em>or upload a file</em></span>
-
           <br>
-
-          <input type="file" name="upload_pdb2" id="upload_pdb2" size="20" />
-
+          <input type="file" name="upload_pdb2" id="upload_pdb2" />
         </div> <!-- pdb selection -->
 
-        <!-- fragment selection -->
-        <div class="span8 mol2_fragments"></div>
-
+        <div class="span8 mol2_fragments"></div> <!-- fragment selection -->
       </div> <!-- structure 2 controls -->
 
-      <!-- structure 2 info -->
-      <div class="small mol2"></div>
+      <div class="small mol2"></div> <!-- structure 2 info -->
 
     </div> <!-- row structure 2 -->
 
@@ -149,7 +132,7 @@
             <input type="radio" name="seed" id="seed_upload_toggle" value="Manual">
             Upload seed alignment (fasta)
           </label>
-          <input type="file" name="seed_upload_file" id="seed_upload_file" size="20" disabled/>
+          <input type="file" name="seed_upload_file" id="seed_upload_file" disabled/>
         </div>
 
         <div class="span2">
@@ -251,7 +234,6 @@
 
     <div class="row well well-small form-inline"> <!-- form controls -->
       <button type="button" class="btn" id="toggle_advanced">Show advanced options</button>
-      <button type="button" class="btn" id="reset">Reset</button>
 
       <div class="btn-group dropup">
         <a class="btn dropdown-toggle small" data-toggle="dropdown" href="#">
@@ -268,7 +250,10 @@
 
       <input type="email" placeholder="Email (optional)" id="email" name="email">
       <span class="alert alert-success small results"></span>
-      <button type="submit" class="btn btn-primary pull-right span2 disabled" id="submit" disabled="disabled"><i class="icon-ok icon-white"></i> Submit</button>
+      <div class="btn-group pull-right">
+        <button class="btn" id="reset"><i class="icon-refresh"></i> Reset</button>
+        <button type="submit" class="btn btn-primary pull-right disabled" id="submit" disabled="disabled"><i class="icon-ok icon-white"></i> Submit</button>
+      </div>
     </div> <!-- row form controls -->
 
 
@@ -283,6 +268,8 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>js/main.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/homepage.js"></script>
 
+
+<!-- Handlebars templates -->
 <script>
     Handlebars.registerHelper('pdbList', function() {
       var out = "";
@@ -297,7 +284,6 @@
     });
 </script>
 
-<!-- Handlebars templates -->
 <script id="chain-fragment" type="text/x-handlebars-template">
   <div class="form-inline fragment">
 

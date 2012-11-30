@@ -216,8 +216,8 @@ var Events = (function($) {
         $(".mol2").children().remove();
         $(".mol1_fragments").children().remove();
         $(".mol2_fragments").children().remove();
-        $("#pdb1").val();
-        $("#pdb2").val();
+        $("#pdb1").val('');
+        $("#pdb2").val('');
         $("#email").val('');
         $(".results").hide();
         my.resetAdvancedParameters(1);
@@ -230,7 +230,10 @@ var Events = (function($) {
         my.advancedInteractions();
         my.addRemoveFragment();
 
-        $("#reset").on('click', my.reset);
+        $("#reset").on('click', function(evt){
+            evt.preventDefault();
+            my.reset();
+        });
 
         $('.typeahead').on('change', function(){
             $this = $(this);
