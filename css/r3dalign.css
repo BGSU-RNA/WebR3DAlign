@@ -122,6 +122,7 @@ footer {
 .r3dalign-homepage .mol1,
 .r3dalign-homepage .mol2,
 .r3dalign-homepage .results,
+.r3dalign-homepage #message,
 .r3dalign-homepage .iteration2,
 .r3dalign-homepage .iteration3 {
   display: none;
@@ -134,6 +135,9 @@ footer {
 .r3dalign-homepage button,
 .r3dalign-homepage .small {
   font-size: 13px;
+}
+.r3dalign-homepage #message {
+  margin-left: -20px;
 }
 .r3dalign-homepage select {
   font-size: 12px;
@@ -155,11 +159,11 @@ footer {
   margin-bottom: 10px;
 }
 .r3dalign-homepage .alert {
-  margin: 10px auto 0px auto;
-  color: black;
+  margin: 10px auto 10px auto;
 }
 .pdb_info {
   border-bottom: 1px dotted;
+  color: #333;
 }
 .pdb_info:hover {
   text-decoration: none;
@@ -181,6 +185,8 @@ footer {
 .r3dalign-homepage .mol2 {
   margin-top: 5px;
 }
+/*
 .r3dalign-homepage input[type="file"] {
   width: 206px;
 }
+*/

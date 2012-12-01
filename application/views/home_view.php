@@ -79,6 +79,8 @@
 
     </div> <!-- row structure 2 -->
 
+    <div id="message"></div>
+
    <!-- Advanced options-->
     <div class="advanced-options row">
     <div class="row well well-small iteration1 span12" id="iteration1">
@@ -241,18 +243,17 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a id="rrna_16s">16S</a></li>
+          <li><a id="rnase_p">RNase P</a></li>
+          <li><a id="rrna_16s">16S rRNA</a></li>
           <li><a id="rrna_5s_partial">5S rRNA (partial chains)</a></li>
           <li><a id="rrna_5s_complete">5S rRNA (complete chains)</a></li>
-          <li><a id="rnase_p">RNase P</a></li>
         </ul>
       </div>
 
       <input type="email" placeholder="Email (optional)" id="email" name="email">
-      <span class="alert alert-success small results"></span>
       <div class="btn-group pull-right">
         <button class="btn" id="reset"><i class="icon-refresh"></i> Reset</button>
-        <button type="submit" class="btn btn-primary pull-right disabled" id="submit" disabled="disabled"><i class="icon-ok icon-white"></i> Submit</button>
+        <button type="submit" class="btn btn-primary disabled" id="submit" disabled="disabled"><i class="icon-ok icon-white"></i> Submit</button>
       </div>
     </div> <!-- row form controls -->
 
@@ -374,14 +375,19 @@
 
 $(function() {
     $('form').submit(function(e) {
-//         e.preventDefault();
 
-        Validator.check_iterations();
-        Validator.replace_empty_nucleotide_fields();
+        Validator.markIterations();
+        Validator.replaceEmptyNucleotideFields();
 
-//         return false;
-
-//         $(this).unbind('submit').submit();
+        if ( Validator.checkPdbId('#pdb1')  &&
+             Validator.checkPdbId('#pdb2')  &&
+             Validator.checkDiscrepancy()   &&
+             Validator.checkBandwidth()     &&
+             Validator.checkNeighborhoods()) {
+            return true;
+        } else {
+            return false;
+        }
     });
 });
 

@@ -119,7 +119,7 @@ var Util = (function($) {
         // clear fragments
         $(div + '_fragments').children().remove();
 
-        // clear previously loaded tips
+        // clear previously loaded structure info
         $(div).children().remove();
 
         my.updateFragmentSelection(div, pdbId);
@@ -212,6 +212,7 @@ var Events = (function($) {
 
     my.reset = function()
     {
+        $(".advanced-options").slideUp();
         $(".mol1").children().remove();
         $(".mol2").children().remove();
         $(".mol1_fragments").children().remove();
@@ -219,7 +220,9 @@ var Events = (function($) {
         $("#pdb1").val('');
         $("#pdb2").val('');
         $("#email").val('');
-        $(".results").hide();
+        $("#message").removeClass().hide();
+        $("#iteration2").hide();
+        $("#iteration3").hide();
         my.resetAdvancedParameters(1);
         my.resetAdvancedParameters(2);
         my.resetAdvancedParameters(3);
@@ -269,14 +272,13 @@ var Events = (function($) {
 var Validator = (function($) {
     var my = {},
              urls = {
-                        getStructureInfo: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_structure_info/',
-                        getEquivalentStructures: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_equivalent_structures/',
+                        isValidPdb: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/is_valid_pdb/'
                      };
 
     my.popoverClass = "";
 
 
-    my.check_iterations = function(data)
+    my.markIterations = function(data)
     {
         for (var i = 1; i <= 3; i++) {
             if ( $("#iteration" + i).is(":visible") ) {
@@ -287,7 +289,7 @@ var Validator = (function($) {
         }
     }
 
-    my.replace_empty_nucleotide_fields = function()
+    my.replaceEmptyNucleotideFields = function()
     {
         for (var i = 1; i <= 2; i++) {
             $("input[name='mol" + i + "_nts[]']").each(function(){
@@ -298,6 +300,75 @@ var Validator = (function($) {
             });
         }
     }
+
+    my.isValidPdb = function(pdbId){
+        return $.get(urls.isValidPdb + pdbId, function(data) {
+            if ( data.valid ) {
+                return true;
+            } else {
+                return false;
+            }
+        }, "json");
+    }
+
+    my.checkPdbId = function(elem)
+    {
+        var $elem = $(elem),
+            pdbId = $elem.val();
+
+        if ( $.type(pdbId) === "string" && pdbId.length == 4 && my.isValidPdb(pdbId) ) {
+            return true;
+        } else {
+            message = "Pdb " + $elem.data('structure') + ' is invalid';
+            $elem.focus();
+            my.showMessage(message);
+            return false;
+        }
+    }
+
+    my.showMessage = function(message)
+    {
+        $('#message').removeClass()
+                     .addClass('alert alert-error')
+                     .html(message)
+                     .slideDown();
+    }
+
+    my.checkNeighborhoods = function()
+    {
+        return my.isValidNumericValue({type: 'neighborhoods', min: 2, max: 10});
+    }
+
+    my.checkDiscrepancy = function()
+    {
+        return my.isValidNumericValue({type: 'discrepancy', min: 0, max: 0.7});
+    }
+
+    my.checkBandwidth = function()
+    {
+        return my.isValidNumericValue({type: 'bandwidth', min: 1, max: 10000});
+    }
+
+    my.isValidNumericValue = function(data)
+    {
+        for (var i = 1; i <= 3; i++) {
+            if ( !$("#iteration" + i).is(':visible') ) {
+                continue;
+            }
+            var elem = $("#" + data.type + i);
+            var value = elem.val();
+            if ( !$.isNumeric(value) || value < data.min || value > data.max ) {
+                var message = data.type + ' in iteration ' + i +
+                              ' should be between ' + data.min +
+                              ' and ' + data.max;
+                my.showMessage(message);
+                elem.focus();
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     return my;
 
@@ -313,10 +384,10 @@ var Examples = (function($) {
 
     my._set_results_url = function(query_id)
     {
-        var $results = $('.results'),
+        var $results = $('#message'),
             a = '<a href="' + my.url_results + query_id + '">View precomputed results</a>';
 
-        $results.children().remove();
+        $results.removeClass().addClass('alert alert-success').html('').children().remove();
         $results.append(a).show();
     }
 
