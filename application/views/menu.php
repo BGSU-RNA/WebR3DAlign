@@ -24,7 +24,7 @@
                 <li><a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a></li>
                 <li><a href="http://rna.bgsu.edu/rna3dhub/motifs">RNA 3D Motif Atlas</a></li>
                 <li class="divider"></li>
-                <li><a href="http://rna.bgsu.edu/rna3dhub">Home</a></li>
+                <li><a href="http://rna.bgsu.edu/rna3dhub">RNA 3D Hub Home</a></li>
               </ul>
             </li>
             <li class="dropdown">

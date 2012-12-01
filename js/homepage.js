@@ -185,8 +185,10 @@ var Events = (function($) {
             if ( parentDiv.siblings().filter('.fragment').length == 0 ) {
                 if (parentDiv.parents('.mol1_fragments').length != 0 ) {
                     $("#pdb1").val('');
+                    $(".mol1").children().remove();
                 } else {
                     $("#pdb2").val('');
+                    $(".mol2").children().remove();
                 }
             }
             parentDiv.remove();
@@ -220,7 +222,7 @@ var Events = (function($) {
         $("#pdb1").val('');
         $("#pdb2").val('');
         $("#email").val('');
-        $("#message").removeClass().hide();
+        $("#message").removeClass().slideUp();
         $("#iteration2").hide();
         $("#iteration3").hide();
         my.resetAdvancedParameters(1);
