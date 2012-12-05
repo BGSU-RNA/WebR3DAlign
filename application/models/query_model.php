@@ -8,11 +8,11 @@ class Query_model extends CI_Model {
         parent::__construct();
     }
 
-    function new_query()
+    function new_query($query_id)
     {
 
         $data = array(
-            'query_id' => uniqid(),
+            'query_id' => $query_id,
             'status' => '0',
             'email' => $this->input->post('email') ? $this->input->post('email') : NULL,
 
@@ -20,12 +20,12 @@ class Query_model extends CI_Model {
             'time_completed' => NULL,
 
             'pdb1' => $this->input->post('pdb1'),
-            'pdb_uploaded1' => $this->input->post('pdb_uploaded1'),
+            'pdb_uploaded1' => isset($_FILES['upload_pdb1']) ? 1 : NULL,
             'pdb2' => $this->input->post('pdb2'),
-            'pdb_uploaded2' => $this->input->post('pdb_uploaded2'),
+            'pdb_uploaded2' => isset($_FILES['upload_pdb2']) ? 1 : NULL,
 
             'seed'          => $this->input->post('seed'),
-            'seed_uploaded' => $this->input->post('seed_uploaded'),
+            'seed_uploaded' => isset($_FILES['seed_uploaded']) ? 1 : NULL,
 
             'nts1' => implode(';', $this->input->post('mol1_nts')),
             'nts2' => implode(';', $this->input->post('mol2_nts')),
@@ -39,10 +39,11 @@ class Query_model extends CI_Model {
 
         try {
             $this->db->insert('query', $data);
-            return $data['query_id'];
         } catch (Exception $e) {
             return FALSE;
         }
+
+        return TRUE;
     }
 
     private function _get_iteration1()
