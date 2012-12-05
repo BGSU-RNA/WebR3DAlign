@@ -4,7 +4,7 @@ class Query extends CI_Controller {
 
     public function new_query()
     {
-        $this->load->model('Query_model');
+        $this->load->model('Query_model', '', TRUE);
 
         $query_id = $this->Query_model->new_query();
 
@@ -17,7 +17,7 @@ class Query extends CI_Controller {
         }
 
 
-
+        redirect("results/$query_id");
 
 
 

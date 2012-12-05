@@ -99,12 +99,22 @@
 
               <div class="tab-pane" id="basepairs">
                 <table class="table table-bordered table-condensed basepair-table">
-                  <?=$basepair_table;?>
+                  <?php if ( is_null($basepair_table) ) : ?>
+                    Basepair comparison is not available for this query. Please
+                    send us the query id if you believe this is a mistake.
+                  <?php else: ?>
+                    <?=$basepair_table;?>
+                  <?php endif ?>
                 </table>
               </div>
 
               <div class="tab-pane" id="alignment">
-                <pre><?=$alignment?></pre>
+                  <?php if ( is_null($basepair_table) ) : ?>
+                    Alignment is not available for this query. Please
+                    send us the query id if you believe this is a mistake.
+                  <?php else: ?>
+                    <pre><?=$alignment?></pre>
+                  <?php endif ?>
               </div>
           </div> <!-- tab-content -->
         </div> <!-- span6, right panel -->

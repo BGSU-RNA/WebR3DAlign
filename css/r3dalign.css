@@ -133,6 +133,7 @@ footer {
 .r3dalign-homepage .advanced-options legend,
 .r3dalign-homepage input,
 .r3dalign-homepage button,
+.r3dalign-homepage #message,
 .r3dalign-homepage .small {
   font-size: 13px;
 }

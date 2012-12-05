@@ -108,5 +108,30 @@ class Query_model extends CI_Model {
         }
     }
 
+    function get_query_status($query_id)
+    {
+        $this->db->select()
+                 ->from('query')
+                 ->where('query_id', $query_id);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0 ) {
+            return 'not found';
+        } else {
+            $result = $query->row();
+            if ( $result->status == 0 ) {
+                return 'submitted';
+            } elseif ( $result->status < 0 ) {
+                return 'aborted';
+            } elseif ( $result->status == 1 ) {
+                return 'done';
+            } else {
+                return 'unknown';
+            }
+        }
+
+    }
+
+
 
 }

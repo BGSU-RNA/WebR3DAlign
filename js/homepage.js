@@ -222,7 +222,7 @@ var Events = (function($) {
         $("#pdb1").val('');
         $("#pdb2").val('');
         $("#email").val('');
-        $("#message").removeClass().slideUp();
+        $("#message").removeClass().html('').slideUp();
         $("#iteration2").hide();
         $("#iteration3").hide();
         my.resetAdvancedParameters(1);
@@ -230,7 +230,7 @@ var Events = (function($) {
         my.resetAdvancedParameters(3);
     }
 
-    my.bind_events = function()
+    my.bindEvents = function()
     {
         my.advancedInteractions();
         my.addRemoveFragment();
@@ -274,11 +274,105 @@ var Events = (function($) {
 var Validator = (function($) {
     var my = {},
              urls = {
-                        isValidPdb: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/is_valid_pdb/'
+                        isValidPdb:  'http://rna.bgsu.edu/rna3dhub_dev/apiv1/is_valid_pdb/',
+                        validateNts: 'http://rna.bgsu.edu/rna3dhub_dev/apiv1/validate_nts'
                      };
 
     my.popoverClass = "";
 
+
+    my.validate = function()
+    {
+        $('form').on('submit', function(e) {
+
+            e.preventDefault();
+            form = this;
+
+            // reset deferred valid counter
+            $('#isValid').val(0);
+
+            // preliminary simple checks
+            if ( !my.checkDiscrepancy() ||
+                 !my.checkBandwidth()   ||
+                 !my.checkNeighborhoods() ) {
+                return false;
+            }
+
+            my.markIterations();
+            my.replaceEmptyNucleotideFields();
+
+            // construct an array of deferred objects
+            deferreds = my.checkNucleotides();
+
+            deferreds.push( my.deferredPdbValidation('#pdb1') );
+            deferreds.push( my.deferredPdbValidation('#pdb2') );
+
+            // when all ajax calls are completed, check the results
+            $.when.apply(null, deferreds).done(function() {
+                console.log("All Ajax call completed");
+                if ( my.checkDeferredValidCounter() ) {
+                     // call native js event to avoid re-triggering jQuery submit
+                     form.submit();
+                } else {
+                    console.log('Validation failed');
+                    return false;
+                }
+            });
+
+        });
+    }
+
+    my.checkNucleotides = function()
+    {
+        var nts = $('.nt-validate'),
+            deferreds = [];
+
+        for (var i = 0; i<nts.length; i++) {
+            deferreds.push( my.deferredNucleotideValidation(nts[i]) );
+        }
+
+        return deferreds;
+    }
+
+    my._incrementSuccessCounter = function()
+    {
+        var counter = $('#isValid');
+        counter.val( parseInt(counter.val()) + 1 );
+    }
+
+    my.deferredNucleotideValidation = function(elem)
+    {
+        $this = $(elem);
+
+        var nts = $this.val();
+        // no need to query the server, resolve right away
+        if ( nts == 'all' ) {
+            my._incrementSuccessCounter();
+            return jQuery.Deferred().resolve();
+        }
+
+        var i = $this.prop('name').search('1') == -1  ?  2 : 1;
+
+        query = {
+            pdb: $('#pdb' + i).val(),
+            nts: nts,
+            chain: $('select[name="mol' + i + '_chains[]"]').val()
+        };
+
+        var deferred = $.post(urls.validateNts, query, "json")
+                        .success(function(data) {
+            if ( !data.valid ) {
+                my.showMessage('Error: ' + data.error_msg);
+                console.log('Invalid ' + nts);
+                $this.focus();
+            } else {
+                my._incrementSuccessCounter();
+                console.log('Valid nucleotides ' + nts);
+            }
+        });
+
+        return deferred;
+    }
 
     my.markIterations = function(data)
     {
@@ -303,29 +397,43 @@ var Validator = (function($) {
         }
     }
 
-    my.isValidPdb = function(pdbId){
-        return $.get(urls.isValidPdb + pdbId, function(data) {
-            if ( data.valid ) {
-                return true;
-            } else {
-                return false;
-            }
-        }, "json");
+    my.checkDeferredValidCounter = function()
+    {
+        // total number of nucleotide fragments + 2 pdb ids
+        return $('#isValid').val() == $('.fragment').length + 2;
     }
 
-    my.checkPdbId = function(elem)
+    my.deferredPdbValidation = function(elem)
     {
+
         var $elem = $(elem),
             pdbId = $elem.val();
 
-        if ( $.type(pdbId) === "string" && pdbId.length == 4 && my.isValidPdb(pdbId) ) {
-            return true;
-        } else {
-            message = "Pdb " + $elem.data('structure') + ' is invalid';
-            $elem.focus();
-            my.showMessage(message);
-            return false;
+        // no need to query the server, can fail right away
+        if ( $.type(pdbId) !== "string" || pdbId.length != 4) {
+            return jQuery.Deferred().resolve();
         }
+
+        // if a pdb file was uploaded, don't query the server
+        var i = $elem.attr('id').search('1') == -1  ?  2 : 1;
+        if ( $('#upload_pdb' + i).val() != "" ) {
+            $elem.val(""); // clear any pdb ids
+            my._incrementSuccessCounter();
+            return jQuery.Deferred().resolve();
+        }
+
+        var deferred = $.get(urls.isValidPdb + pdbId, function(data) {
+            if ( data.valid ) {
+                my._incrementSuccessCounter();
+                console.log('Valid pdb ' + pdbId);
+            } else {
+                message = "Pdb " + $elem.data('structure') + ' is invalid';
+                $elem.focus();
+                my.showMessage(message);
+            }
+        }, "json");
+
+        return deferred;
     }
 
     my.showMessage = function(message)
@@ -389,8 +497,8 @@ var Examples = (function($) {
         var $results = $('#message'),
             a = '<a href="' + my.url_results + query_id + '">View precomputed results</a>';
 
-        $results.removeClass().addClass('alert alert-success').html('').children().remove();
-        $results.append(a).show();
+        $results.removeClass().addClass('alert alert-success').children().remove();
+        $results.html('').append(a).slideDown();
     }
 
     my._set_nucleotides = function(mol, nts)
@@ -458,7 +566,7 @@ var Examples = (function($) {
         $("#pdb2").val('1NBS');
 
 	    $("#email").val("");
-	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
+	    $("#submit_btn").removeClass('disabled').prop('disabled', '').focus();
     }
 
     my.rrna_16s = function()
@@ -503,7 +611,7 @@ var Examples = (function($) {
         $("#pdb2").val('2AVY');
 
 	    $("#email").val("");
-	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
+	    $("#submit_btn").removeClass('disabled').prop('disabled', '').focus();
     }
 
     my.rrna_5s_partial = function()
@@ -543,7 +651,7 @@ var Examples = (function($) {
         $("#pdb2").val('2J01');
 
 	    $("#email").val("");
-	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
+	    $("#submit_btn").removeClass('disabled').prop('disabled', '').focus();
     }
 
     my.rrna_5s_complete = function()
@@ -577,10 +685,10 @@ var Examples = (function($) {
         $("#pdb2").val('2J01');
 
 	    $("#email").val("");
-	    $("#submit").removeClass('disabled').prop('disabled', '').focus();
+	    $("#submit_btn").removeClass('disabled').prop('disabled', '').focus();
     }
 
-    my.bind_events = function()
+    my.bindEvents = function()
     {
         $("#rnase_p").on('click', my.rnase_p);
         $("#rrna_16s").on('click', my.rrna_16s);

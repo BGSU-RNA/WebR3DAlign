@@ -10,6 +10,10 @@ class Results_model extends CI_Model {
     function get_basepair_comparison($query_id)
     {
         $filename = "/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/{$query_id}.csv";
+        if ( !file_exists($filename) ) {
+            return NULL;
+        }
+
         $table = '';
         if (($handle = fopen($filename, "r")) !== FALSE) {
             $isFirstLine = True;
@@ -46,6 +50,10 @@ class Results_model extends CI_Model {
     function get_alignment($query_id)
     {
         $filename = "/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/{$query_id}.fasta";
+        if ( !file_exists($filename) ) {
+            return NULL;
+        }
+
         $lines = file($filename);
 
         $num = count($lines) - 1; // the last line is empty

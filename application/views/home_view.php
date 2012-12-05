@@ -29,6 +29,8 @@
 
     <form enctype="multipart/form-data" action="<?php echo base_url();?>query/new" name="main" method="post">
 
+    <input type="hidden" id="isValid" value="0">
+
     <!-- structure 1 -->
     <div class="row well well-small">
 
@@ -253,7 +255,7 @@
       <input type="email" placeholder="Email (optional)" id="email" name="email">
       <div class="btn-group pull-right">
         <button class="btn" id="reset"><i class="icon-refresh"></i> Reset</button>
-        <button type="submit" class="btn btn-primary disabled" id="submit" disabled="disabled"><i class="icon-ok icon-white"></i> Submit</button>
+        <button type="submit" class="btn btn-primary disabled" id="submit_btn" disabled="disabled"><i class="icon-ok icon-white"></i> Submit</button>
       </div>
     </div> <!-- row form controls -->
 
@@ -264,7 +266,7 @@
 </div> <!-- wrap -->
 
 
-<script type="text/javascript" src="<?php echo base_url(); ?>js/ajaxfileupload.js"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url(); ?>js/ajaxfileupload.js"></script> -->
 <script type="text/javascript" src="<?php echo base_url(); ?>js/handlebars-1.0.rc.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/main.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/homepage.js"></script>
@@ -302,7 +304,7 @@
                                 and can be separated by commas.<br>
                                 Example: 2:20,62:69,110:119"></i>
       </span>
-      <input class="input-medium" name="{{ntsInputName}}" type="text" placeholder="leave blank to use all">
+      <input class="input-medium nt-validate" autocomplete="off" name="{{ntsInputName}}" type="text" placeholder="leave blank to use all">
       <button class="btn minus-fragment" type="button"><i class="icon-minus-sign"></i></button>
       <button class="btn plus-fragment" type="button"><i class="icon-plus-sign"></i></button>
     </div>
@@ -373,25 +375,6 @@
 
 <script>
 
-$(function() {
-    $('form').submit(function(e) {
-
-        Validator.markIterations();
-        Validator.replaceEmptyNucleotideFields();
-
-        if ( Validator.checkPdbId('#pdb1')  &&
-             Validator.checkPdbId('#pdb2')  &&
-             Validator.checkDiscrepancy()   &&
-             Validator.checkBandwidth()     &&
-             Validator.checkNeighborhoods()) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-});
-
-
 // $(function() {
 //    $('form').submit(function(e) {
 //       e.preventDefault();
@@ -419,8 +402,9 @@ $(function() {
 
 $(function() {
 
-    Events.bind_events();
-    Examples.bind_events();
+    Events.bindEvents();
+    Examples.bindEvents();
+    Validator.validate();
 
     $('.icon-question-sign').tooltip();
     $('.reset-advanced').tooltip();
