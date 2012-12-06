@@ -43,6 +43,11 @@ class Query_model extends CI_Model {
         $data = array_merge($data, $this->_get_iteration2());
         $data = array_merge($data, $this->_get_iteration3());
 
+        // check if such a query has already been performed
+        if ($this->_precomputed_results_exist($data)) {
+            $data['status'] = 1;
+        }
+
         try {
             $this->db->insert('query', $data);
         } catch (Exception $e) {
@@ -50,6 +55,53 @@ class Query_model extends CI_Model {
         }
 
         return TRUE;
+    }
+
+
+    private function _precomputed_results_exist($data) {
+
+        $this->db->select()
+                 ->from('query')
+                 ->where('status', 1) // successful queries
+                 ->limit(1);
+
+        $ignore = array('id', 'query_id', 'time_submitted', 'time_completed',
+                        'status', 'email');
+
+        // populate sql query with fields from the query
+        foreach($data as $key => $value) {
+            if ( !in_array($key, $ignore) ) {
+                $this->db->where($key, $value);
+            }
+        }
+
+        $query = $this->db->get();
+
+        if ( $query->num_rows() > 0 ) {
+            // copy over all resulting files with new names
+
+            $result = $query->row();
+            $source = '/Servers/rna.bgsu.edu/r3dalign_dev/data/results/' . $result->query_id;
+            $sourceHandle = opendir($source);
+
+            while ( $file = readdir($sourceHandle) ){
+                if ( $file == '.' || $file == '..' ) {
+                    continue;
+                } elseif ( is_file($source . '/' . $file) ) {
+
+                    $src = $source . '/' . $file;
+                    $ext = pathinfo($src, PATHINFO_EXTENSION);
+                    $query_id = $data['query_id'];
+                    $dst = '/Servers/rna.bgsu.edu/r3dalign_dev/data/results/' . $query_id . '/' . $query_id . '.' . $ext;
+
+                    copy($src, $dst);
+                }
+            }
+
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     private function _get_iteration1()
@@ -214,7 +266,7 @@ Seed1     = '$seed1';
 [AlNTs1,AlNTs2] = webR3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc1,NeighMin1,Band1,CliqMeth1,Query);
 EOD;
 
-        fwrite($fh, $text);
+        fwrite($fh, "$text\n");
 
         if ( $this->input->post('iteration_enabled2') ) {
             $discrepancy2   = $this->input->post('discrepancy2');
@@ -229,7 +281,7 @@ Band2     = $bandwidth2;
 CliqMeth2 = $clique_method2;
 [AlNTs3,AlNTs4] = webR3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc2,NeighMin2,Band2,CliqMeth2,Query,AlNTs1,AlNTs2);
 EOD;
-            fwrite($fh, $text);
+            fwrite($fh, "$text\n");
 
             if ( $this->input->post('iteration_enabled2') ) {
                 $discrepancy3   = $this->input->post('discrepancy3');
@@ -244,7 +296,7 @@ Band3     = $bandwidth3;
 CliqMeth3 = $clique_method3;
 [AlNTs5,AlNTs6] = webR3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,AlNTs3,AlNTs4);
 EOD;
-                fwrite($fh, $text);
+                fwrite($fh, "$text\n");
             }
         }
 
