@@ -14,7 +14,7 @@ class Query extends CI_Controller {
         header('Location: ' . base_url("results/$query_id"));
 
         // create new results folder
-        $query_folder = '/Servers/rna.bgsu.edu/r3dalign_dev/data/results/' . $query_id;
+        $query_folder = $this->config->item('results_folder') . $query_id;
         mkdir($query_folder);
         chmod($query_folder, 0777);
 
@@ -61,7 +61,7 @@ class Query extends CI_Controller {
         if( isset($_FILES[$file_name]) && !empty($_FILES[$file_name]['name'])) {
 
             // initialize the uploads library
-            $config['upload_path']   = './data/results/' . $query_id;
+            $config['upload_path']   = $this->config->item('results_folder') . $query_id;
             $config['allowed_types'] = '*';
             $config['max_size']      = 1024 * 20; // 20 megabytes
             $config['encrypt_name']  = FALSE;

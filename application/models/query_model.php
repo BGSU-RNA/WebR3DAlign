@@ -81,7 +81,7 @@ class Query_model extends CI_Model {
             // copy over all resulting files with new names
 
             $result = $query->row();
-            $source = '/Servers/rna.bgsu.edu/r3dalign_dev/data/results/' . $result->query_id;
+            $source = $this->config->item('results_folder') . $result->query_id;
             $sourceHandle = opendir($source);
 
             while ( $file = readdir($sourceHandle) ){
@@ -92,7 +92,7 @@ class Query_model extends CI_Model {
                     $src = $source . '/' . $file;
                     $ext = pathinfo($src, PATHINFO_EXTENSION);
                     $query_id = $data['query_id'];
-                    $dst = '/Servers/rna.bgsu.edu/r3dalign_dev/data/results/' . $query_id . '/' . $query_id . '.' . $ext;
+                    $dst = $this->config->item('results_folder') . $query_id . '/' . $query_id . '.' . $ext;
 
                     copy($src, $dst);
                 }

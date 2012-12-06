@@ -49,6 +49,7 @@ build/config/buildinfo.properties
 application/config/config.php
 application/config/database.php
 application/config/email.php
+application/config/r3dalign.php
 application/cache/*
 
 # project specific

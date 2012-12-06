@@ -9,7 +9,7 @@ class Results_model extends CI_Model {
 
     function get_basepair_comparison($query_id)
     {
-        $filename = "/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/{$query_id}.csv";
+        $filename = $this->config->item('results_folder') . "$query_id/{$query_id}.csv";
         if ( !file_exists($filename) ) {
             return NULL;
         }
@@ -49,7 +49,7 @@ class Results_model extends CI_Model {
 
     function get_alignment($query_id)
     {
-        $filename = "/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/{$query_id}.fasta";
+        $filename = $this->config->item('results_folder') . "$query_id/{$query_id}.fasta";
         if ( !file_exists($filename) ) {
             return NULL;
         }
