@@ -705,7 +705,7 @@ var Examples = (function($) {
         $("#toggle_iteration2").prop('checked', false);
         $("#toggle_iteration3").prop('checked', false);
 
-        my._set_results_url('4d24dbc864984');
+        my._set_results_url('4d24dbcf8fbfb');
 
         $('.mol1').ajaxComplete(function() {
             my._set_chain('mol1', 'A');
