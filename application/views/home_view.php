@@ -81,6 +81,10 @@
 
     </div> <!-- row structure 2 -->
 
+    <div class="progress active">
+        <div class="bar" style="width: 0%;"></div>
+    </div>
+
     <div id="message"></div>
 
    <!-- Advanced options-->
@@ -237,7 +241,7 @@
     </div> <!-- advanced options -->
 
     <div class="row well well-small form-inline"> <!-- form controls -->
-      <button type="button" class="btn" id="toggle_advanced">Show advanced options</button>
+      <button type="button" class="btn" id="toggle_advanced">Advanced options</button>
 
       <div class="btn-group dropup">
         <a class="btn dropdown-toggle small" data-toggle="dropdown" href="#">
@@ -266,7 +270,6 @@
 </div> <!-- wrap -->
 
 
-<!-- <script type="text/javascript" src="<?php echo base_url(); ?>js/ajaxfileupload.js"></script> -->
 <script type="text/javascript" src="<?php echo base_url(); ?>js/handlebars-1.0.rc.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/main.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/homepage.js"></script>
@@ -374,31 +377,6 @@
 
 
 <script>
-
-// $(function() {
-//    $('form').submit(function(e) {
-//       e.preventDefault();
-//       $.ajaxFileUpload({
-//          url         :'<?php echo base_url(); ?>/upload/upload_file/',
-//          secureuri      :false,
-//          fileElementId  :'upload1',
-//          dataType    : 'json',
-//          data        : {
-//             'title'           : 'test'
-//          },
-//          success  : function (data, status)
-//          {
-//             if(data.status != 'error')
-//             {
-//                $('.results').html('Done');
-//             }
-//             alert(data.msg);
-//          }
-//       });
-//       return false;
-//    });
-// });
-
 
 $(function() {
 

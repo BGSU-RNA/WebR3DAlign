@@ -37,7 +37,7 @@ class Query extends CI_Controller {
             // query wasn't persisted in the database
         }
 
-        $this->notify();
+//         $this->notify();
 
     }
 

@@ -124,7 +124,8 @@ footer {
 .r3dalign-homepage .results,
 .r3dalign-homepage #message,
 .r3dalign-homepage .iteration2,
-.r3dalign-homepage .iteration3 {
+.r3dalign-homepage .iteration3,
+.r3dalign-homepage .progress {
   display: none;
 }
 .r3dalign-homepage .advanced-options,
@@ -137,7 +138,8 @@ footer {
 .r3dalign-homepage .small {
   font-size: 13px;
 }
-.r3dalign-homepage #message {
+.r3dalign-homepage #message,
+.r3dalign-homepage .progress {
   margin-left: -20px;
 }
 .r3dalign-homepage select {
