@@ -4,22 +4,19 @@ class Query extends CI_Controller {
 
     public function new_query()
     {
+        $this->load->model('Query_model', '', TRUE);
+        $this->load->library('upload');
+
         // unique id for this query
         $query_id = uniqid();
 
-        print_r($_POST);
-
-        echo $query_id;
-
         // redirect right away
-//         redirect("results/$query_id");
+        header('Location: ' . base_url("results/$query_id"));
 
         // create new results folder
         $query_folder = '/Servers/rna.bgsu.edu/r3dalign_dev/data/results/' . $query_id;
         mkdir($query_folder);
         chmod($query_folder, 0777);
-
-        $this->load->library('upload');
 
         // save pdb1 if uploaded
         $this->_save_file('upload_pdb1', $query_id);
@@ -30,13 +27,32 @@ class Query extends CI_Controller {
         // if seed was uploaded
         $this->_save_file('seed_upload_file', $query_id);
 
+        // write out R3DAlign matlab script
+        $this->Query_model->create_r3dalign_script($query_id);
+
         // save the data in the database
-        // this will trigger the queue
-        $this->load->model('Query_model', '', TRUE);
+        // this will launch matlab
         $result = $this->Query_model->new_query($query_id);
         if (!$result) {
             // query wasn't persisted in the database
         }
+
+        $this->notify();
+
+    }
+
+    private function notify()
+    {
+        $this->load->library('email');
+        $this->email->set_newline("\r\n");
+
+        $this->email->from('rnabgsu@gmail.com', 'R3DAlign');
+        $this->email->to('anton.i.petrov@gmail.com');
+
+        $this->email->subject('Email Test');
+        $this->email->message('Testing the email class.');
+
+        $this->email->send();
 
     }
 
@@ -49,7 +65,7 @@ class Query extends CI_Controller {
             $config['allowed_types'] = '*';
             $config['max_size']      = 1024 * 20; // 20 megabytes
             $config['encrypt_name']  = FALSE;
-            $config['file_name'] = $file_name;
+            $config['file_name'] = $file_name . '.pdb';
             $this->upload->initialize($config);
 
             if (!$this->upload->do_upload($file_name)) {

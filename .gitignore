@@ -48,6 +48,7 @@ build/config/buildinfo.properties
 .htaccess
 application/config/config.php
 application/config/database.php
+application/config/email.php
 application/cache/*
 
 # project specific

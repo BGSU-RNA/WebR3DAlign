@@ -126,6 +126,8 @@ var Util = (function($) {
         my.getEquivalentStructures(div, pdbId);
 
         $(div).slideDown('slow');
+
+        $("#submit_btn").removeClass('disabled').prop('disabled', '');
     }
 
     return my;
@@ -353,6 +355,12 @@ var Validator = (function($) {
 
         var i = $this.prop('name').search('1') == -1  ?  2 : 1;
 
+        // don't validate nucleotides if the file is uploaded
+        if ( $('#upload_pdb' + i).val() != "" ) {
+            my._incrementSuccessCounter();
+            return jQuery.Deferred().resolve();
+        }
+
         query = {
             pdb: $('#pdb' + i).val(),
             nts: nts,
@@ -411,6 +419,8 @@ var Validator = (function($) {
 
         // no need to query the server, can fail right away
         if ( $.type(pdbId) !== "string" || pdbId.length != 4) {
+            my.showMessage('Please choose a valid pdb file.');
+            $elem.focus();
             return jQuery.Deferred().resolve();
         }
 
@@ -566,7 +576,7 @@ var Examples = (function($) {
         $("#pdb2").val('1NBS');
 
 	    $("#email").val("");
-	    $("#submit_btn").removeClass('disabled').prop('disabled', '').focus();
+	    $("#submit_btn").focus();
     }
 
     my.rrna_16s = function()
@@ -611,7 +621,7 @@ var Examples = (function($) {
         $("#pdb2").val('2AVY');
 
 	    $("#email").val("");
-	    $("#submit_btn").removeClass('disabled').prop('disabled', '').focus();
+	    $("#submit_btn").focus();
     }
 
     my.rrna_5s_partial = function()
@@ -651,7 +661,7 @@ var Examples = (function($) {
         $("#pdb2").val('2J01');
 
 	    $("#email").val("");
-	    $("#submit_btn").removeClass('disabled').prop('disabled', '').focus();
+	    $("#submit_btn").focus();
     }
 
     my.rrna_5s_complete = function()
@@ -685,7 +695,7 @@ var Examples = (function($) {
         $("#pdb2").val('2J01');
 
 	    $("#email").val("");
-	    $("#submit_btn").removeClass('disabled').prop('disabled', '').focus();
+	    $("#submit_btn").focus();
     }
 
     my.bindEvents = function()

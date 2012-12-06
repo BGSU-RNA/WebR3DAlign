@@ -255,7 +255,7 @@
       <input type="email" placeholder="Email (optional)" id="email" name="email">
       <div class="btn-group pull-right">
         <button class="btn" id="reset"><i class="icon-refresh"></i> Reset</button>
-        <button type="submit" class="btn btn-primary disabled" id="submit_btn" disabled="disabled"><i class="icon-ok icon-white"></i> Submit</button>
+        <button type="submit" class="btn btn-primary" id="submit_btn"><i class="icon-ok icon-white"></i> Submit</button>
       </div>
     </div> <!-- row form controls -->
 
@@ -414,6 +414,14 @@ $(function() {
             return $.get('http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_all_rna_pdb_ids', { query: query }, function (data) {
                 return process(data.pdb_ids);
             });
+        }
+    });
+
+    // prevent form submission when Enter is pressed in input fields
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
         }
     });
 
