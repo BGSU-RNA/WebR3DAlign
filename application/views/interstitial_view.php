@@ -13,15 +13,14 @@
 
           <p>
             Your job request has been successfully submitted.
-            This page will automatically refresh every 10 seconds until the results become available.
+            This page will automatically refresh every <strong>10 seconds</strong> until the results become available.
             An email notification will be sent if an email address was provided.
           </p>
 
           <p>
-            You can bookmark this page and return later to view your results.
+            You can <strong>bookmark</strong> this page and return later to view your results.
             All R3DAlign results are stored indefinitely, so feel free to
-            share the results with your collaborators or refer to the results
-            in papers.
+            share the url to refer to these results.
           </p>
 
           <p>
@@ -30,8 +29,6 @@
             Please consider downloading the <a href="#">standalone R3DAlign program</a>
             for computationally-intensive tasks.
           </p>
-
-
 
           <a href="<?=$baseurl?>">Submit another query</a>
 
