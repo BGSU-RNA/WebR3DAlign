@@ -303,7 +303,6 @@ var Validator = (function($) {
                 $bar.text('Validation failed');
                 return false;
             }
-            $bar.width($bar.width() + 200);
 
             my.markIterations();
             my.replaceEmptyNucleotideFields();
@@ -314,22 +313,19 @@ var Validator = (function($) {
             deferreds.push( my.deferredPdbValidation('#pdb1') );
             deferreds.push( my.deferredPdbValidation('#pdb2') );
 
-            $bar.width($bar.width() + 200);
+            $bar.width(400);
 
             // when all ajax calls are completed, check the results
             $.when.apply(null, deferreds).done(function() {
-                console.log("All Ajax call completed");
                 if ( my.checkDeferredValidCounter() ) {
-                    $bar.width(960);
-                    $bar.text('Submitting...');
-                     // call native js event to avoid re-triggering jQuery submit
+                    $bar.text('Submitting...').width(960);
+                    // call native js event to avoid re-triggering jQuery submit
                     form.submit();
                 } else {
                     $bar.text('Validation failed');
                     return false;
                 }
             });
-
         });
     }
 
@@ -354,13 +350,11 @@ var Validator = (function($) {
     my.deferredNucleotideValidation = function(elem)
     {
         $this = $(elem);
-        $bar = $('.bar');
 
         var nts = $this.val();
         // no need to query the server, resolve right away
         if ( nts == 'all' ) {
             my._incrementSuccessCounter();
-            $bar.width($bar.width() + 100);
             return jQuery.Deferred().resolve();
         }
 
@@ -369,7 +363,6 @@ var Validator = (function($) {
         // don't validate nucleotides if the file is uploaded
         if ( $('#upload_pdb' + i).val() != "" ) {
             my._incrementSuccessCounter();
-            $bar.width($bar.width() + 100);
             return jQuery.Deferred().resolve();
         }
 
@@ -383,7 +376,6 @@ var Validator = (function($) {
             type: 'POST',
             url: urls.validateNts,
             data: query,
-            beforeSend: function() { $bar.width( $bar.width() + 100) },
             dataType: "json"
         }).success(function(data) {
             if ( !data.valid ) {
@@ -394,8 +386,6 @@ var Validator = (function($) {
                 my._incrementSuccessCounter();
                 console.log('Valid nucleotides ' + nts);
             }
-        }).complete(function(){
-            $bar.width($bar.width() + 100);
         });
 
         return deferred;
@@ -433,7 +423,6 @@ var Validator = (function($) {
     my.deferredPdbValidation = function(elem)
     {
         var $elem = $(elem),
-            $bar  = $('.bar');
             pdbId = $elem.val();
 
         // no need to query the server, fail right away
@@ -448,14 +437,12 @@ var Validator = (function($) {
         var i = $elem.attr('id').search('1') == -1  ?  2 : 1;
         if ( $('#upload_pdb' + i).val() != "" ) {
             $elem.val(""); // clear any pdb ids
-            $bar.width($bar.width() + 100);
             my._incrementSuccessCounter();
             return jQuery.Deferred().resolve();
         }
 
         var deferred = $.ajax({
             url: urls.isValidPdb + pdbId,
-            beforeSend: function() { $bar.width($bar.width() + 100); },
             dataType: "json"
         }).done(function(data) {
             if ( data.valid ) {
@@ -465,8 +452,6 @@ var Validator = (function($) {
                 $elem.focus();
                 my.showMessage(message);
             }
-        }).complete(function(){
-            $bar.width($bar.width() + 100);
         });
 
         return deferred;
