@@ -54,3 +54,4 @@ application/cache/*
 
 # project specific
 queue/r3dalign_queue_config.pl
+matlab/import_config.m

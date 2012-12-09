@@ -33,6 +33,9 @@ my %config = do $RealBin . '/r3dalign_queue_config.pl';
 my $dsn = 'DBI:mysql:' . $config{db_database}. ':localhost';
 my $dbh = DBI->connect($dsn, $config{db_user_name}, $config{db_password});
 
+my $MATLAB = $config{matlab_app};
+my $MATLAB_DIR = $config{matlab_dir};
+
 ### Signal Handling ###
 
 # Gracefully terminate application on ^C or command line 'kill'
@@ -84,7 +87,11 @@ MAIN:
             # Give the thread some work to do
             my $query_id = pop(@queries);
 
+            my $matlab_command = "cd $MATLAB_DIR; webWrapper; quit;";
+
             my $work = "ulimit -t $TIMEOUT; ";
+            $work .= "$MATLAB -nodesktop -r '$matlab_command'; ";
+            $work .= '/usr/bin/perl ' . $RealBin . "/r3dalign_queue_update_status.pl $query_id";
             $work_queues{$tid}->enqueue($work);
         }
         sleep($SLEEP);
