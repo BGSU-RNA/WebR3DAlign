@@ -87,7 +87,9 @@ MAIN:
             # Give the thread some work to do
             my $query_id = pop(@queries);
 
-            my $matlab_command = "cd $MATLAB_DIR; webWrapper; quit;";
+            mark_as_queued($query_id);
+
+            my $matlab_command = "cd $MATLAB_DIR; query; quit;";
 
             my $work = "ulimit -t $TIMEOUT; ";
             $work .= "$MATLAB -nodesktop -r '$matlab_command'; ";
@@ -150,6 +152,16 @@ sub worker
     printf("Finished -> %2d\n", $tid);
 }
 
+sub mark_as_queued
+{
+    my $query_id = $_[0];
+    my $statement = "UPDATE `query` SET `status` = 2 WHERE `query_id` = '$query_id'";
+    print $statement;
+    my $sth = $dbh->prepare($statement);
+    $sth->execute();
+    $sth->finish;
+}
+
 sub get_queries
 {
     my $statement = "SELECT `query_id` FROM `query` WHERE `status` = 0;";
@@ -160,7 +172,7 @@ sub get_queries
     my @query_ids = ();
 
     while (my $result = $sth->fetchrow_hashref()) {
-        print "Value returned: $result->{query_id}\n";
+        print "New query: $result->{query_id}\n";
         push @query_ids, $result->{query_id};
     }
 

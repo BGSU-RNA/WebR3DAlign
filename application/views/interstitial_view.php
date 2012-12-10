@@ -11,8 +11,11 @@
         <div class="span12 well interstitial">
           <h3>Thank you for using R3D Align.</h3>
 
-          <p>
+          <p class="text-info">
             Your job request has been successfully submitted.
+          </p>
+
+          <p>
             This page will automatically refresh every <strong>10 seconds</strong> until the results become available.
             An email notification will be sent if an email address was provided.
           </p>

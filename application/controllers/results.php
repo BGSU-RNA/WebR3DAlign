@@ -9,28 +9,26 @@ class Results extends CI_Controller {
 
         $status = $this->Query_model->get_query_status($query_id);
 
+        $data['status']   = $status;
+        $data['query_id'] = $query_id;
+        $data['title']    = "Query $query_id";
+        $data['verbose_footer'] = True;
+        $this->load->view('header', $data);
+        $this->load->view('menu');
+
         if ( $status == 'done' ) {
-            $data['query_id'] = $query_id;
             $data['basepair_table'] = $this->Results_model->get_basepair_comparison($query_id);
             $data['alignment'] = $this->Results_model->get_alignment($query_id);
-            $data['title'] = "Query $query_id";
-            $data['verbose_footer'] = True;
-
-            $this->load->view('header', $data);
-            $this->load->view('menu');
             $this->load->view('results_view', $data);
-            $this->load->view('footer');
-        } elseif ( $status == 'submitted' ) {
-            $data['query_id'] = $query_id;
-            $data['title'] = "Query $query_id";
-            $data['verbose_footer'] = True;
-            $this->load->view('header', $data);
-            $this->load->view('menu');
+
+        } elseif ( $status == 'submitted' or $status == 'active' ) {
             $this->load->view('interstitial_view', $data);
-            $this->load->view('footer');
+
         } else {
             show_404();
         }
+
+        $this->load->view('footer');
 	}
 }
 

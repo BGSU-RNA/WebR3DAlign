@@ -184,6 +184,8 @@ class Query_model extends CI_Model {
                 return 'aborted';
             } elseif ( $result->status == 1 ) {
                 return 'done';
+            } elseif ( $result->status == 2 ) {
+                return 'active';
             } else {
                 return 'unknown';
             }
