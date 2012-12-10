@@ -263,7 +263,7 @@ NeighMin1 = $neighborhoods1;
 Band1     = $bandwidth1;
 CliqMeth1 = '$clique_method1';
 Seed1     = '$seed1';
-[AlNTs1,AlNTs2] = webR3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc1,NeighMin1,Band1,CliqMeth1,Query);
+[AlNTs1,AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc1,NeighMin1,Band1,CliqMeth1,Query);
 EOD;
 
         fwrite($fh, "$text\n");
@@ -279,7 +279,7 @@ Disc2     = $discrepancy2;
 NeighMin2 = $neighborhoods2;
 Band2     = $bandwidth2;
 CliqMeth2 = $clique_method2;
-[AlNTs3,AlNTs4] = webR3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc2,NeighMin2,Band2,CliqMeth2,Query,AlNTs1,AlNTs2);
+[AlNTs3,AlNTs4] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc2,NeighMin2,Band2,CliqMeth2,Query,AlNTs1,AlNTs2);
 EOD;
             fwrite($fh, "$text\n");
 
@@ -294,7 +294,7 @@ Disc3     = $discrepancy3;
 NeighMin3 = $neighborhoods3;
 Band3     = $bandwidth3;
 CliqMeth3 = $clique_method3;
-[AlNTs5,AlNTs6] = webR3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,AlNTs3,AlNTs4);
+[AlNTs5,AlNTs6] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,AlNTs3,AlNTs4);
 EOD;
                 fwrite($fh, "$text\n");
             }
