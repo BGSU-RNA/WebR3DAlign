@@ -1,0 +1,3 @@
+[submodule "R3DAlign"]
+	path = R3DAlign
+	url = git@github.com:BGSU-RNA/R3DAlign.git
