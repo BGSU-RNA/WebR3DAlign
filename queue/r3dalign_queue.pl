@@ -33,8 +33,10 @@ my %config = do $RealBin . '/r3dalign_queue_config.pl';
 my $dsn = 'DBI:mysql:' . $config{db_database}. ':localhost';
 my $dbh = DBI->connect($dsn, $config{db_user_name}, $config{db_password});
 
-my $MATLAB = $config{matlab_app};
-my $MATLAB_DIR = $config{matlab_dir};
+my $MATLAB       = $config{matlab_app};
+my $MATLAB_DIR   = $config{matlab_dir};
+my $RESULTS_DIR  = $config{results_dir};
+my $R3DALIGN_DIR = $config{r3dalign_dir};
 
 ### Signal Handling ###
 
@@ -68,7 +70,6 @@ MAIN:
         $work_queues{$thr->tid()} = $work_q;
     }
 
-
     ### DO WORK ###
 
     # Manage the thread pool until signalled to terminate
@@ -89,10 +90,13 @@ MAIN:
 
             mark_as_queued($query_id);
 
-            my $matlab_command = "cd $MATLAB_DIR; query; quit;";
+            my $matlab_command = "cd $RESULTS_DIR" . "/$query_id;" .
+                                 "addpath(genpath('$R3DALIGN_DIR'));" .
+                                 "addpath('$MATLAB_DIR');" .
+                                 "query; quit";
+            my $work = "ulimit -t $TIMEOUT;";
+            $work .= "$MATLAB -nodesktop -r \"$matlab_command\"; ";
 
-            my $work = "ulimit -t $TIMEOUT; ";
-            $work .= "$MATLAB -nodesktop -r '$matlab_command'; ";
             $work .= '/usr/bin/perl ' . $RealBin . "/r3dalign_queue_update_status.pl $query_id";
             $work_queues{$tid}->enqueue($work);
         }
@@ -156,7 +160,6 @@ sub mark_as_queued
 {
     my $query_id = $_[0];
     my $statement = "UPDATE `query` SET `status` = 2 WHERE `query_id` = '$query_id'";
-    print $statement;
     my $sth = $dbh->prepare($statement);
     $sth->execute();
     $sth->finish;

@@ -3,11 +3,12 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
     try
         AlNTs1 = '';
         AlNTs2 = '';
+        Query.Type = 'web';
 
         if nargin == 11
-%            [AlNTs1, AlNTs2] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query);
+            [AlNTs1, AlNTs2] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query);
         else
-%            [AlNTs1, AlNTs2] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,Al1,Al2);
+            [AlNTs1, AlNTs2] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,Al1,Al2);
         end
 
         if exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
