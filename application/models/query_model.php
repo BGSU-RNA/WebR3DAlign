@@ -180,7 +180,7 @@ class Query_model extends CI_Model {
             $result = $query->row();
             if ( $result->status == 0 ) {
                 return 'submitted';
-            } elseif ( $result->status < 0 ) {
+            } elseif ( $result->status == -1 ) {
                 return 'aborted';
             } elseif ( $result->status == 1 ) {
                 return 'done';
