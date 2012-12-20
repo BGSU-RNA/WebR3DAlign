@@ -6,9 +6,9 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
         Query.Type = 'web';
 
         if nargin == 11
-            [AlNTs1, AlNTs2] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query);
+            [AlNTs1, AlNTs2, ErrorMsg] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query);
         else
-            [AlNTs1, AlNTs2] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,Al1,Al2);
+            [AlNTs1, AlNTs2, ErrorMsg] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,Al1,Al2);
         end
 
         if exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
@@ -17,7 +17,11 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
             sendNotification(Query.Email, subject, msg);
         end
 
-        disp('OK');
+        if ~strcmp(ErrorMsg, '')
+            disp(ErrorMsg);
+        end
+
+        disp('Done');
 
     catch err
         disp(Query.Name);
