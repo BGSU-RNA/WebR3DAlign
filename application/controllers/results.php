@@ -24,6 +24,9 @@ class Results extends CI_Controller {
         } elseif ( $status == 'submitted' or $status == 'active' ) {
             $this->load->view('interstitial_view', $data);
 
+        } elseif ( $status == 'aborted' ) {
+            $this->load->view('interstitial_view', $data);
+
         } else {
             show_404();
         }

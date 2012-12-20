@@ -11,9 +11,15 @@
         <div class="span12 well interstitial">
           <h3>Thank you for using R3D Align.</h3>
 
-          <p class="text-info">
-            Your job request has been successfully submitted.
-          </p>
+          <?php if ( $status == 'submitted' ): ?>
+            <p class="text-info">
+              Your job request has been successfully submitted.
+            </p>
+          <?php else: ?>
+            <p class="text-info">
+              Your job request is being processed.
+            </p>
+          <?php endif; ?>
 
           <p>
             This page will automatically refresh every <strong>10 seconds</strong> until the results become available.
