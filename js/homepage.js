@@ -605,7 +605,7 @@ var Examples = (function($) {
 	    $("#neighborhoods2").val("9");
 	    $("#bandwidth2").val("20");
 
-        $("#clique_method_full1").prop('checked', true);
+        $("#clique_method_greedy1").prop('checked', true);
         $("#clique_method_greedy2").prop('checked', true);
 
         if ( !$('#iteration1').is(':visible') ) {
