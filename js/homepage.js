@@ -39,7 +39,7 @@ var Util = (function($) {
         var url = urls.getEquivalentStructures + pdbId;
         $.get(url, function(data) {
             data.div = div;
-            data.pdbId = pdbId;
+            data.pdbId = pdbId.toUpperCase();
             my.updateEquivalentStructuresTemplate(data);
         }, "json");
     }
