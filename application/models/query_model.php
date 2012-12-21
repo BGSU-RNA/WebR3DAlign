@@ -8,6 +8,20 @@ class Query_model extends CI_Model {
         parent::__construct();
     }
 
+    function get_email($query_id)
+    {
+        $this->db->select('email')
+                 ->from('query')
+                 ->where('query_id', $query_id);
+        $query = $this->db->get();
+        if ( $query->num_rows() > 0 ) {
+            $row = $query->row();
+            return $row->email;
+        } else {
+            return FALSE;
+        }
+    }
+
     function new_query($query_id)
     {
         $name1 = 'upload_pdb1';
@@ -182,6 +196,8 @@ class Query_model extends CI_Model {
                 return 'submitted';
             } elseif ( $result->status == -1 ) {
                 return 'aborted';
+            } elseif ( $result->status == -2 ) {
+                return 'crashed';
             } elseif ( $result->status == 1 ) {
                 return 'done';
             } elseif ( $result->status == 2 ) {

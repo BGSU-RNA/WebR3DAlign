@@ -1,8 +1,9 @@
 function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3, Query, Al1,Al2)
 
+    AlNTs1 = '';
+    AlNTs2 = '';
+
     try
-        AlNTs1 = '';
-        AlNTs2 = '';
         Query.Type = 'web';
 
         if nargin == 11
@@ -21,45 +22,58 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
             disp(ErrorMsg);
         end
 
-        disp('Done');
-
     catch err
-        disp(Query.Name);
-        if ~exist('Query') || ~isfield(Query, 'Name') || strcmp(Query.Name, '')
-            Query.Name = 'Unknown query id';
+
+        log = errorLog(err, Query.Name);
+        fprintf(log);
+
+        % save error report
+        fid = fopen([Query.Name '_error.txt'], 'w');
+        fprintf(fid, '%s', log);
+        fclose(fid);
+
+        % notify the user
+        if exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
+            subject = ['R3DAlign problem with query ' Query.Name];
+            msg = errorMessage(Query.Name);
+            sendNotification(Query.Email, subject, msg);
         end
 
-        sendErrorReport(err, Query.Name);
+        % notify the admin
+        importConfig;
+        sendNotification(config.adminEmail, 'R3DAlign error log', log);
 
     end
+
+    disp('Done');
 
 end
 
 
-function sendErrorReport(err, queryId)
+function [report] = errorLog(err, queryId)
 
     importConfig;
 
-    report = sprintf('%s/%s\n', config.resultsUrl, queryId);
-    report = strcat(report, sprintf('Error message: %s\n', err.message));
+    report = sprintf('Error message: %s\n', err.message);
 
     for e = 1:length(err.stack)
         report = sprintf('%sIn function %s at line number %i\n', report, err.stack(e).name, err.stack(e).line);
     end
 
-    sendNotification(config.adminEmail, 'R3DAlign error log', report);
+    report = strcat(report, sprintf('\n%s/%s\n', config.resultsUrl, queryId));
+
 end
 
 
 function [msg] = successMessage(queryId)
-    importConfig();
+    importConfig;
     msg = sprintf('Your R3DAlign results are available at the following url: \n');
     msg = strcat(msg, [config.resultsUrl '/' queryId]);
 end
 
 
-function [msg] = errorMessage()
-    importConfig();
+function [msg] = errorMessage(queryId)
+    importConfig;
     msg = 'An error occurred while processing your R3DAlign query. ';
     msg = strcat(msg, 'You can view the report at the following url: ');
     msg = strcat(msg, [config.resultsUrl '/' queryId]);

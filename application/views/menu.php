@@ -12,7 +12,7 @@
           <ul class="nav">
             <li><a href="#tutorial">Tutorial</a></li>
             <li><a href="#featured">Featured Molecules</a></li>
-            <li><a href="#">Standalone Program</a></li>
+            <li><a href="https://github.com/BGSU-RNA/R3DAlign">Standalone Program</a></li>
             <li><a href="http://rna.bgsu.edu/main/contact-us">Contact Us</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
