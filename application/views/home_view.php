@@ -9,13 +9,13 @@
         You will be redirected to an interstitial page that you can bookmark.
         Processing usually takes 3-10 minutes.
         You can leave your email address if you wish to be notified once the results are ready.
-        Take a look at <a href="">help</a> and <a href="">tutorial</a>
+        Take a look at <a href="http://rna.bgsu.edu/main/r3dalign-help">help</a>
         and feel free to <a href="">contact us</a> if you have questions.
       </p>
 
       <p>
         <strong>
-        R3DAlign is integrated with the <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a>
+        R3DAlign is integrated with the <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Lists</a>
         </strong>
         where all RNA 3D structures are organized into <strong><em>equivalence classes</em></strong>
         according to organism, sequence and 3D similarity, and structure quality considerations.
@@ -369,7 +369,7 @@
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdbId}}</a>
     hasn't been included in the
-    <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Atlas</a>.
+    <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Lists</a>.
     Either it does not have any complete nucleotides,
     or it hasn't been processed yet.
   </div>
