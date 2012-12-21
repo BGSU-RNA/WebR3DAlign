@@ -42,6 +42,7 @@ footer {
 .r3dalign-results pre {
   font-size: 0.6em;
   font-family: monospace;
+  background-color: white;
 }
 
 /*hide extra whitespace in the bar diagram*/
