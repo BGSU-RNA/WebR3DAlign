@@ -7,6 +7,15 @@ class Results_model extends CI_Model {
         parent::__construct();
     }
 
+    function get_query_parameters($query_id)
+    {
+        $this->db->select()
+                 ->from('query')
+                 ->where('query_id', $query_id);
+        $result = $this->db->get()->result_array();
+        return $result[0];
+    }
+
     function get_basepair_comparison($query_id)
     {
         $filename = $this->config->item('results_folder') . "$query_id/{$query_id}.csv";
@@ -31,9 +40,12 @@ class Results_model extends CI_Model {
                     }
                     if ( $i == 1 or $i == 4 ) {
                         $table .= "<$tag class='{$data[$i]}'>" . $data[$i] . "</$tag>";
+                    } elseif ( $i == 6 and $tag == 'td') {
+                        $table .= "<$tag>" . number_format($data[$i], 4) . "</$tag>";
                     } else {
                         $table .= "<$tag>" . $data[$i] . "</$tag>";
                     }
+
                 }
                 $table .= '</tr>';
                 if ($isFirstLine) {

@@ -87,13 +87,67 @@
 
                 <dl>
                   <dt>Molecule 1 (green)</dt>
-                  <dd>1J5E, chain A</dd>
+                  <?php if ($parameters['pdb_uploaded1']): ?>
+                    <dd>user supplied file</dd>
+                  <?php else: ?>
+                    <dd>
+                      <strong>PDB id:</strong> <?=$parameters['pdb1']?>,
+                      <strong>Chains:</strong> <?=$parameters['chains1']?>,
+                      <strong>Nucleotides:</strong> <?=$parameters['nts1']?>
+                    </dd>
+                  <?php endif; ?>
+
                   <dt>Molecule 2 (red)</dt>
-                  <dd>2AVY, chain A</dd>
+                  <?php if ($parameters['pdb_uploaded2']): ?>
+                    <dd>user supplied file</dd>
+                  <?php else: ?>
+                    <dd>
+                      <strong>PDB id:</strong> <?=$parameters['pdb2']?>,
+                      <strong>Chains:</strong> <?=$parameters['chains2']?>,
+                      <strong>Nucleotides:</strong> <?=$parameters['nts2']?>
+                    </dd>
+                  <?php endif; ?>
+
                   <dt>Iteration 1</dt>
-                  <dd>d = 0.5, p = 3, &beta; = 60, Heuristic Clique Method</dd>
+                  <dd>
+                      d = <?=$parameters['discrepancy1']?>,
+                      p = <?=$parameters['neighborhoods1']?>,
+                      &beta; = <?=$parameters['bandwidth1']?>,
+                      <?php if ($parameters['clique_method1'] == 'greedy'): ?>
+                      Heuristic Clique Method (greedy)
+                      <?php else: ?>
+                      Branch and Bound Clique Method (exact)
+                      <?php endif; ?>
+                  </dd>
+
+                  <?php if ($parameters['iteration2'] == 1): ?>
                   <dt>Iteration 2</dt>
-                  <dd>d = 0.5, p = 9, &beta; = 20, Heuristic Clique Method</dd>
+                  <dd>
+                      d = <?=$parameters['discrepancy2']?>,
+                      p = <?=$parameters['neighborhoods2']?>,
+                      &beta; = <?=$parameters['bandwidth2']?>,
+                      <?php if ($parameters['clique_method2'] == 'greedy'): ?>
+                      Heuristic Clique Method (greedy)
+                      <?php else: ?>
+                      Branch and Bound Clique Method (exact)
+                      <?php endif; ?>
+                  </dd>
+                  <?php endif; ?>
+
+                  <?php if ($parameters['iteration3'] == 1): ?>
+                  <dt>Iteration 2</dt>
+                  <dd>
+                      d = <?=$parameters['discrepancy3']?>,
+                      p = <?=$parameters['neighborhoods3']?>,
+                      &beta; = <?=$parameters['bandwidth3']?>,
+                      <?php if ($parameters['clique_method3'] == 'greedy'): ?>
+                      Heuristic Clique Method (greedy)
+                      <?php else: ?>
+                      Branch and Bound Clique Method (exact)
+                      <?php endif; ?>
+                  </dd>
+                  <?php endif; ?>
+
                 </dl>
               </div> <!-- overview panel -->
 
@@ -132,7 +186,10 @@
 
     $('.fancybox').fancybox({
         afterClose: function(){
-            $('img').css('display', 'inline');
+            $('img').css('display', 'inline').addClass('span6');
+        },
+        beforeShow: function(){
+            $('img').removeClass('span6');
         },
         wrapCSS: 'r3dalign-results-crop',
         height: '500',

@@ -19,13 +19,21 @@ class Results extends CI_Controller {
         if ( $status == 'done' ) {
             $data['basepair_table'] = $this->Results_model->get_basepair_comparison($query_id);
             $data['alignment'] = $this->Results_model->get_alignment($query_id);
+            $data['parameters'] = $this->Results_model->get_query_parameters($query_id);
             $this->load->view('results_view', $data);
 
         } elseif ( $status == 'submitted' or $status == 'active' ) {
             $this->load->view('interstitial_view', $data);
 
         } elseif ( $status == 'aborted' ) {
-            $this->load->view('interstitial_view', $data);
+            $this->load->view('aborted_view', $data);
+            $email = $this->Query_model->get_email($query_id);
+            if ( $email ) {
+                $this->notify($query_id, $email);
+            }
+
+        } elseif ( $status == 'crashed' ) {
+            $this->load->view('crashed_view', $data);
 
         } else {
             show_404();
@@ -33,6 +41,25 @@ class Results extends CI_Controller {
 
         $this->load->view('footer');
 	}
+
+	private function notify($query_id, $email)
+    {
+        $this->load->library('email');
+        $this->email->set_newline("\r\n");
+
+        $this->email->from('rnabgsu@gmail.com', 'R3DAlign');
+        $this->email->to($email);
+
+        $this->email->subject("R3DAlign query $query_id has been aborted");
+
+        $message = "Your R3DAlign query has been aborted. For more information please visit "
+                    . site_url("results/view/$query_id");
+
+        $this->email->message($message);
+
+        $this->email->send();
+    }
+
 }
 
 /* End of file results.php */
