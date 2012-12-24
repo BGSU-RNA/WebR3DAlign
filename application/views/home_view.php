@@ -97,14 +97,14 @@
           <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy1" name="discrepancy1">
           <span class="help-inline">
             Discrepancy (d)
-            <i class="icon-question-sign" data-original-title="Enter a number between 0 and 0.7"></i>
+            <i class="icon-question-sign" data-original-title="Enter a number between 0 and 1.0"></i>
           </span>
           <br>
 
           <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods1" name="neighborhoods1">
           <span class="help-inline">
             Neighborhoods (p)
-            <i class="icon-question-sign" data-original-title="Enter an integer between 2 and 10"></i>
+            <i class="icon-question-sign" data-original-title="Enter an integer between 1 and 10"></i>
           </span>
           <br>
 
@@ -389,7 +389,7 @@ $(function() {
 
     $('.typeahead').typeahead({
         source: function (query, process) {
-            return $.get('http://rna.bgsu.edu/rna3dhub_dev/apiv1/get_all_rna_pdb_ids', { query: query }, function (data) {
+            return $.get('http://rna.bgsu.edu/rna3dhub/apiv1/get_all_rna_pdb_ids', { query: query }, function (data) {
                 return process(data.pdb_ids);
             });
         }

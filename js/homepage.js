@@ -425,19 +425,19 @@ var Validator = (function($) {
         var $elem = $(elem),
             pdbId = $elem.val();
 
-        // no need to query the server, fail right away
-        if ( $.type(pdbId) !== "string" || pdbId.length != 4) {
-            $bar.text('Validation failed');
-            my.showMessage('Please choose a valid pdb file.');
-            $elem.focus();
-            return jQuery.Deferred().resolve();
-        }
-
         // if a pdb file was uploaded, don't query the server
         var i = $elem.attr('id').search('1') == -1  ?  2 : 1;
         if ( $('#upload_pdb' + i).val() != "" ) {
             $elem.val(""); // clear any pdb ids
             my._incrementSuccessCounter();
+            return jQuery.Deferred().resolve();
+        }
+
+        // no need to query the server, fail right away
+        if ( $.type(pdbId) !== "string" || pdbId.length != 4) {
+            $bar.text('Validation failed');
+            my.showMessage('Please choose a valid pdb file.');
+            $elem.focus();
             return jQuery.Deferred().resolve();
         }
 
@@ -467,12 +467,12 @@ var Validator = (function($) {
 
     my.checkNeighborhoods = function()
     {
-        return my.isValidNumericValue({type: 'neighborhoods', min: 2, max: 10});
+        return my.isValidNumericValue({type: 'neighborhoods', min: 1, max: 10});
     }
 
     my.checkDiscrepancy = function()
     {
-        return my.isValidNumericValue({type: 'discrepancy', min: 0, max: 0.7});
+        return my.isValidNumericValue({type: 'discrepancy', min: 0, max: 1.0});
     }
 
     my.checkBandwidth = function()
