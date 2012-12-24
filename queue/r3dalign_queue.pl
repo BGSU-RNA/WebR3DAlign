@@ -22,7 +22,7 @@ my $TERM :shared = 0;
 my $IDLE_QUEUE = Thread::Queue->new();
 
 # CPU time out for each query in seconds
-my $TIMEOUT = 1800;
+my $TIMEOUT = 3600;
 
 # refresh time
 my $SLEEP = 5;
@@ -90,11 +90,11 @@ MAIN:
 
             mark_as_queued($query_id);
 
-            my $matlab_command = "cd $R3DALIGN_DIR;" .
+            my $matlab_command = "try, cd $R3DALIGN_DIR;" .
                                  "addpath(genpath(pwd));" .
                                  "addpath('$MATLAB_DIR');" .
                                  "addpath('$RESULTS_DIR" . "/$query_id');" .
-                                 "query; quit";
+                                 "query; catch, disp('Critical error'); end; quit";
             my $work = "ulimit -t $TIMEOUT;";
             $work .= "$MATLAB -nodesktop -r \"$matlab_command\"; ";
             $work .= "mv $R3DALIGN_DIR" . "/$query_id* $RESULTS_DIR" . "/$query_id; ";

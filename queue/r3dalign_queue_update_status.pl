@@ -19,7 +19,7 @@ my $dbh = DBI->connect($dsn, $config{db_user_name}, $config{db_password});
 
 my $input = $ARGV[0];
 
-my $result_file = $config{results_dir} . "/$input/$input.mat";
+my $result_file = $config{results_dir} . "/$input/$input.pdb";
 my $error_file  = $config{results_dir} . "/$input/$input" . "_error.txt";
 
 my $status = 0;
