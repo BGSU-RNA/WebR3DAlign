@@ -22,7 +22,7 @@
           <?php endif; ?>
 
           <p>
-            This page will automatically refresh every <strong>10 seconds</strong> until the results become available.
+            This page will automatically refresh every <strong>30 seconds</strong> until the results become available.
             An email notification will be sent if an email address was provided.
           </p>
 
@@ -41,6 +41,17 @@
 
           <a href="<?=$baseurl?>">Submit another query</a>
 
+          <br><br>
+
+          <!-- AddThis Button BEGIN -->
+          <span class="addthis_toolbox addthis_default_style">
+          <a href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4fb19f2d543502ad" class="addthis_button_compact at300m"><span class="at16nc at300bs at15nc at15t_compact at16t_compact"><span class="at_a11y">More Sharing Services</span></span>Share</a>
+          <div class="atclear"></div>
+          </span>
+          <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+          <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fb19f2d543502ad"></script>
+          <!-- AddThis Button END -->
+
         </div>
 
 
@@ -55,7 +66,7 @@
 <script>
 
 $(function() {
-	setTimeout("location.reload(true);", 10000);
+	setTimeout("location.reload(true);", 30000);
 });
 
 
