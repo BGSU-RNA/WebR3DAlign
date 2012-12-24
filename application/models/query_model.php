@@ -47,10 +47,10 @@ class Query_model extends CI_Model {
             'seed'          => $this->input->post('seed'),
             'seed_uploaded' => $seed_uploaded,
 
-            'nts1' => implode(';', $this->input->post('mol1_nts')),
-            'nts2' => implode(';', $this->input->post('mol2_nts')),
-            'chains1' => implode(';', $this->input->post('mol1_chains')),
-            'chains2' => implode(';', $this->input->post('mol2_chains'))
+            'nts1' => ($this->input->post('mol1_nts')) ? implode(';', $this->input->post('mol1_nts')) : NULL,
+            'nts2' => ($this->input->post('mol1_nts')) ? implode(';', $this->input->post('mol2_nts')) : NULL,
+            'chains1' => ($this->input->post('mol1_chains')) ? implode(';', $this->input->post('mol1_chains')) : NULL,
+            'chains2' => ($this->input->post('mol2_chains')) ? implode(';', $this->input->post('mol2_chains')) : NULL
         );
 
         $data = array_merge($data, $this->_get_iteration1());
@@ -225,41 +225,55 @@ class Query_model extends CI_Model {
         $name2 = 'upload_pdb2';
 
         if( isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) {
+            $pdb_uploaded1 = TRUE;
             fwrite($fh, "pdb1  = 'uploaded';\n");
-            fwrite($fh, "Name1 = '{$name1}.pdb';\n");
-            fwrite($fh, "Query.UploadName1 = '$name1';\n");
+            fwrite($fh, "Name1 = '{$query_id}_1.pdb';\n");
+            fwrite($fh, "Query.UploadName1 = '{$query_id}_1';\n");
         } else {
+            $pdb_uploaded1 = FALSE;
             $pdb1 = $this->input->post('pdb1');
             fwrite($fh, "pdb1 = '$pdb1';\n");
         }
 
         if( isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) {
+            $pdb_uploaded2 = TRUE;
             fwrite($fh, "pdb2 = 'uploaded';\n");
-            fwrite($fh, "Name2 = '{$name2}.pdb';\n");
-            fwrite($fh, "Query.UploadName2 = '$name2';\n");
+            fwrite($fh, "Name2 = '{$query_id}_2.pdb';\n");
+            fwrite($fh, "Query.UploadName2 = '{$query_id}_2';\n");
         } else {
+            $pdb_uploaded2 = FALSE;
             $pdb2 = $this->input->post('pdb2');
             fwrite($fh, "pdb2 = '$pdb2';\n");
         }
 
-        $chains = $this->input->post('mol1_chains');
-        $i = 1;
-        foreach($chains as $chain) {
-            fwrite($fh, 'Chain1{' . $i . "} = '");
-            fwrite($fh, $_POST["mol1_chains"][$i-1] . "';\n");
-            fwrite($fh, 'Nts1{' . $i . "}   = '");
-            fwrite($fh, $_POST["mol1_nts"][$i-1] . "';\n");
-            $i++;
+        if ($pdb_uploaded1) {
+            fwrite($fh, "Chain1{1} = 'all';\n");
+            fwrite($fh, "Nts1{1}   = 'all';\n");
+        } else {
+            $chains = $this->input->post('mol1_chains');
+            $i = 1;
+            foreach($chains as $chain) {
+                fwrite($fh, 'Chain1{' . $i . "} = '");
+                fwrite($fh, $_POST["mol1_chains"][$i-1] . "';\n");
+                fwrite($fh, 'Nts1{' . $i . "}   = '");
+                fwrite($fh, $_POST["mol1_nts"][$i-1] . "';\n");
+                $i++;
+            }
         }
 
-        $chains = $this->input->post('mol2_chains');
-        $i = 1;
-        foreach($chains as $chain) {
-            fwrite($fh, 'Chain2{' . $i . "} = '");
-            fwrite($fh, $_POST["mol2_chains"][$i-1] . "';\n");
-            fwrite($fh, 'Nts2{' . $i . "}   = '");
-            fwrite($fh, $_POST["mol2_nts"][$i-1] . "';\n");
-            $i++;
+        if ($pdb_uploaded2) {
+            fwrite($fh, "Chain2{1} = 'all';\n");
+            fwrite($fh, "Nts2{1}   = 'all';\n");
+        } else {
+            $chains = $this->input->post('mol2_chains');
+            $i = 1;
+            foreach($chains as $chain) {
+                fwrite($fh, 'Chain2{' . $i . "} = '");
+                fwrite($fh, $_POST["mol2_chains"][$i-1] . "';\n");
+                fwrite($fh, 'Nts2{' . $i . "}   = '");
+                fwrite($fh, $_POST["mol2_nts"][$i-1] . "';\n");
+                $i++;
+            }
         }
 
         $discrepancy1   = $this->input->post('discrepancy1');

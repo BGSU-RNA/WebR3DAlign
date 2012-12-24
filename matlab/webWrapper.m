@@ -12,14 +12,14 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
             [AlNTs1, AlNTs2, ErrorMsg] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,Al1,Al2);
         end
 
+        if ~strcmp(ErrorMsg, '')
+            error(ErrorMsg);
+        end
+
         if exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
             subject = ['R3DAlign results ' Query.Name];
             msg = successMessage(Query.Name);
             sendNotification(Query.Email, subject, msg);
-        end
-
-        if ~strcmp(ErrorMsg, '')
-            disp(ErrorMsg);
         end
 
     catch err
@@ -34,7 +34,7 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
 
         % notify the user
         if exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
-            subject = ['R3DAlign problem with query ' Query.Name];
+            subject = ['Problem with R3DAlign query ' Query.Name];
             msg = errorMessage(Query.Name);
             sendNotification(Query.Email, subject, msg);
         end

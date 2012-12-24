@@ -37,23 +37,6 @@ class Query extends CI_Controller {
             // query wasn't persisted in the database
         }
 
-//         $this->notify();
-
-    }
-
-    private function notify()
-    {
-        $this->load->library('email');
-        $this->email->set_newline("\r\n");
-
-        $this->email->from('rnabgsu@gmail.com', 'R3DAlign');
-        $this->email->to('anton.i.petrov@gmail.com');
-
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
-
-        $this->email->send();
-
     }
 
     private function _save_file($file_name, $query_id)
@@ -65,12 +48,29 @@ class Query extends CI_Controller {
             $config['allowed_types'] = '*';
             $config['max_size']      = 1024 * 20; // 20 megabytes
             $config['encrypt_name']  = FALSE;
-            $config['file_name'] = $file_name . '.pdb';
+
+            if ($file_name == 'seed_upload_file') {
+                $extension = '.fasta';
+            } else {
+                $extension = '.pdb';
+            }
+
+            $config['file_name'] = $file_name . $extension;
             $this->upload->initialize($config);
 
             if (!$this->upload->do_upload($file_name)) {
+                echo $this->upload->display_errors();
                 // store error code in the database
             }
+
+            if ($file_name == 'upload_pdb1') {
+                rename($config['upload_path'] . '/upload_pdb1.pdb', $config['upload_path'] . '/' . $query_id . '_1.pdb');
+            } elseif ($file_name == 'upload_pdb2') {
+                rename($config['upload_path'] . '/upload_pdb2.pdb', $config['upload_path'] . '/' . $query_id . '_2.pdb');
+            }
+
+        } else {
+            log_message('error', 'File not found');
         }
     }
 

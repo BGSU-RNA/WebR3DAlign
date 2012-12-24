@@ -393,7 +393,8 @@ var Validator = (function($) {
 
     my.markIterations = function(data)
     {
-        for (var i = 1; i <= 3; i++) {
+        $("#iteration_enabled1").val(1);
+        for (var i = 2; i <= 3; i++) {
             if ( $("#iteration" + i).is(":visible") ) {
                 $("#iteration_enabled" + i).val(1);
             } else {
