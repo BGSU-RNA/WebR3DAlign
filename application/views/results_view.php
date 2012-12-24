@@ -23,6 +23,10 @@
           <button class="btn" id="toggle_labels">Labels on</button>
           <button class="btn" id="toggle_aligned">Hide unaligned nucleotides</button>
 
+          <p>
+          <small>Unaligned nucleotides are dimly colored.</small>
+          </p>
+
         </div> <!-- span6, left panel -->
 
         <div class="span6" id="tabbed_content"> <!-- right panel -->
@@ -91,7 +95,7 @@
                     <dd>user supplied file</dd>
                   <?php else: ?>
                     <dd>
-                      <strong>PDB id:</strong> <?=$parameters['pdb1']?>,
+                      <strong>PDB id:</strong> <a class="pdb_info"><?=$parameters['pdb1']?></a>,
                       <strong>Chains:</strong> <?=$parameters['chains1']?>,
                       <strong>Nucleotides:</strong> <?=$parameters['nts1']?>
                     </dd>
@@ -102,7 +106,7 @@
                     <dd>user supplied file</dd>
                   <?php else: ?>
                     <dd>
-                      <strong>PDB id:</strong> <?=$parameters['pdb2']?>,
+                      <strong>PDB id:</strong> <a class="pdb_info"><?=$parameters['pdb2']?></a>,
                       <strong>Chains:</strong> <?=$parameters['chains2']?>,
                       <strong>Nucleotides:</strong> <?=$parameters['nts2']?>
                     </dd>
@@ -179,10 +183,12 @@
   </div> <!-- container -->
 </div> <!-- wrap -->
 
-
+<script type="text/javascript" src="<?php echo base_url(); ?>js/main.js"></script>
 <script>
     // activate tooltips
     $('i').tooltip()
+
+    $('.pdb_info').click(LookUpPDBInfo);
 
     $('.fancybox').fancybox({
         afterClose: function(){
