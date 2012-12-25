@@ -511,8 +511,10 @@ var Examples = (function($) {
 
     var my = {};
 
-    my.url_results = 'http://rna.bgsu.edu/r3dalign_dev/results/';
+    // r3dalign or r3dalign_dev
+    var environment = window.location.href.split('/')[3];
 
+    my.url_results = 'http://rna.bgsu.edu/' + environment + '/results/';
 
     my._set_results_url = function(query_id)
     {
