@@ -81,6 +81,7 @@
                   </small>
                 </h4>
 
+                <?php if (file_exists($results_folder . "$query_id/$query_id.jpg")): ?>
                 <ul class="thumbnails">
                   <li>
                     <a href="#" class="thumbnail">
@@ -88,6 +89,9 @@
                     </a>
                   </li>
                 </ul>
+                <?php else: ?>
+                  Bar diagram is not available for this query.
+                <?php endif; ?>
 
                 <dl>
                   <dt>Molecule 1 (green)</dt>
