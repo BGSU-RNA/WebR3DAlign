@@ -36,9 +36,10 @@
                 <li><a href="http://rna.bgsu.edu">RNA BGSU Home</a></li>
                 <li class="divider"></li>
                 <li><a href="http://rna.bgsu.edu/FR3D/basepairs">Basepair Catalog</a></li>
-                <li class="divider"></li>
                 <li><a href="http://rna.bgsu.edu/webfr3d">WebFR3D</a></li>
                 <li><a href="http://rna.bgsu.edu/jar3d">JAR3D</a></li>
+                <li class="divider"></li>
+                <li><a href="https://github.com/BGSU-RNA/WebR3DAlign">Github</a></li>
               </ul>
             </li>
 
