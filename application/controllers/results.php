@@ -17,6 +17,7 @@ class Results extends CI_Controller {
         $this->load->view('menu');
 
         if ( $status == 'done' ) {
+            $data['results_folder'] = $this->config->item('results_folder');
             $data['basepair_table'] = $this->Results_model->get_basepair_comparison($query_id);
             $data['alignment'] = $this->Results_model->get_alignment($query_id);
             $data['parameters'] = $this->Results_model->get_query_parameters($query_id);

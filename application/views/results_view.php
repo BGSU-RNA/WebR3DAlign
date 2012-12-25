@@ -41,25 +41,25 @@
                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
                 Download <b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu">
-                  <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.pdb")): ?>
+                  <?php if (file_exists($results_folder . "$query_id/$query_id.pdb")): ?>
                     <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb"
                            target='_blank' download="<?=$query_id?>.pdb">3D superposition (.pdb)</a>
                     </li>
                   <?php endif; ?>
 
-                  <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.fasta")): ?>
+                  <?php if (file_exists($results_folder . "$query_id/$query_id.fasta")): ?>
                     <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.fasta"
                            target='_blank' download="<?=$query_id?>.fasta">3D alignment (.fasta)</a>
                     </li>
                   <?php endif; ?>
 
-                  <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.pdf")): ?>
+                  <?php if (file_exists($results_folder . "$query_id/$query_id.pdf")): ?>
                     <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdf"
                            target='_blank' download="<?=$query_id?>.pdf">Bar diagram (.pdf)</a>
                     </li>
                   <?php endif; ?>
 
-                  <?php if (file_exists("/Servers/rna.bgsu.edu/r3dalign_dev/data/results/$query_id/$query_id.csv")): ?>
+                  <?php if (file_exists($results_folder . "$query_id/$query_id.csv")): ?>
                     <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.csv"
                            target='_blank' download="<?=$query_id?>.csv">Basepair comparison (.csv)</a>
                     </li>
