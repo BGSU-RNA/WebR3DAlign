@@ -16,7 +16,7 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
             error(ErrorMsg);
         end
 
-        if exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
+        if nargin == 11 && exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
             subject = ['R3DAlign results ' Query.Name];
             msg = successMessage(Query.Name);
             sendNotification(Query.Email, subject, msg);
@@ -42,6 +42,8 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
         % notify the admin
         importConfig;
         sendNotification(config.adminEmail, 'R3DAlign error log', log);
+
+        quit;
 
     end
 
