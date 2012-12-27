@@ -91,7 +91,7 @@ MAIN:
             mark_as_queued($query_id);
 
             my $matlab_command = "try, cd $R3DALIGN_DIR;" .
-                                 "addpath(genpath(pwd));" .
+                                 "addpath('FR3D', 'R3DAlign', 'PrecomputedData', 'PDBFiles');" .
                                  "addpath('$MATLAB_DIR');" .
                                  "addpath('$RESULTS_DIR" . "/$query_id');" .
                                  "query; catch err, disp('Critical error'); " .
