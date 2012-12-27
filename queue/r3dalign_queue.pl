@@ -94,7 +94,10 @@ MAIN:
                                  "addpath(genpath(pwd));" .
                                  "addpath('$MATLAB_DIR');" .
                                  "addpath('$RESULTS_DIR" . "/$query_id');" .
-                                 "query; catch, disp('Critical error'); end; quit";
+                                 "query; catch err, disp('Critical error'); " .
+                                 "fid=fopen('" . $query_id . "_error.txt');" .
+                                 "fprintf(fid, err.message);" .
+                                 "fclose(fid); end; quit";
             my $work = "ulimit -t $TIMEOUT;";
             $work .= "$MATLAB -nodesktop -r \"$matlab_command\"; ";
             $work .= "mv $R3DALIGN_DIR" . "/$query_id* $RESULTS_DIR" . "/$query_id; ";
