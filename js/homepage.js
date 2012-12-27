@@ -19,6 +19,7 @@ var Util = (function($) {
         var template = Handlebars.compile(source);
         var html = template(data);
 
+        $(data.div + '_fragments').children().remove();
         $(data.div + "_fragments").append(html);
 
         $('.fragment .icon-question-sign').tooltip();
@@ -108,6 +109,8 @@ var Util = (function($) {
             text = my.generateRegularMemberMessage(data);
         }
 
+        // clear previously loaded info
+        $(data.div).children().remove();
         $(data.div).append(text);
 
         // enable popovers on the newly created elements
@@ -116,12 +119,6 @@ var Util = (function($) {
 
     my.loadStructureData = function(div, pdbId)
     {
-        // clear fragments
-        $(div + '_fragments').children().remove();
-
-        // clear previously loaded structure info
-        $(div).children().remove();
-
         my.updateFragmentSelection(div, pdbId);
         my.getEquivalentStructures(div, pdbId);
 
