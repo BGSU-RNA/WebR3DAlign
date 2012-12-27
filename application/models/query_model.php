@@ -22,6 +22,26 @@ class Query_model extends CI_Model {
         }
     }
 
+    function _remove_duplicates($nts, $chains)
+    {
+        // helps to avoid duplicate entries where the same chain with the same
+        // nucleotides are submitted, e.g. chains A,A nts all,all
+        if ( $nts and $chains ) {
+            $observed = array();
+            foreach($nts as $k => $v) {
+                $combination = $v . $chains[$k]; // chain + nt combination
+                if ( in_array($combination, $observed) ) {
+                    unset($nts[$k]); // delete duplicate from both arrays
+                    unset($chains[$k]);
+                } else {
+                    $observed[] = $combination;
+                }
+            }
+        }
+
+        return array('nts' => $nts, 'chains' => $chains);
+    }
+
     function new_query($query_id)
     {
         $name1 = 'upload_pdb1';
@@ -30,6 +50,11 @@ class Query_model extends CI_Model {
         $pdb_uploaded1 = (isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) ? 1 : NULL;
         $pdb_uploaded2 = (isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) ? 1 : NULL;
         $seed_uploaded = (isset($_FILES[$seed])  && !empty($_FILES[$seed]['name']))  ? 1 : NULL;
+
+        $nt_ch1 = $this->_remove_duplicates($this->input->post('mol1_nts'),
+                                            $this->input->post('mol1_chains'));
+        $nt_ch2 = $this->_remove_duplicates($this->input->post('mol2_nts'),
+                                            $this->input->post('mol2_chains'));
 
         $data = array(
             'query_id' => $query_id,
@@ -47,10 +72,10 @@ class Query_model extends CI_Model {
             'seed'          => $this->input->post('seed'),
             'seed_uploaded' => $seed_uploaded,
 
-            'nts1' => ($this->input->post('mol1_nts')) ? implode(';', $this->input->post('mol1_nts')) : NULL,
-            'nts2' => ($this->input->post('mol1_nts')) ? implode(';', $this->input->post('mol2_nts')) : NULL,
-            'chains1' => ($this->input->post('mol1_chains')) ? implode(';', $this->input->post('mol1_chains')) : NULL,
-            'chains2' => ($this->input->post('mol2_chains')) ? implode(';', $this->input->post('mol2_chains')) : NULL
+            'nts1' => $nt_ch1['nts'] ? implode(';', $nt_ch1['nts']) : NULL,
+            'nts2' => $nt_ch2['nts'] ? implode(';', $nt_ch2['nts']) : NULL,
+            'chains1' => $nt_ch1['chains'] ? implode(';', $nt_ch1['chains']) : NULL,
+            'chains2' => $nt_ch2['chains'] ? implode(';', $nt_ch2['chains']) : NULL
         );
 
         $data = array_merge($data, $this->_get_iteration1());
@@ -250,13 +275,17 @@ class Query_model extends CI_Model {
             fwrite($fh, "Chain1{1} = 'all';\n");
             fwrite($fh, "Nts1{1}   = 'all';\n");
         } else {
-            $chains = $this->input->post('mol1_chains');
+            $nt_ch1 = $this->_remove_duplicates($this->input->post('mol1_nts'),
+                                                $this->input->post('mol1_chains'));
+            $nts    = $nt_ch1['nts'];
+            $chains = $nt_ch1['chains'];
+
             $i = 1;
             foreach($chains as $chain) {
                 fwrite($fh, 'Chain1{' . $i . "} = '");
-                fwrite($fh, $_POST["mol1_chains"][$i-1] . "';\n");
+                fwrite($fh, $chains[$i-1] . "';\n");
                 fwrite($fh, 'Nts1{' . $i . "}   = '");
-                fwrite($fh, $_POST["mol1_nts"][$i-1] . "';\n");
+                fwrite($fh, $nts[$i-1] . "';\n");
                 $i++;
             }
         }
@@ -265,13 +294,17 @@ class Query_model extends CI_Model {
             fwrite($fh, "Chain2{1} = 'all';\n");
             fwrite($fh, "Nts2{1}   = 'all';\n");
         } else {
-            $chains = $this->input->post('mol2_chains');
+            $nt_ch2 = $this->_remove_duplicates($this->input->post('mol2_nts'),
+                                                $this->input->post('mol2_chains'));
+            $nts    = $nt_ch2['nts'];
+            $chains = $nt_ch2['chains'];
+
             $i = 1;
             foreach($chains as $chain) {
                 fwrite($fh, 'Chain2{' . $i . "} = '");
-                fwrite($fh, $_POST["mol2_chains"][$i-1] . "';\n");
+                fwrite($fh, $chains[$i-1] . "';\n");
                 fwrite($fh, 'Nts2{' . $i . "}   = '");
-                fwrite($fh, $_POST["mol2_nts"][$i-1] . "';\n");
+                fwrite($fh, $nts[$i-1] . "';\n");
                 $i++;
             }
         }
