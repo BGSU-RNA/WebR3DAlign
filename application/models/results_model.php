@@ -41,7 +41,10 @@ class Results_model extends CI_Model {
                     if ( $i == 1 or $i == 4 ) {
                         $table .= "<$tag class='{$data[$i]}'>" . $data[$i] . "</$tag>";
                     } elseif ( $i == 6 and $tag == 'td') {
-                        $table .= "<$tag>" . number_format($data[$i], 4) . "</$tag>";
+                        // prevents writing out zeros for empty discrepancy fields
+                        if ( $data[$i] != '' ) {
+                            $table .= "<$tag>" . number_format($data[$i], 4) . "</$tag>";
+                        }
                     } else {
                         $table .= "<$tag>" . $data[$i] . "</$tag>";
                     }
