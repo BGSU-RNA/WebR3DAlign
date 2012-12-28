@@ -34,4 +34,7 @@ if (-e $result_file) {
 my $statement = "UPDATE `query` SET `status` = $status WHERE `query_id` = '$input';";
 $dbh->do($statement);
 
+$statement = "UPDATE `query` SET `time_completed` = NOW() WHERE `query_id` = '$input';";
+$dbh->do($statement);
+
 $dbh->disconnect;
