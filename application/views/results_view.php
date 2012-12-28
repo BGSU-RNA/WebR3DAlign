@@ -55,7 +55,13 @@
 
                   <?php if (file_exists($results_folder . "$query_id/$query_id.pdf")): ?>
                     <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdf"
-                           target='_blank' download="<?=$query_id?>.pdf">Bar diagram (.pdf)</a>
+                           target='_blank' download="<?=$query_id?>.pdf">Standard Bar Diagram (.pdf)</a>
+                    </li>
+                  <?php endif; ?>
+
+                  <?php if (file_exists($results_folder . "$query_id/$query_id" . "_int.pdf")): ?>
+                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>_int.pdf"
+                           target='_blank' download="<?=$query_id?>_int.pdf">Basepair Bar Diagram (.pdf)</a>
                     </li>
                   <?php endif; ?>
 
@@ -67,6 +73,21 @@
                 </ul>
               </li>
             </ul>
+
+            <?php
+                $bar_diagram = '';
+                $basefile = $results_folder . "$query_id/$query_id";
+                if (file_exists("$basefile.png")) {
+                    $bar_diagram = "$query_id.png";
+                } elseif (file_exists("$basefile.jpg")) {
+                    $bar_diagram = "$query_id.jpg";
+                }
+
+                $advanced_diagram = '';
+                if (file_exists($basefile . "_int.png")) {
+                    $advanced_diagram = $basefile . "_int.png";
+                }
+            ?>
 
             <!-- tab content -->
             <div class="tab-content">
@@ -81,22 +102,44 @@
                   </small>
                 </h4>
 
-                <?php if (file_exists($results_folder . "$query_id/$query_id.png")): ?>
-                <ul class="thumbnails">
-                  <li>
-                    <a href="#" class="thumbnail">
-                      <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.png" class="fancybox r3dalign-results-crop span6">
-                    </a>
-                  </li>
+                <?php if ($bar_diagram != ''): ?>
+
+                <small>
+                <ul class="nav nav-tabs" id="nav-diagrams">
+                  <li class="active"><a href="#standard-diagram">Standard Bar Diagram</a></li>
+                  <li><a href="#advanced-diagram">Basepair Bar Diagram</a></li>
                 </ul>
-                <?php elseif (file_exists($results_folder . "$query_id/$query_id.jpg")): ?>
-                <ul class="thumbnails">
-                  <li>
-                    <a href="#" class="thumbnail">
-                      <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.jpg" class="fancybox r3dalign-results-crop span6">
-                    </a>
-                  </li>
-                </ul>
+                </small>
+
+                <div class="tab-content">
+
+                  <div class="tab-pane active" id="standard-diagram">
+                    <ul class="thumbnails">
+                      <li>
+                        <a href="#" class="thumbnail">
+                          <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$bar_diagram?>" class="fancybox r3dalign-results-crop span6">
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="tab-pane" id="advanced-diagram">
+
+                  <?php if ( $advanced_diagram != '' ): ?>
+                    <ul class="thumbnails">
+                      <li>
+                        <a href="#" class="thumbnail">
+                          <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>_int.png" class="fancybox span6">
+                        </a>
+                      </li>
+                    </ul>
+                  <?php else: ?>
+                    Advanced diagram is not available for this query.
+                  <?php endif; ?>
+                  </div>
+
+                </div>
+
                 <?php else: ?>
                   Bar diagram is not available for this query.
                 <?php endif; ?>
@@ -219,16 +262,20 @@
         beforeShow: function(){
             $('img').removeClass('span6');
         },
-        wrapCSS: 'r3dalign-results-crop',
-        height: '500',
         autoSize: false
     });
 
-    // activate tab navigation
+    // activate main tab navigation
     $('#nav>li>a').click(function (e) {
       e.preventDefault();
       $(this).tab('show');
     });
+
+    // activate diagrmas tab navigation
+    $('#nav-diagrams>li>a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    })
 
     $('#toggle_stereo').toggle(function(){
         jmolScript("stereo on");
