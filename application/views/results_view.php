@@ -81,7 +81,15 @@
                   </small>
                 </h4>
 
-                <?php if (file_exists($results_folder . "$query_id/$query_id.jpg")): ?>
+                <?php if (file_exists($results_folder . "$query_id/$query_id.png")): ?>
+                <ul class="thumbnails">
+                  <li>
+                    <a href="#" class="thumbnail">
+                      <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.png" class="fancybox r3dalign-results-crop span6">
+                    </a>
+                  </li>
+                </ul>
+                <?php elseif (file_exists($results_folder . "$query_id/$query_id.jpg")): ?>
                 <ul class="thumbnails">
                   <li>
                     <a href="#" class="thumbnail">
