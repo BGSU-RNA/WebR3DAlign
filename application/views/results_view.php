@@ -143,7 +143,7 @@
                   <?php endif; ?>
 
                   <?php if ($parameters['iteration3'] == 1): ?>
-                  <dt>Iteration 2</dt>
+                  <dt>Iteration 3</dt>
                   <dd>
                       d = <?=$parameters['discrepancy3']?>,
                       p = <?=$parameters['neighborhoods3']?>,
