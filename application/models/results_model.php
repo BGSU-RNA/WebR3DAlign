@@ -16,6 +16,41 @@ class Results_model extends CI_Model {
         return $result[0];
     }
 
+    function _get_discrepancy_css_class($disc)
+    {
+        $class = '';
+        if ( $disc == 0 ) {
+            $class = 'd10';
+        } elseif ( $disc < 0.1 ) {
+            $class = 'd09';
+        } elseif ( $disc < 0.2 ) {
+            $class = 'd08';
+        } elseif ( $disc < 0.3 ) {
+            $class = 'd07';
+        } elseif ( $disc < 0.4 ) {
+            $class = 'd06';
+        } elseif ( $disc < 0.5 ) {
+            $class = 'd05';
+        } elseif ( $disc < 0.6 ) {
+            $class = 'd04';
+        } elseif ( $disc < 0.7 ) {
+            $class = 'd03';
+        } elseif ( $disc < 0.8 ) {
+            $class = 'd02';
+        } elseif ( $disc < 0.9 ) {
+            $class = 'd01';
+        } else {
+            $class = 'd00';
+        }
+        return $class;
+    }
+
+    function _format_discrepancy($disc)
+    {
+        $class = $this->_get_discrepancy_css_class($disc);
+        return "<td class='$class disc-value'></td>";
+    }
+
     function get_basepair_comparison($query_id)
     {
         $filename = $this->config->item('results_folder') . "$query_id/{$query_id}.csv";
@@ -38,12 +73,16 @@ class Results_model extends CI_Model {
                     } else {
                         $tag = 'td';
                     }
-                    if ( $i == 1 or $i == 4 ) {
+                    if ($tag == 'th' and $data[$i] == 'Discrepancy') {
+                        $table .= '<th>Disc</th>';
+                    } elseif ( $i > 6 ) {
+                        continue;
+                    } elseif ( $i == 1 or $i == 4 ) {
                         $table .= "<$tag class='{$data[$i]}'>" . $data[$i] . "</$tag>";
                     } elseif ( $i == 6 and $tag == 'td') {
                         // prevents writing out zeros for empty discrepancy fields
                         if ( $data[$i] != '' ) {
-                            $table .= "<$tag>" . number_format($data[$i], 4) . "</$tag>";
+                            $table .= $this->_format_discrepancy($data[$i]);
                         }
                     } else {
                         $table .= "<$tag>" . $data[$i] . "</$tag>";

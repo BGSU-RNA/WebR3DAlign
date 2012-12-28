@@ -221,14 +221,31 @@
               </div> <!-- overview panel -->
 
               <div class="tab-pane" id="basepairs">
-                <table class="table table-bordered table-condensed basepair-table">
                   <?php if ( is_null($basepair_table) ) : ?>
                     Basepair comparison is not available for this query. Please
                     send us the query id if you believe this is a mistake.
                   <?php else: ?>
+
+                            <table id='legend' class="span6">
+                            <caption>Discrepancy color legend (low is better)</caption>
+                            <tr>
+                            <td class="legend d10">&lt;0.0</td>
+                            <td class="legend d09">&lt;0.1</td>
+                            <td class="legend d08">&lt;0.2</td>
+                            <td class="legend d07">&lt;0.3</td>
+                            <td class="legend d06">&lt;0.4</td>
+                            <td class="legend d05">&lt;0.5</td>
+                            <td class="legend d04">&lt;0.6</td>
+                            <td class="legend d03">&lt;0.7</td>
+                            <td class="legend d02">&lt;0.8</td>
+                            <td class="legend d01">&lt;0.9</td>
+                            <td class="legend d00">&gt;1.0</td>
+                            </tr>
+                            </table>
+                    <table class="table table-bordered table-condensed basepair-table">
                     <?=$basepair_table;?>
+                    </table>
                   <?php endif ?>
-                </table>
               </div>
 
               <div class="tab-pane" id="alignment">
@@ -251,7 +268,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>js/main.js"></script>
 <script>
     // activate tooltips
-    $('i').tooltip()
+    $('i').tooltip();
 
     $('.pdb_info').click(LookUpPDBInfo);
 

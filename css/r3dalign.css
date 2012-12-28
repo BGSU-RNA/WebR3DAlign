@@ -52,6 +52,26 @@ footer {
 .r3dalign-results-crop {
     margin: -210px 0px -30px 0px;
 }
+.r3dalign-results .d00 {background-color:rgb(255,0,0);}
+.r3dalign-results .d01 {background-color:rgb(255,223,0);}
+.r3dalign-results .d02 {background-color:rgb(207,255,47);}
+.r3dalign-results .d03 {background-color:rgb(127,255,127);}
+.r3dalign-results .d04 {background-color:rgb(47,255,207);}
+.r3dalign-results .d05 {background-color:rgb(0,223,255);}
+.r3dalign-results .d06 {background-color:rgb(0,143,255);}
+.r3dalign-results .d07 {background-color:rgb(25,100,75);}
+.r3dalign-results .d08 {background-color:rgb(0,63,255);}
+.r3dalign-results .d09 {background-color:rgb(0,0,239);}
+.r3dalign-results .d10 {background-color:rgb(0,0,175);}
+.r3dalign-results .disc-value {width: 20px;}
+
+.r3dalign-results .legend {
+    height: 10px;
+}
+.r3dalign-results table {
+    margin: 0px 0px 10px 0px;
+    width: 90%;
+}
 
 /* basepair comparison table */
 .r3dalign-results .basepair-table td {
