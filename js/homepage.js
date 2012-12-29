@@ -131,34 +131,127 @@ var Util = (function($) {
 
 }(jQuery));
 
+var DefaultParameters = {
+    small: [
+        null,
+        {
+            d: 0.5,
+            p: 9,
+            b: 50,
+            enabled: true
+        },
+        {
+            enabled: false
+        },
+        {
+            enabled: false
+        }
+    ],
+    medium: [
+        null,
+        {
+            d: 0.5,
+            p: 2,
+            b: 100,
+            enabled: true
+        },
+        {
+            d: 0.5,
+            p: 9,
+            b: 20,
+            enabled: true
+        },
+        {
+            enabled: false
+        }
+    ],
+    large: [
+        null,
+        {
+            d: 0.4,
+            p: 1,
+            b: 200,
+            enabled: true
+        },
+        {
+            d: 0.5,
+            p: 3,
+            b: 70,
+            enabled: true
+        },
+        {
+            d: 0.5,
+            p: 9,
+            b: 20,
+            enabled: true
+        }
+    ]
+}
 
 var Events = (function($) {
 
-    var my = {};
+    var my = {},
+        d = [null, $("#discrepancy1"), $("#discrepancy2"), $("#discrepancy3")],
+        p = [null, $("#neighborhoods1"), $("#neighborhoods2"), $("#neighborhoods3")],
+        b = [null, $("#bandwidth1"), $("#bandwidth2"), $("#bandwidth3")],
+        t = [null, null, $("#toggle_iteration2"), $("#toggle_iteration3")];
+        e = [null, $('#iteration_enabled1'), $('#iteration_enabled2'), $('#iteration_enabled3')];
+
+    my.loadDefaultParameters = function(setId)
+    {
+        data = DefaultParameters[setId];
+
+        for (i = 1; i <= 3; i++) {
+            if ( data[i].enabled ) {
+                d[i].val(data[i].d);
+                p[i].val(data[i].p);
+                b[i].val(data[i].b);
+                my.enableIteration(i);
+            } else {
+                my.disableIteration(i);
+            }
+        }
+
+    }
+
+    my.disableIteration = function(i)
+    {
+        d[i].prop('disabled', 'disabled');
+        p[i].prop('disabled', 'disabled');
+        b[i].prop('disabled', 'disabled');
+        e[i].val(0);
+        if ( i == 2 ) {
+            t[i+1].prop('checked', false).prop('disabled', 'disabled');
+        }
+    }
+
+    my.enableIteration = function(i)
+    {
+        d[i].prop('disabled', '');
+        p[i].prop('disabled', '');
+        b[i].prop('disabled', '');
+        e[i].val(1);
+        if ( i == 2 ) {
+            t[i+1].prop('disabled', '');
+        }
+    }
 
     my.advancedInteractions = function()
     {
-        $("#toggle_advanced").toggle(function(){
-            $('.advanced-options').slideDown();
-        }, function(){
-            $('.advanced-options').slideUp();
-        });
-
         $("#toggle_iteration2").on('click', function(){
-            if ( this.checked ) {
-                $("#iteration2").slideDown();
+            if (this.checked) {
+                my.enableIteration(2);
             } else {
-                $("#iteration2").slideUp();
-                $("#iteration3").slideUp();
-                $("#toggle_iteration3").prop('checked', false);
+                my.disableIteration(2);
+                my.disableIteration(3);
             }
         });
 
         $("#toggle_iteration3").on('click', function(){
-            if ( this.checked ) {
-                $("#iteration3").slideDown();
+            if (this.checked) {
+                my.enableIteration(3);
             } else {
-                $("#iteration3").slideUp();
+                my.disableIteration(3);
             }
         });
     }
@@ -192,26 +285,8 @@ var Events = (function($) {
         });
     }
 
-    my.resetAdvancedParameters = function(iterationId)
-    {
-        $('#neighborhoods' + iterationId).val(7);
-        $('#discrepancy' + iterationId).val(0.5);
-        $('#bandwidth' + iterationId).val(60);
-        $('#clique_method_greedy' + iterationId).attr('checked', true);
-        if ( iterationId == 1 ) {
-            $('#seed_default').attr('checked', true);
-            $('#seed_upload_file').remove();
-            $('#seed_upload_toggle').parent()
-                                    .after('<input type="file" ' +
-                                                  'name="seed_upload_file" ' +
-                                                  'id="seed_upload_file" ' +
-                                                  'size="20" disabled/>');
-        }
-    }
-
     my.reset = function()
     {
-        $(".advanced-options").slideUp();
         $(".mol1").children().remove();
         $(".mol2").children().remove();
         $(".mol1_fragments").children().remove();
@@ -220,12 +295,10 @@ var Events = (function($) {
         $("#pdb2").val('');
         $("#email").val('');
         $("#message").removeClass().html('').slideUp();
-        $("#iteration2").hide();
-        $("#iteration3").hide();
+        my.disableIteration(2);
+        my.disableIteration(3);
         $('.progress').hide();
-        my.resetAdvancedParameters(1);
-        my.resetAdvancedParameters(2);
-        my.resetAdvancedParameters(3);
+        my.loadDefaultParameters('large');
     }
 
     my.bindEvents = function()
@@ -233,9 +306,23 @@ var Events = (function($) {
         my.advancedInteractions();
         my.addRemoveFragment();
 
+        my.loadDefaultParameters('large');
+
         $("#reset").on('click', function(evt){
             evt.preventDefault();
             my.reset();
+        });
+
+        $('#parameters_small').on('click', function(){
+            my.loadDefaultParameters('small');
+        });
+
+        $('#parameters_medium').on('click', function(){
+            my.loadDefaultParameters('medium');
+        });
+
+        $('#parameters_large').on('click', function(){
+            my.loadDefaultParameters('large');
         });
 
         $('.typeahead').on('change', function(){
@@ -248,18 +335,6 @@ var Events = (function($) {
             var div = ".mol" + $this.data('structure');
             var pdbId = $this.val();
             Util.loadStructureData(div, pdbId);
-        });
-
-        $('#seed_upload_toggle').click(function(){
-            $('#seed_upload_file').prop('disabled', '');
-        });
-        $('#seed_default').click(function(){
-            $('#seed_upload_file').prop('disabled', 'disabled');
-        });
-
-        $('.reset-advanced').on('click', function(evt){
-            evt.preventDefault();
-            my.resetAdvancedParameters($(this).data('iteration'));
         });
 
     }
@@ -301,7 +376,6 @@ var Validator = (function($) {
                 return false;
             }
 
-            my.markIterations();
             my.replaceEmptyNucleotideFields();
 
             // construct an array of deferred objects
@@ -386,18 +460,6 @@ var Validator = (function($) {
         });
 
         return deferred;
-    }
-
-    my.markIterations = function(data)
-    {
-        $("#iteration_enabled1").val(1);
-        for (var i = 2; i <= 3; i++) {
-            if ( $("#iteration" + i).is(":visible") ) {
-                $("#iteration_enabled" + i).val(1);
-            } else {
-                $("#iteration_enabled" + i).val(0);
-            }
-        }
     }
 
     my.replaceEmptyNucleotideFields = function()
@@ -545,51 +607,6 @@ var Examples = (function($) {
         }
     }
 
-    my.rnase_p = function()
-    {
-        Events.reset();
-
-        Util.loadStructureData(".mol1", '1U9S');
-        Util.loadStructureData(".mol2", '1NBS');
-
-	    $("#discrepancy1").val("0.5");
-	    $("#neighborhoods1").val("3");
-	    $("#bandwidth1").val("200");
-
-	    $("#discrepancy2").val("0.5");
-	    $("#neighborhoods2").val("9");
-	    $("#bandwidth2").val("80");
-
-        $("#clique_method_full1").prop('checked', true);
-        $("#clique_method_full2").prop('checked', true);
-
-        if ( !$('#iteration1').is(':visible') ) {
-            $('#toggle_advanced').trigger('click');
-        }
-        $("#iteration2").show();
-        $("#iteration3").hide();
-        $("#toggle_iteration2").prop('checked', true);
-        $("#toggle_iteration3").prop('checked', false);
-
-        my._set_results_url('4d1269ba996fc');
-
-        $('.mol1').ajaxComplete(function() {
-            my._set_chain('mol1', 'A');
-            my._set_nucleotides('mol1', 'all');
-        });
-
-        $('.mol2').ajaxComplete(function() {
-            my._set_chain('mol2', 'B');
-            my._set_nucleotides('mol2', 'all');
-        });
-
-        $("#pdb1").val('1U9S');
-        $("#pdb2").val('1NBS');
-
-	    $("#email").val("");
-	    $("#submit_btn").focus();
-    }
-
     my.rrna_16s = function()
     {
         Events.reset();
@@ -605,16 +622,7 @@ var Examples = (function($) {
 	    $("#neighborhoods2").val("9");
 	    $("#bandwidth2").val("20");
 
-        $("#clique_method_greedy1").prop('checked', true);
-        $("#clique_method_greedy2").prop('checked', true);
-
-        if ( !$('#iteration1').is(':visible') ) {
-            $('#toggle_advanced').trigger('click');
-        }
-        $("#iteration2").show();
-        $("#iteration3").hide();
-        $("#toggle_iteration2").prop('checked', true);
-        $("#toggle_iteration3").prop('checked', false);
+        Events.loadDefaultParameters('large');
 
         my._set_results_url('4d24d95bee03d');
 
@@ -646,15 +654,7 @@ var Examples = (function($) {
 	    $("#neighborhoods1").val("7");
 	    $("#bandwidth1").val("50");
 
-        $("#clique_method_greedy1").prop('checked', true);
-
-        if ( !$('#iteration1').is(':visible') ) {
-            $('#toggle_advanced').trigger('click');
-        }
-        $("#iteration2").hide();
-        $("#iteration3").hide();
-        $("#toggle_iteration2").prop('checked', false);
-        $("#toggle_iteration3").prop('checked', false);
+        Events.loadDefaultParameters('small');
 
         my._set_results_url('4d24dbc864984');
 
@@ -682,13 +682,7 @@ var Examples = (function($) {
         Util.loadStructureData(".mol1", '2AW4');
         Util.loadStructureData(".mol2", '2J01');
 
-        if ( !$('#iteration1').is(':visible') ) {
-            $('#toggle_advanced').trigger('click');
-        }
-        $("#iteration2").hide();
-        $("#iteration3").hide();
-        $("#toggle_iteration2").prop('checked', false);
-        $("#toggle_iteration3").prop('checked', false);
+        Events.loadDefaultParameters('small');
 
         my._set_results_url('4d24dbcf8fbfb');
 
@@ -711,7 +705,6 @@ var Examples = (function($) {
 
     my.bindEvents = function()
     {
-        $("#rnase_p").on('click', my.rnase_p);
         $("#rrna_16s").on('click', my.rrna_16s);
         $("#rrna_5s_partial").on('click', my.rrna_5s_partial);
         $("#rrna_5s_complete").on('click', my.rrna_5s_complete);

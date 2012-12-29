@@ -24,9 +24,6 @@ class Query extends CI_Controller {
         // if pdb2 was uploaded
         $this->_save_file('upload_pdb2', $query_id);
 
-        // if seed was uploaded
-        $this->_save_file('seed_upload_file', $query_id);
-
         // write out R3DAlign matlab script
         $this->Query_model->create_r3dalign_script($query_id);
 
@@ -49,11 +46,7 @@ class Query extends CI_Controller {
             $config['max_size']      = 1024 * 20; // 20 megabytes
             $config['encrypt_name']  = FALSE;
 
-            if ($file_name == 'seed_upload_file') {
-                $extension = '.fasta';
-            } else {
-                $extension = '.pdb';
-            }
+            $extension = '.pdb';
 
             $config['file_name'] = $file_name . $extension;
             $this->upload->initialize($config);

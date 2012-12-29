@@ -46,10 +46,9 @@ class Query_model extends CI_Model {
     {
         $name1 = 'upload_pdb1';
         $name2 = 'upload_pdb2';
-        $seed  = 'seed_uploaded';
+
         $pdb_uploaded1 = (isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) ? 1 : NULL;
         $pdb_uploaded2 = (isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) ? 1 : NULL;
-        $seed_uploaded = (isset($_FILES[$seed])  && !empty($_FILES[$seed]['name']))  ? 1 : NULL;
 
         $nt_ch1 = $this->_remove_duplicates($this->input->post('mol1_nts'),
                                             $this->input->post('mol1_chains'));
@@ -69,8 +68,8 @@ class Query_model extends CI_Model {
             'pdb2' => $this->input->post('pdb2'),
             'pdb_uploaded2' => $pdb_uploaded2,
 
-            'seed'          => $this->input->post('seed'),
-            'seed_uploaded' => $seed_uploaded,
+            'seed'          => 'NWseed',
+            'seed_uploaded' => 0,
 
             'nts1' => $nt_ch1['nts'] ? implode(';', $nt_ch1['nts']) : NULL,
             'nts2' => $nt_ch2['nts'] ? implode(';', $nt_ch2['nts']) : NULL,
@@ -151,7 +150,7 @@ class Query_model extends CI_Model {
                 'discrepancy1'   => $this->input->post('discrepancy1'),
                 'neighborhoods1' => $this->input->post('neighborhoods1'),
                 'bandwidth1'     => $this->input->post('bandwidth1'),
-                'clique_method1' => $this->input->post('clique_method1'),
+                'clique_method1' => 'greedy',
             );
         } else {
             return array(
@@ -172,7 +171,7 @@ class Query_model extends CI_Model {
                 'discrepancy2'   => $this->input->post('discrepancy2'),
                 'neighborhoods2' => $this->input->post('neighborhoods2'),
                 'bandwidth2'     => $this->input->post('bandwidth2'),
-                'clique_method2' => $this->input->post('clique_method2')
+                'clique_method2' => 'greedy'
             );
         } else {
             return array(
@@ -193,7 +192,7 @@ class Query_model extends CI_Model {
                 'discrepancy3'   => $this->input->post('discrepancy3'),
                 'neighborhoods3' => $this->input->post('neighborhoods3'),
                 'bandwidth3'     => $this->input->post('bandwidth3'),
-                'clique_method3' => $this->input->post('clique_method3'),
+                'clique_method3' => 'greedy',
             );
         } else {
             return array(
@@ -312,11 +311,11 @@ class Query_model extends CI_Model {
         $discrepancy1   = $this->input->post('discrepancy1');
         $neighborhoods1 = $this->input->post('neighborhoods1');
         $bandwidth1     = $this->input->post('bandwidth1');
-        $seed1 = $this->input->post('seed');
-        $clique_method1 = $this->input->post('clique_method1');
+        $seed = 'NWseed';
+        $clique_method1 = 'greedy';
         $iteration2 = $this->input->post('iteration_enabled2');
 
-        if ( $seed1 == 'Manual' ) {
+        if ( $seed == 'Manual' ) {
             fwrite($fh, "Query.SeedName = 'seed.txt';\n");
         } else {
             fwrite($fh, "Query.SeedName = '';\n");
@@ -327,7 +326,6 @@ Disc1     = $discrepancy1;
 NeighMin1 = $neighborhoods1;
 Band1     = $bandwidth1;
 CliqMeth1 = '$clique_method1';
-Seed1     = '$seed1';
 [AlNTs1,AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc1,NeighMin1,Band1,CliqMeth1,Query);
 EOD;
 
@@ -337,7 +335,7 @@ EOD;
             $discrepancy2   = $this->input->post('discrepancy2');
             $neighborhoods2 = $this->input->post('neighborhoods2');
             $bandwidth2     = $this->input->post('bandwidth2');
-            $clique_method2 = $this->input->post('clique_method2');
+            $clique_method2 = 'greedy';
 
             $text = <<<EOD
 Disc2     = $discrepancy2;
@@ -348,11 +346,11 @@ CliqMeth2 = '$clique_method2';
 EOD;
             fwrite($fh, "$text\n");
 
-            if ( $this->input->post('iteration_enabled2') ) {
+            if ( $this->input->post('iteration_enabled3') ) {
                 $discrepancy3   = $this->input->post('discrepancy3');
                 $neighborhoods3 = $this->input->post('neighborhoods3');
                 $bandwidth3     = $this->input->post('bandwidth3');
-                $clique_method3 = $this->input->post('clique_method3');
+                $clique_method3 = 'greedy';
 
                 $text = <<<EOD
 Disc3     = $discrepancy3;

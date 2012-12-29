@@ -139,13 +139,10 @@ footer {
 }
 
 /* Home page styling */
-.r3dalign-homepage .advanced-options,
 .r3dalign-homepage .mol1,
 .r3dalign-homepage .mol2,
 .r3dalign-homepage .results,
 .r3dalign-homepage #message,
-.r3dalign-homepage .iteration2,
-.r3dalign-homepage .iteration3,
 .r3dalign-homepage .progress {
   display: none;
 }

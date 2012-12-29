@@ -88,12 +88,12 @@
     <div id="message"></div>
 
    <!-- Advanced options-->
-    <div class="advanced-options row">
-    <div class="row well well-small iteration1 span12" id="iteration1">
-      <fieldset>
-        <div class="span3">
-          <strong>Iteration 1</strong><br>
+    <div class="advanced-options row well well-small">
 
+        <div class="span3" id="iteration1">
+          <strong>Iteration 1</strong>
+          <br>
+          <fieldset>
           <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy1" name="discrepancy1">
           <span class="help-inline">
             Discrepancy (d)
@@ -114,134 +114,73 @@
             <i class="icon-question-sign" data-original-title="Enter a positive integer"></i>
           </span>
           <br>
-        </div>
 
-        <div class="span3">
-          <strong>Final clique-finding method:</strong>
-          <i class="icon-question-sign" data-original-title="Help text here"></i>
-          <label class="radio">
-            <input type="radio" name="clique_method1" value="greedy" id="clique_method_greedy1" checked>
-            Greedy (Faster)
-          </label>
-          <label class="radio">
-            <input type="radio" name="clique_method1" value="full" id="clique_method_full1">
-            Branch and Bound (Exact)
-          </label>
-        </div>
-
-        <div class="span3">
-          <strong>Seed alignment:</strong>
-          <i class="icon-question-sign" data-original-title="Help text here"></i>
-          <label class="radio">
-            <input type="radio" name="seed" id="seed_default" value="NWseed" checked>
-              Internally produced alignment
-          </label>
-          <label class="radio">
-            <input type="radio" name="seed" id="seed_upload_toggle" value="Manual">
-            Upload seed alignment (fasta)
-          </label>
-          <input type="file" name="seed_upload_file" id="seed_upload_file" disabled/>
-        </div>
-
-        <div class="span2">
           <label class="checkbox">
-            <input type="checkbox" id="toggle_iteration2"> Use this alignment as the seed for next iteration?
+            <input type="checkbox" id="toggle_iteration2">Add iteration
           </label>
+          <input type="hidden" id="iteration_enabled1" name="iteration_enabled1">
+          </fieldset>
         </div>
 
-        <button class="btn btn-mini reset-advanced pull-right" data-iteration="1" data-original-title="Reset default values for this iteration">
-          <i class="icon-refresh"></i>
-        </button>
-        <input type="hidden" id="iteration_enabled1" name="iteration_enabled1">
+        <div class="iteration2 span3" id="iteration2">
+          <fieldset>
+            <strong>Iteration 2</strong>
+            <br>
+            <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy2" name="discrepancy2">
+            <span class="help-inline">Discrepancy (d)</span>
+            <br>
 
-      </fieldset>
-    </div>
+            <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods2" name="neighborhoods2">
+            <span class="help-inline">Neighborhoods (p)</span>
+            <br>
 
-    <div class="row well well-small iteration2 span12" id="iteration2">
-      <fieldset>
-      <div class="span3">
-        <strong>Iteration 2</strong><br>
-        <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy2" name="discrepancy2">
-        <span class="help-inline">Discrepancy (d)</span>
-        <br>
+            <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth2" name="bandwidth2">
+            <span class="help-inline">Alignment bandwidth (&beta;)</span>
+            <label class="checkbox">
+              <input type="checkbox" id="toggle_iteration3">Add iteration
+            </label>
+            <input type="hidden" id="iteration_enabled2" name="iteration_enabled2">
+          </fieldset>
+       </div>
 
-        <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods2" name="neighborhoods2">
-        <span class="help-inline">Neighborhoods (p)</span>
-        <br>
+       <div class="iteration3 span3" id="iteration3">
+         <fieldset>
+             <strong>Iteration 3</strong><br>
+             <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy3" name="discrepancy3">
+             <span class="help-inline">Discrepancy (d)</span>
+             <br>
 
-        <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth2" name="bandwidth2">
-        <span class="help-inline">Alignment bandwidth (&beta;)</span>
-      </div>
+             <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods3" name="neighborhoods3">
+             <span class="help-inline">Neighborhoods (p)</span>
+             <br>
 
-      <div class="span3">
-        <strong>Final clique-finding method:</strong>
-        <label class="radio">
-          <input type="radio" name="clique_method2" value="greedy" id="clique_method_greedy2" checked>
-          Greedy (Faster)
-        </label>
-        <label class="radio">
-          <input type="radio" name="clique_method2" value="full" id="clique_method_full2">
-          Branch and Bound (Exact)
-        </label>
-      </div>
+             <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth3" name="bandwidth3">
+             <span class="help-inline">Alignment bandwidth (&beta;)</span>
+             <input type="hidden" id="iteration_enabled3" name="iteration_enabled3">
+          </fieldset>
+       </div>
 
-      <div class="span3">
-      </div>
-
-      <div class="span2">
-        <label class="checkbox">
-          <input type="checkbox" id="toggle_iteration3"> Use this alignment as the seed for next iteration?
-        </label>
-      </div>
-
-      <input type="hidden" id="iteration_enabled2" name="iteration_enabled2">
-      <button class="btn btn-mini reset-advanced pull-right" data-iteration="2" data-original-title="Reset default values for this iteration">
-        <i class="icon-refresh"></i>
-      </button>
-
-      </fieldset>
-   </div>
-
-   <div class="row well well-small iteration3 span12" id="iteration3">
-     <fieldset>
        <div class="span3">
-         <strong>Iteration 3</strong><br>
-         <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy3" name="discrepancy3">
-         <span class="help-inline">Discrepancy (d)</span>
-         <br>
-
-         <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods3" name="neighborhoods3">
-         <span class="help-inline">Neighborhoods (p)</span>
-         <br>
-
-         <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth3" name="bandwidth3">
-         <span class="help-inline">Alignment bandwidth (&beta;)</span>
-        </div>
-
-        <div class="span3">
-          <strong>Final clique-finding method:</strong>
-          <label class="radio">
-            <input type="radio" name="clique_method3" value="greedy" id="clique_method_greedy3" checked>
-            Greedy (Faster)
-          </label>
-          <label class="radio">
-            <input type="radio" name="clique_method3" value="full" id="clique_method_full3">
-            Branch and Bound (Exact)
-          </label>
-        </div>
-
-        <input type="hidden" id="iteration_enabled3" name="iteration_enabled3">
-        <button class="btn btn-mini reset-advanced pull-right" data-iteration="3" data-original-title="Reset default values for this iteration">
-          <i class="icon-refresh"></i>
-        </button>
-
-      </fieldset>
-    </div>
+         <small>
+Lorem ipsum suspendisse viverra, purus interdum pretium sagittis, erat ipsum fringilla libero, sit amet iaculis tortor tortor eu dui. Fusce ac nibh orci, ut dictum est. Curabitur vel urna nec libero dictum euismod.
+         </small>
+       </div>
 
     </div> <!-- advanced options -->
 
     <div class="row well well-small form-inline"> <!-- form controls -->
-      <button type="button" class="btn" id="toggle_advanced">Advanced options</button>
+
+      <div class="btn-group dropup">
+        <a class="btn dropdown-toggle small" data-toggle="dropdown" href="#">
+          Suggest parameters
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a id="parameters_small">Small (&lt;50 nts)</a></li>
+          <li><a id="parameters_medium">Medium (50-200 nts)</a></li>
+          <li><a id="parameters_large">Large (&gt;200 nts)</a></li>
+        </ul>
+      </div>
 
       <div class="btn-group dropup">
         <a class="btn dropdown-toggle small" data-toggle="dropdown" href="#">
@@ -249,7 +188,6 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a id="rnase_p">RNase P</a></li>
           <li><a id="rrna_16s">16S rRNA</a></li>
           <li><a id="rrna_5s_partial">5S rRNA (partial chains)</a></li>
           <li><a id="rrna_5s_complete">5S rRNA (complete chains)</a></li>

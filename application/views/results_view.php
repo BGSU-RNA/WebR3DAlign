@@ -229,7 +229,7 @@
                             <table id='legend' class="span6">
                             <caption>Discrepancy color legend (low is better)</caption>
                             <tr>
-                            <td class="legend d10">&lt;0.0</td>
+                            <td class="legend d10">0.0</td>
                             <td class="legend d09">&lt;0.1</td>
                             <td class="legend d08">&lt;0.2</td>
                             <td class="legend d07">&lt;0.3</td>
