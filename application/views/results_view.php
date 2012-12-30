@@ -172,11 +172,6 @@
                       d = <?=$parameters['discrepancy1']?>,
                       p = <?=$parameters['neighborhoods1']?>,
                       &beta; = <?=$parameters['bandwidth1']?>,
-                      <?php if ($parameters['clique_method1'] == 'greedy'): ?>
-                      Heuristic Clique Method (greedy)
-                      <?php else: ?>
-                      Branch and Bound Clique Method (exact)
-                      <?php endif; ?>
                   </dd>
 
                   <?php if ($parameters['iteration2'] == 1): ?>
@@ -185,11 +180,6 @@
                       d = <?=$parameters['discrepancy2']?>,
                       p = <?=$parameters['neighborhoods2']?>,
                       &beta; = <?=$parameters['bandwidth2']?>,
-                      <?php if ($parameters['clique_method2'] == 'greedy'): ?>
-                      Heuristic Clique Method (greedy)
-                      <?php else: ?>
-                      Branch and Bound Clique Method (exact)
-                      <?php endif; ?>
                   </dd>
                   <?php endif; ?>
 
@@ -199,11 +189,6 @@
                       d = <?=$parameters['discrepancy3']?>,
                       p = <?=$parameters['neighborhoods3']?>,
                       &beta; = <?=$parameters['bandwidth3']?>,
-                      <?php if ($parameters['clique_method3'] == 'greedy'): ?>
-                      Heuristic Clique Method (greedy)
-                      <?php else: ?>
-                      Branch and Bound Clique Method (exact)
-                      <?php endif; ?>
                   </dd>
                   <?php endif; ?>
 
