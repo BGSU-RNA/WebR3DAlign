@@ -128,10 +128,18 @@ class Query_model extends CI_Model {
                     continue;
                 } elseif ( is_file($source . '/' . $file) ) {
 
+                    // for filenames like <query_id>_int.png
+                    $pattern = '/^\w{13}(\w+)\./';
+                    if ( preg_match($pattern, $file, $matches) ) {
+                        $suffix = $matches[1];
+                    } else {
+                        $suffix = '';
+                    }
+
                     $src = $source . '/' . $file;
                     $ext = pathinfo($src, PATHINFO_EXTENSION);
                     $query_id = $data['query_id'];
-                    $dst = $this->config->item('results_folder') . $query_id . '/' . $query_id . '.' . $ext;
+                    $dst = $this->config->item('results_folder') . $query_id . '/' . $query_id . $suffix . '.' . $ext;
 
                     copy($src, $dst);
                 }
