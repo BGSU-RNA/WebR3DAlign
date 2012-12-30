@@ -9,9 +9,10 @@
         <strong>R3D Align</strong> is a web application for
         <strong>detailed global nucleotide to nucleotide
         pairwise alignments of RNA 3D structures</strong>
-        based on the method described by <a href="http://www.ncbi.nlm.nih.gov/pubmed/20929913">Rahrig et al., 2010</a>.
+        based on the method described by
+        <a href="http://www.ncbi.nlm.nih.gov/pubmed/20929913" target="_blank">Rahrig et al., 2010</a>.
         <br>
-        Refer to <a href="http://rna.bgsu.edu/main/r3dalign-help">help</a>
+        Refer to <a href="http://rna.bgsu.edu/main/r3dalign-help" target="_blank">help</a>
         and feel free to <a href="">contact us</a> if you have questions.
     </div>
     <div class="item hero-unit">
@@ -23,10 +24,10 @@
     </div>
     <div class="item hero-unit">
         <strong>
-        <a href="http://rna.bgsu.edu/rna3dhub">RNA 3D Hub</a> integration.
+        <a href="http://rna.bgsu.edu/rna3dhub" target="_blank">RNA 3D Hub</a> integration.
         </strong>
         R3DAlign is integrated with the
-         <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Lists</a>
+         <a href="http://rna.bgsu.edu/rna3dhub/nrlist" target="_blank">Non-redundant Lists</a>
         where all RNA 3D structures are organized into <strong><em>equivalence classes</em></strong>
         according to organism, sequence and 3D similarity, and structure quality considerations.
         Each class is <strong><em>represented</em></strong> by a single structure.
