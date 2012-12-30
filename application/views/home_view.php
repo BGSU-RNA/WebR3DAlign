@@ -141,15 +141,15 @@
             <strong>Iteration 2</strong>
             <br>
             <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy2" name="discrepancy2">
-            <span class="help-inline">Discrepancy (d)</span>
+            <span class="help-inline">Discrepancy</span>
             <br>
 
             <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods2" name="neighborhoods2">
-            <span class="help-inline">Neighborhoods (p)</span>
+            <span class="help-inline">Neighborhoods</span>
             <br>
 
             <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth2" name="bandwidth2">
-            <span class="help-inline">Alignment bandwidth (&beta;)</span>
+            <span class="help-inline">Alignment bandwidth</span>
             <label class="checkbox">
               <input type="checkbox" id="toggle_iteration3">Add iteration
             </label>
@@ -161,15 +161,15 @@
          <fieldset>
              <strong>Iteration 3</strong><br>
              <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy3" name="discrepancy3">
-             <span class="help-inline">Discrepancy (d)</span>
+             <span class="help-inline">Discrepancy</span>
              <br>
 
              <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods3" name="neighborhoods3">
-             <span class="help-inline">Neighborhoods (p)</span>
+             <span class="help-inline">Neighborhoods</span>
              <br>
 
              <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth3" name="bandwidth3">
-             <span class="help-inline">Alignment bandwidth (&beta;)</span>
+             <span class="help-inline">Alignment bandwidth</span>
              <input type="hidden" id="iteration_enabled3" name="iteration_enabled3">
           </fieldset>
        </div>

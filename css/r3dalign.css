@@ -217,7 +217,8 @@ footer {
     font-size: 14px;
     height: 100px;
 }
-.r3dalign-homepage #myCarousel {
+.r3dalign-homepage .carousel {
     width: 960px;
     margin-left: -20px;
+    margin-bottom: 10px;
 }
