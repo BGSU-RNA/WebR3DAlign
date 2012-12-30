@@ -186,6 +186,7 @@ footer {
 .r3dalign-homepage .alert {
   margin: 10px auto 10px auto;
 }
+
 .pdb_info {
   border-bottom: 1px dotted;
   color: #333;
@@ -210,8 +211,13 @@ footer {
 .r3dalign-homepage .mol2 {
   margin-top: 5px;
 }
-/*
-.r3dalign-homepage input[type="file"] {
-  width: 206px;
+.r3dalign-homepage .hero-unit {
+    padding: 15px 100px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    height: 100px;
 }
-*/
+.r3dalign-homepage #myCarousel {
+    width: 960px;
+    margin-left: -20px;
+}

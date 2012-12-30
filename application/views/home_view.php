@@ -2,37 +2,44 @@
   <div class="container r3dalign-homepage">
     <div class="content">
 
-    <div class="row well well-small small about"> <!-- row structure 1 -->
-
-      <p>
-        <strong>R3D Align is a web application for pairwise alignment of RNA 3D structures</strong>
+<div id="myCarousel" class="carousel slide">
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div class="active item hero-unit">
+        <strong>R3D Align</strong> is a web application for
+        <strong>detailed global nucleotide to nucleotide
+        pairwise alignments of RNA 3D structures</strong>
         based on the method described by <a href="http://www.ncbi.nlm.nih.gov/pubmed/20929913">Rahrig et al., 2010</a>.
-      </p>
-
-      <p>
-        <i class="icon-info-sign"></i>
+        <br>
+        Refer to <a href="http://rna.bgsu.edu/main/r3dalign-help">help</a>
+        and feel free to <a href="">contact us</a> if you have questions.
+    </div>
+    <div class="item hero-unit">
+        <strong>Quickstart.</strong>
         Specify two RNA 3D structures that you would like to align and hit submit.
         You will be redirected to an interstitial page that you can bookmark.
         Processing usually takes 3-10 minutes.
         You can leave your email address if you wish to be notified once the results are ready.
-        Take a look at <a href="http://rna.bgsu.edu/main/r3dalign-help">help</a>
-        and feel free to <a href="">contact us</a> if you have questions.
-      </p>
-
-      <p>
+    </div>
+    <div class="item hero-unit">
         <strong>
-        R3DAlign is integrated with the
+        <a href="http://rna.bgsu.edu/rna3dhub">RNA 3D Hub</a> integration.
         </strong>
+        R3DAlign is integrated with the
          <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Lists</a>
         where all RNA 3D structures are organized into <strong><em>equivalence classes</em></strong>
         according to organism, sequence and 3D similarity, and structure quality considerations.
         Each class is <strong><em>represented</em></strong> by a single structure.
         When a PDB id is selected, its
         <span class="label label-info">Redundancy report</span>
-        is dynamically loaded from the <a href="http://rna.bgsu.edu/rna3dhub">RNA 3D Hub</a>.
-      </p>
-
+        is dynamically retrieved.
     </div>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
 
     <form enctype="multipart/form-data" action="<?php echo base_url();?>query/new" name="main" method="post">
 
@@ -172,7 +179,7 @@
             Three sets of default parameters that usually work well for
             large, medium, and small structures can be loaded
             by clicking the "Suggest parameters" button.
-            <a href="http://rna.bgsu.edu/main/r3dalign-help/">More</a>.
+            <a href="http://rna.bgsu.edu/main/r3dalign-help/" target="_blank">More</a>.
          </small>
        </div>
 
@@ -335,6 +342,8 @@ $(function() {
 
     $('.icon-question-sign').tooltip();
     $('.reset-advanced').tooltip();
+
+    $('.carousel').carousel('pause');
 
     $('.typeahead').typeahead({
         source: function (query, process) {
