@@ -109,24 +109,24 @@
           <strong>Iteration 1</strong>
           <br>
           <fieldset>
-          <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy1" name="discrepancy1">
+          <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy1"
+                 name="discrepancy1" data-original-title="Enter a number between 0 and 1.0">
           <span class="help-inline">
             Discrepancy (d)
-            <i class="icon-question-sign" data-original-title="Enter a number between 0 and 1.0"></i>
           </span>
           <br>
 
-          <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods1" name="neighborhoods1">
+          <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods1"
+                 name="neighborhoods1" data-original-title="Enter an integer between 1 and 10">
           <span class="help-inline">
             Neighborhoods (p)
-            <i class="icon-question-sign" data-original-title="Enter an integer between 1 and 10"></i>
           </span>
           <br>
 
-          <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth1" name="bandwidth1">
+          <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth1"
+                 name="bandwidth1" data-original-title="Enter a positive integer">
           <span class="help-inline">
             Alignment bandwidth (&beta;)
-            <i class="icon-question-sign" data-original-title="Enter a positive integer"></i>
           </span>
           <br>
 
@@ -141,15 +141,18 @@
           <fieldset>
             <strong>Iteration 2</strong>
             <br>
-            <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy2" name="discrepancy2">
+            <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy2"
+                   name="discrepancy2" data-original-title="Enter a number between 0 and 1.0">
             <span class="help-inline">Discrepancy</span>
             <br>
 
-            <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods2" name="neighborhoods2">
+            <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods2"
+                   name="neighborhoods2" data-original-title="Enter an integer between 1 and 10">
             <span class="help-inline">Neighborhoods</span>
             <br>
 
-            <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth2" name="bandwidth2">
+            <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth2"
+                   name="bandwidth2" data-original-title="Enter a positive integer">
             <span class="help-inline">Alignment bandwidth</span>
             <label class="checkbox">
               <input type="checkbox" id="toggle_iteration3">Add iteration
@@ -161,15 +164,18 @@
        <div class="iteration3 span3" id="iteration3">
          <fieldset>
              <strong>Iteration 3</strong><br>
-             <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy3" name="discrepancy3">
+             <input type="text" class="r3dalign-input-mini" value="0.5" id="discrepancy3"
+                    name="discrepancy3" data-original-title="Enter a number between 0 and 1.0">
              <span class="help-inline">Discrepancy</span>
              <br>
 
-             <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods3" name="neighborhoods3">
+             <input type="text" class="r3dalign-input-mini" value="7" id="neighborhoods3"
+                    name="neighborhoods3" data-original-title="Enter an integer between 1 and 10">
              <span class="help-inline">Neighborhoods</span>
              <br>
 
-             <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth3" name="bandwidth3">
+             <input type="text" class="r3dalign-input-mini" value="60" id="bandwidth3"
+                    name="bandwidth3" data-original-title="Enter a positive integer">
              <span class="help-inline">Alignment bandwidth</span>
              <input type="hidden" id="iteration_enabled3" name="iteration_enabled3">
           </fieldset>
@@ -177,10 +183,11 @@
 
        <div class="span3">
          <small>
-            Three sets of default parameters that usually work well for
-            large, medium, and small structures can be loaded
+            <i class="icon-question-sign"></i> Choose among 3 sets of default
+            parameters that usually work well for
+            large, medium, and small structures
             by clicking the "Suggest parameters" button.
-            <a href="http://rna.bgsu.edu/main/r3dalign-help/" target="_blank">More</a>.
+            <a href="http://rna.bgsu.edu/main/r3dalign-help/" target="_blank">More</a>
          </small>
        </div>
 
@@ -341,8 +348,9 @@ $(function() {
     Examples.bindEvents();
     Validator.validate();
 
-    $('.icon-question-sign').tooltip();
-    $('.reset-advanced').tooltip();
+    $('input').tooltip({
+        trigger: 'focus'
+    });
 
     $('.carousel').carousel('pause');
 
