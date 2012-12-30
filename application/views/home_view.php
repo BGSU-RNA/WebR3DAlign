@@ -5,7 +5,13 @@
     <div class="row well well-small small about"> <!-- row structure 1 -->
 
       <p>
-        <strong>Specify two RNA 3D structures that you would like to align and hit submit.</strong>
+        <strong>R3D Align is a web application for pairwise alignment of RNA 3D structures</strong>
+        based on the method described by <a href="http://www.ncbi.nlm.nih.gov/pubmed/20929913">Rahrig et al., 2010</a>.
+      </p>
+
+      <p>
+        <i class="icon-info-sign"></i>
+        Specify two RNA 3D structures that you would like to align and hit submit.
         You will be redirected to an interstitial page that you can bookmark.
         Processing usually takes 3-10 minutes.
         You can leave your email address if you wish to be notified once the results are ready.
@@ -15,8 +21,9 @@
 
       <p>
         <strong>
-        R3DAlign is integrated with the <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Lists</a>
+        R3DAlign is integrated with the
         </strong>
+         <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Lists</a>
         where all RNA 3D structures are organized into <strong><em>equivalence classes</em></strong>
         according to organism, sequence and 3D similarity, and structure quality considerations.
         Each class is <strong><em>represented</em></strong> by a single structure.
@@ -162,7 +169,10 @@
 
        <div class="span3">
          <small>
-Lorem ipsum suspendisse viverra, purus interdum pretium sagittis, erat ipsum fringilla libero, sit amet iaculis tortor tortor eu dui. Fusce ac nibh orci, ut dictum est. Curabitur vel urna nec libero dictum euismod.
+            Three sets of default parameters that usually work well for
+            large, medium, and small structures can be loaded
+            by clicking the "Suggest parameters" button.
+            <a href="http://rna.bgsu.edu/main/r3dalign-help/">More</a>.
          </small>
        </div>
 
