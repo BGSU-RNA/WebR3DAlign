@@ -171,7 +171,7 @@
                   <dd>
                       d = <?=$parameters['discrepancy1']?>,
                       p = <?=$parameters['neighborhoods1']?>,
-                      &beta; = <?=$parameters['bandwidth1']?>,
+                      &beta; = <?=$parameters['bandwidth1']?>
                   </dd>
 
                   <?php if ($parameters['iteration2'] == 1): ?>
@@ -179,7 +179,7 @@
                   <dd>
                       d = <?=$parameters['discrepancy2']?>,
                       p = <?=$parameters['neighborhoods2']?>,
-                      &beta; = <?=$parameters['bandwidth2']?>,
+                      &beta; = <?=$parameters['bandwidth2']?>
                   </dd>
                   <?php endif; ?>
 
@@ -188,7 +188,7 @@
                   <dd>
                       d = <?=$parameters['discrepancy3']?>,
                       p = <?=$parameters['neighborhoods3']?>,
-                      &beta; = <?=$parameters['bandwidth3']?>,
+                      &beta; = <?=$parameters['bandwidth3']?>
                   </dd>
                   <?php endif; ?>
 
