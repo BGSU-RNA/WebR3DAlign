@@ -187,7 +187,7 @@
             parameters that usually work well for
             large, medium, and small structures
             by clicking the "Suggest parameters" button.
-            <a href="http://rna.bgsu.edu/main/r3dalign-help/" target="_blank">More</a>
+            <a href="http://rna.bgsu.edu/main/r3dalign-help#advanced-parameters" target="_blank">More</a>
          </small>
        </div>
 
