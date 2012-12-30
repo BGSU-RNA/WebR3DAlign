@@ -607,6 +607,44 @@ var Examples = (function($) {
         }
     }
 
+    my.rrna_23s = function()
+    {
+        Events.reset();
+
+        Util.loadStructureData(".mol1", '2QBG');
+        Util.loadStructureData(".mol2", '1S72');
+
+	    $("#discrepancy1").val("0.5");
+	    $("#neighborhoods1").val("1");
+	    $("#bandwidth1").val("100");
+
+	    $("#discrepancy2").val("0.5");
+	    $("#neighborhoods2").val("3");
+	    $("#bandwidth2").val("60");
+
+	    $("#discrepancy3").val("0.5");
+	    $("#neighborhoods3").val("9");
+	    $("#bandwidth3").val("20");
+
+        my._set_results_url('50ddceac7c8e8');
+
+        $('.mol1').ajaxComplete(function() {
+            my._set_chain('mol1', 'B');
+            my._set_nucleotides('mol1', 'all');
+        });
+
+        $('.mol2').ajaxComplete(function() {
+            my._set_chain('mol2', '0');
+            my._set_nucleotides('mol2', 'all');
+        });
+
+        $("#pdb1").val('2QBG');
+        $("#pdb2").val('1S72');
+
+	    $("#email").val("");
+	    $("#submit_btn").focus();
+    }
+
     my.rrna_16s = function()
     {
         Events.reset();
@@ -706,6 +744,7 @@ var Examples = (function($) {
     my.bindEvents = function()
     {
         $("#rrna_16s").on('click', my.rrna_16s);
+        $("#rrna_23s").on('click', my.rrna_23s);
         $("#rrna_5s_partial").on('click', my.rrna_5s_partial);
         $("#rrna_5s_complete").on('click', my.rrna_5s_complete);
     }

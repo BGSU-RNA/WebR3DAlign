@@ -189,6 +189,7 @@ Lorem ipsum suspendisse viverra, purus interdum pretium sagittis, erat ipsum fri
         </a>
         <ul class="dropdown-menu">
           <li><a id="rrna_16s">16S rRNA</a></li>
+          <li><a id="rrna_23s">23S rRNA</a></li>
           <li><a id="rrna_5s_partial">5S rRNA (partial chains)</a></li>
           <li><a id="rrna_5s_complete">5S rRNA (complete chains)</a></li>
         </ul>
