@@ -84,6 +84,7 @@ class Query_model extends CI_Model {
         // check if such a query has already been performed
         if ($this->_precomputed_results_exist($data)) {
             $data['status'] = 1;
+            $data['time_completed'] = date("Y-m-d H:m:s");
         }
 
         try {
