@@ -68,6 +68,7 @@ class Results_model extends CI_Model {
                 $table .= '<tr>';
                 $num = count($data);
                 for ($i = 0; $i < $num; $i++) {
+                    $data[$i] = trim($data[$i]);
                     if ( $isFirstLine ) {
                         $tag = 'th';
                     } else {
