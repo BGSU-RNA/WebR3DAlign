@@ -94,13 +94,7 @@
 
               <!-- overview panel -->
               <div class="tab-pane active" id="overview">
-                <h4>
-                  Local geometric similarity
-                  <small>
-                    <i class="icon-info-sign" rel="tooltip"
-                    data-original-title="Low geometric discrepancy (blue) indicates high 3D similarity. High discrepancy (red) means low 3D similarity"></i>
-                  </small>
-                </h4>
+                <h4>Local geometric similarity</h4>
 
                 <?php if ($bar_diagram != ''): ?>
 
@@ -140,9 +134,17 @@
 
                 </div>
 
+                <small>
+                  <i class="icon-info-sign"></i> Blue (low geometric discrepancy) indicates high 3D similarity.
+                  Red (high geometric discrepancy) indicates low 3D similarity.
+                  <a href="http://rna.bgsu.edu/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">More</a>
+                </small>
+
                 <?php else: ?>
                   Bar diagram is not available for this query.
                 <?php endif; ?>
+
+                <br>
 
                 <dl>
                   <dt>Molecule 1 (green)</dt>
