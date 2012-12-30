@@ -222,6 +222,7 @@ var Events = (function($) {
         e[i].val(0);
         if ( i == 2 ) {
             t[i+1].prop('checked', false).prop('disabled', 'disabled');
+            t[i].prop('checked', false);
         }
     }
 
@@ -233,6 +234,10 @@ var Events = (function($) {
         e[i].val(1);
         if ( i == 2 ) {
             t[i+1].prop('disabled', '');
+            t[i].prop('checked', true);
+        }
+        if ( i == 3 ) {
+            t[i].prop('checked', true);
         }
     }
 
@@ -573,7 +578,7 @@ var Examples = (function($) {
     // r3dalign or r3dalign_dev
     var environment = window.location.href.split('/')[3];
 
-    my.url_results = 'http://rna.bgsu.edu/' + environment + '/results/';
+    my.url_results = 'http://rna.bgsu.edu/r3dalign/results/';
 
     my._set_results_url = function(query_id)
     {
@@ -614,19 +619,9 @@ var Examples = (function($) {
         Util.loadStructureData(".mol1", '2QBG');
         Util.loadStructureData(".mol2", '1S72');
 
-	    $("#discrepancy1").val("0.5");
-	    $("#neighborhoods1").val("1");
-	    $("#bandwidth1").val("100");
+        Events.loadDefaultParameters('large');
 
-	    $("#discrepancy2").val("0.5");
-	    $("#neighborhoods2").val("3");
-	    $("#bandwidth2").val("60");
-
-	    $("#discrepancy3").val("0.5");
-	    $("#neighborhoods3").val("9");
-	    $("#bandwidth3").val("20");
-
-        my._set_results_url('50ddceac7c8e8');
+        my._set_results_url('50e0c1ea1109c');
 
         $('.mol1').ajaxComplete(function() {
             my._set_chain('mol1', 'B');
@@ -652,17 +647,9 @@ var Examples = (function($) {
         Util.loadStructureData(".mol1", '1J5E');
         Util.loadStructureData(".mol2", '2AVY');
 
-	    $("#discrepancy1").val("0.5");
-	    $("#neighborhoods1").val("3");
-	    $("#bandwidth1").val("60");
-
-	    $("#discrepancy2").val("0.5");
-	    $("#neighborhoods2").val("9");
-	    $("#bandwidth2").val("20");
-
         Events.loadDefaultParameters('large');
 
-        my._set_results_url('4d24d95bee03d');
+        my._set_results_url('50e0c0e6b8e8e');
 
         $('.mol1').ajaxComplete(function() {
             my._set_chain('mol1', 'A');
@@ -688,13 +675,9 @@ var Examples = (function($) {
         Util.loadStructureData(".mol1", '2AW4');
         Util.loadStructureData(".mol2", '2J01');
 
-	    $("#discrepancy1").val("0.5");
-	    $("#neighborhoods1").val("7");
-	    $("#bandwidth1").val("50");
-
         Events.loadDefaultParameters('small');
 
-        my._set_results_url('4d24dbc864984');
+        my._set_results_url('50e0c1fa9a45f');
 
         $('.mol1').ajaxComplete(function() {
             my._set_chain('mol1', 'A');
@@ -722,7 +705,7 @@ var Examples = (function($) {
 
         Events.loadDefaultParameters('small');
 
-        my._set_results_url('4d24dbcf8fbfb');
+        my._set_results_url('50e0c216d6234');
 
         $('.mol1').ajaxComplete(function() {
             my._set_chain('mol1', 'A');
