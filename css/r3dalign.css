@@ -49,6 +49,10 @@ footer {
 .r3dalign-results a.thumbnail {
     overflow: hidden;
 }
+.r3dalign-results .tab-content {
+    overflow: visible;
+}
+
 .r3dalign-results-crop {
     margin: -210px 0px -30px 0px;
 }
