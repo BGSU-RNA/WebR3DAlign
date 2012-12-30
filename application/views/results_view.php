@@ -260,9 +260,11 @@
     $('.fancybox').fancybox({
         afterClose: function(){
             $('img').css('display', 'inline').addClass('span6');
+            $('#jmolApplet0').show();
         },
         beforeShow: function(){
             $('img').removeClass('span6');
+            $('#jmolApplet0').hide();
         },
         autoSize: false
     });
