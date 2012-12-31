@@ -621,7 +621,7 @@ var Examples = (function($) {
 
         Events.loadDefaultParameters('large');
 
-        my._set_results_url('50e0c1ea1109c');
+        my._set_results_url('50e1d188849d9');
 
         $('.mol1').ajaxComplete(function() {
             my._set_chain('mol1', 'B');
