@@ -12,7 +12,6 @@ class Results extends CI_Controller {
         $data['status']   = $status;
         $data['query_id'] = $query_id;
         $data['title']    = "Query $query_id";
-        $data['verbose_footer'] = True;
         $this->load->view('header', $data);
         $this->load->view('menu');
 
