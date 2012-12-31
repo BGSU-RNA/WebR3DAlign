@@ -7,7 +7,7 @@
   <div class="carousel-inner">
     <div class="active item hero-unit">
         <strong>R3D Align</strong> is a web application for
-        <strong>detailed global nucleotide to nucleotide
+        <strong>locally optimized, nucleotide to nucleotide
         pairwise alignments of RNA 3D structures</strong>
         based on the method described by
         <a href="http://www.ncbi.nlm.nih.gov/pubmed/20929913" target="_blank">Rahrig et al., 2010</a>.
