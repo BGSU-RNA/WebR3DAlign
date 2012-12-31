@@ -4,8 +4,6 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
     AlNTs2 = '';
 
     try
-        Query.Type = 'web';
-
         if nargin == 11
             [AlNTs1, AlNTs2, ErrorMsg] = R3DAlign(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query);
         else
