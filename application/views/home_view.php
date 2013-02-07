@@ -13,7 +13,7 @@
         <a href="http://www.ncbi.nlm.nih.gov/pubmed/20929913" target="_blank">Rahrig et al., 2010</a>.
         <br>
         Refer to <a href="http://rna.bgsu.edu/main/r3dalign-help" target="_blank">help</a>
-        and feel free to <a href="">contact us</a> if you have questions.
+        and don't hesitate to <a href="">contact us</a> if you have questions.
     </div>
     <div class="item hero-unit">
         <strong>Quickstart.</strong>
