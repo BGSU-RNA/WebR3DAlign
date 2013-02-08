@@ -332,11 +332,10 @@ class Query_model extends CI_Model {
         }
 
         $text = <<<EOD
-Disc1     = $discrepancy1;
-NeighMin1 = $neighborhoods1;
-Band1     = $bandwidth1;
-CliqMeth1 = '$clique_method1';
-[AlNTs1,AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc1,NeighMin1,Band1,CliqMeth1,Query);
+Disc{1}     = $discrepancy1;
+NeighMin{1} = $neighborhoods1;
+Band{1}     = $bandwidth1;
+CliqMeth{1} = '$clique_method1';
 EOD;
 
         fwrite($fh, "$text\n");
@@ -348,11 +347,10 @@ EOD;
             $clique_method2 = 'greedy';
 
             $text = <<<EOD
-Disc2     = $discrepancy2;
-NeighMin2 = $neighborhoods2;
-Band2     = $bandwidth2;
-CliqMeth2 = '$clique_method2';
-[AlNTs3,AlNTs4] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc2,NeighMin2,Band2,CliqMeth2,Query,AlNTs1,AlNTs2);
+Disc{2}     = $discrepancy2;
+NeighMin{2} = $neighborhoods2;
+Band{2}     = $bandwidth2;
+CliqMeth{2} = '$clique_method2';
 EOD;
             fwrite($fh, "$text\n");
 
@@ -363,16 +361,17 @@ EOD;
                 $clique_method3 = 'greedy';
 
                 $text = <<<EOD
-Disc3     = $discrepancy3;
-NeighMin3 = $neighborhoods3;
-Band3     = $bandwidth3;
-CliqMeth3 = '$clique_method3';
-[AlNTs5,AlNTs6] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3,NeighMin3,Band3,CliqMeth3,Query,AlNTs3,AlNTs4);
+Disc{3}     = $discrepancy3;
+NeighMin{3} = $neighborhoods3;
+Band{3}     = 'foobar';
+CliqMeth{3} = '$clique_method3';
 EOD;
                 fwrite($fh, "$text\n");
             }
         }
 
+        $text = 'webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc,NeighMin,Band,CliqMeth,Query);';
+        fwrite($fh, "$text\n");
         fclose($fh);
 
     }
