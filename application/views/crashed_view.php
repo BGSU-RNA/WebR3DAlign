@@ -12,12 +12,16 @@
           <h3>Thank you for using R3D Align.</h3>
 
           <p class="text-error">
-            There was a problem with your query.
+            There was a problem with your query. The error has been logged and will be examined.
           </p>
 
-          <p>
-            The error has been logged and will be examined.
+          <?php if ( $error_message != -1 ): ?>
+
+          <p class="text-error">
+            <?=$error_message?>
           </p>
+
+          <?php endif; ?>
 
           <a href="<?=$baseurl?>">Submit another query</a>
 

@@ -33,6 +33,7 @@ class Results extends CI_Controller {
             }
 
         } elseif ( $status == 'crashed' ) {
+            $data['error_message'] = $this->get_error_message($query_id);
             $this->load->view('crashed_view', $data);
 
         } else {
@@ -41,6 +42,19 @@ class Results extends CI_Controller {
 
         $this->load->view('footer');
 	}
+
+    private function get_error_message($query_id)
+    {
+        $line = -1;
+        $file = $this->config->item('results_folder') . "{$query_id}/{$query_id}_error.txt";
+
+        if ( file_exists($file) ) {
+            $f = fopen($file, 'r');
+            $line = fgets($f);
+            fclose($f);
+        }
+        return $line;
+    }
 
 	private function notify($query_id, $email)
     {
