@@ -32,10 +32,7 @@ if (-e $error_file) {
     $status = -1; # no output files, the job timed out
 }
 
-my $statement = "UPDATE `query` SET `status` = $status WHERE `query_id` = '$input';";
-$dbh->do($statement);
-
-$statement = "UPDATE `query` SET `time_completed` = NOW() WHERE `query_id` = '$input';";
+my $statement = "UPDATE `query` SET `status` = $status, `time_completed` = NOW() WHERE `query_id` = '$input';";
 $dbh->do($statement);
 
 $dbh->disconnect;
