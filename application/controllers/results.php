@@ -61,12 +61,12 @@ class Results extends CI_Controller {
         $this->load->library('email');
         $this->email->set_newline("\r\n");
 
-        $this->email->from('rnabgsu@gmail.com', 'R3DAlign');
+        $this->email->from('rnabgsu@gmail.com', 'R3D Align');
         $this->email->to($email);
 
-        $this->email->subject("R3DAlign query $query_id has been aborted");
+        $this->email->subject("R3D Align query $query_id has been aborted");
 
-        $message = "Your R3DAlign query has been aborted. For more information please visit "
+        $message = "Your R3D Align query has been aborted. For more information please visit "
                     . site_url("results/view/$query_id");
 
         $this->email->message($message);

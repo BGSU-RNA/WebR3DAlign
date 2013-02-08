@@ -7,7 +7,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="<?php echo base_url(); ?>">R3DAlign</a>
+        <a class="brand" href="<?php echo base_url(); ?>">R3D Align</a>
         <div class="nav-collapse collapse">
           <ul class="nav">
             <li><a href="http://rna.bgsu.edu/main/r3dalign-help/gallery-of-featured-alignments">Gallery of Featured Alignments</a></li>

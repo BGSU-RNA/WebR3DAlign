@@ -28,14 +28,14 @@
 
           <p>
             You can <strong>bookmark</strong> this page and return later to view your results.
-            All R3DAlign results are stored indefinitely, so feel free to
+            All R3D Align results are stored indefinitely, so feel free to
             share the url to refer to these results.
           </p>
 
           <p>
             Processing usually takes 3-10 minutes.
             After 30 minutes of CPU time all queries are aborted.
-            Please consider downloading the <a href="https://github.com/BGSU-RNA/R3DAlign">standalone R3DAlign program</a>
+            Please consider downloading the <a href="https://github.com/BGSU-RNA/R3DAlign">standalone R3D Align program</a>
             for computationally-intensive tasks.
           </p>
 

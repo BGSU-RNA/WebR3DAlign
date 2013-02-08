@@ -26,7 +26,7 @@
         <strong>
         <a href="http://rna.bgsu.edu/rna3dhub" target="_blank">RNA 3D Hub</a> integration.
         </strong>
-        R3DAlign is integrated with the
+        R3D Align is integrated with the
          <a href="http://rna.bgsu.edu/rna3dhub/nrlist" target="_blank">Non-redundant Lists</a>
         where all RNA 3D structures are organized into <strong><em>equivalence classes</em></strong>
         according to organism, sequence and 3D similarity, and structure quality considerations.
