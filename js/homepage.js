@@ -344,6 +344,18 @@ var Events = (function($) {
             Util.loadStructureData(div, pdbId);
         });
 
+        $('#upload_pdb1').change(function(){
+            $('.mol1_fragments').children().remove();
+            $(".mol1").children().remove();
+            $("#pdb1").val('');
+        });
+
+        $('#upload_pdb2').change(function(){
+            $('.mol2_fragments').children().remove();
+            $(".mol2").children().remove();
+            $("#pdb2").val('');
+        });
+
     }
 
     return my;
