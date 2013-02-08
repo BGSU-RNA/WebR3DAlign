@@ -34,7 +34,7 @@
 
           <p>
             Processing usually takes 3-10 minutes.
-            After 30 minutes all queries are aborted.
+            After 30 minutes of CPU time all queries are aborted.
             Please consider downloading the <a href="https://github.com/BGSU-RNA/R3DAlign">standalone R3DAlign program</a>
             for computationally-intensive tasks.
           </p>

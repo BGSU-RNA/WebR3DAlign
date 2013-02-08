@@ -12,7 +12,7 @@
           <h3>Thank you for using R3D Align.</h3>
 
           <p class="text-error">
-            Your job request has been aborted because it took longer than 30 minutes.
+            Your job request has been aborted because it took longer than 30 minutes of CPU time.
           </p>
 
           <p>
