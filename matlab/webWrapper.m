@@ -17,7 +17,7 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
         end
 
         if nargin == 11 && exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
-            subject = ['R3DAlign results ' Query.Name];
+            subject = ['R3D Align results ' Query.Name];
             msg = successMessage(Query.Name);
             sendNotification({Query.Email}, subject, msg);
         end
@@ -34,14 +34,14 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
 
         % notify the user
         if exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
-            subject = ['Problem with R3DAlign query ' Query.Name];
+            subject = ['Problem with R3D Align query ' Query.Name];
             msg = errorMessage(Query.Name);
             sendNotification({Query.Email}, subject, msg);
         end
 
         % notify the admin
         importConfig;
-        sendNotification(config.adminEmail, 'R3DAlign error log', log);
+        sendNotification(config.adminEmail, 'R3D Align error log', log);
 
         quit;
 
@@ -69,14 +69,14 @@ end
 
 function [msg] = successMessage(queryId)
     importConfig;
-    msg = sprintf('Your R3DAlign results are available at the following url: \n');
+    msg = sprintf('Your R3D Align results are available at the following url: \n');
     msg = strcat(msg, [config.resultsUrl '/' queryId]);
 end
 
 
 function [msg] = errorMessage(queryId)
     importConfig;
-    msg = 'An error occurred while processing your R3DAlign query. ';
+    msg = 'An error occurred while processing your R3D Align query. ';
     msg = strcat(msg, 'You can view the report at the following url: ');
     msg = strcat(msg, [config.resultsUrl '/' queryId]);
 end
@@ -91,7 +91,7 @@ function sendNotification(email, subject, message)
     importConfig;
 
     for i = 1:length(email)
-    
+
         %% Set up Gmail SMTP service
         setpref('Internet', 'E_mail', email{i});
         setpref('Internet', 'SMTP_Server', 'smtp.gmail.com');
@@ -105,7 +105,7 @@ function sendNotification(email, subject, message)
         props.setProperty('mail.smtp.socketFactory.port','465');
 
         sendmail(email{i}, subject, message);
-    
+
     end
 
 end
