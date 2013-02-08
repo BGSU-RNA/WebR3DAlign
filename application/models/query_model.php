@@ -99,6 +99,10 @@ class Query_model extends CI_Model {
 
     private function _precomputed_results_exist($data) {
 
+        if ( $data['pdb_uploaded1'] == 1 or $data['pdb_uploaded2'] == 1 ) {
+            return FALSE;
+        }
+
         $this->db->select()
                  ->from('query')
                  ->where('status', 1) // successful queries
