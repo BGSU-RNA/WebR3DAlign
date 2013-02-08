@@ -19,7 +19,7 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
         if nargin == 11 && exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
             subject = ['R3DAlign results ' Query.Name];
             msg = successMessage(Query.Name);
-            sendNotification(Query.Email, subject, msg);
+            sendNotification({Query.Email}, subject, msg);
         end
 
     catch err
@@ -36,7 +36,7 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
         if exist('Query') && isfield(Query, 'Email') && ~strcmp(Query.Email, '')
             subject = ['Problem with R3DAlign query ' Query.Name];
             msg = errorMessage(Query.Name);
-            sendNotification(Query.Email, subject, msg);
+            sendNotification({Query.Email}, subject, msg);
         end
 
         % notify the admin
@@ -84,23 +84,28 @@ end
 
 function sendNotification(email, subject, message)
 
+    % email is a cell array of emails
     % adapted from http://www.mathworks.com/matlabcentral/fileexchange/20227
 
     % imports login and password variables
     importConfig;
 
-    %% Set up Gmail SMTP service
-    setpref('Internet', 'E_mail', email);
-    setpref('Internet', 'SMTP_Server', 'smtp.gmail.com');
-    setpref('Internet', 'SMTP_Username', config.login);
-    setpref('Internet', 'SMTP_Password', config.password);
+    for i = 1:length(email)
+    
+        %% Set up Gmail SMTP service
+        setpref('Internet', 'E_mail', email{i});
+        setpref('Internet', 'SMTP_Server', 'smtp.gmail.com');
+        setpref('Internet', 'SMTP_Username', config.login);
+        setpref('Internet', 'SMTP_Password', config.password);
 
-    % Gmail server
-    props = java.lang.System.getProperties;
-    props.setProperty('mail.smtp.auth','true');
-    props.setProperty('mail.smtp.socketFactory.class', 'javax.net.ssl.SSLSocketFactory');
-    props.setProperty('mail.smtp.socketFactory.port','465');
+        % Gmail server
+        props = java.lang.System.getProperties;
+        props.setProperty('mail.smtp.auth','true');
+        props.setProperty('mail.smtp.socketFactory.class', 'javax.net.ssl.SSLSocketFactory');
+        props.setProperty('mail.smtp.socketFactory.port','465');
 
-    sendmail(email, subject, message);
+        sendmail(email{i}, subject, message);
+    
+    end
 
 end
