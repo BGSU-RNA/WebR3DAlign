@@ -30,10 +30,29 @@ class Query extends CI_Controller {
         // save the data in the database
         // this will launch matlab
         $result = $this->Query_model->new_query($query_id);
-        if (!$result) {
-            // query wasn't persisted in the database
+        if ( $result['status'] and $result['email'] ) {
+            // email when precomputed results are available
+            $this->notify($query_id, $result['email']);
         }
 
+    }
+
+	private function notify($query_id, $email)
+    {
+        $this->load->library('email');
+        $this->email->set_newline("\r\n");
+
+        $this->email->from('rnabgsu@gmail.com', 'R3D Align');
+        $this->email->to($email);
+
+        $this->email->subject("R3D Align results $query_id");
+
+        $message = "Your R3D Align results are available at the following url: "
+                    . site_url("results/view/$query_id");
+
+        $this->email->message($message);
+
+        $this->email->send();
     }
 
     private function _save_file($file_name, $query_id)

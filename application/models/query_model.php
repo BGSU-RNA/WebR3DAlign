@@ -85,15 +85,19 @@ class Query_model extends CI_Model {
         if ($this->_precomputed_results_exist($data)) {
             $data['status'] = 1;
             $data['time_completed'] = date("Y-m-d H:m:s");
+            $email = $data['email'];
+        } else {
+            $email = FALSE;
         }
 
         try {
             $this->db->insert('query', $data);
+            $dbstatus = TRUE;
         } catch (Exception $e) {
-            return FALSE;
+            $dbstatus = FALSE;
         }
 
-        return TRUE;
+        return array('status' => $dbstatus, 'email' => $email);
     }
 
 
