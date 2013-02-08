@@ -19,25 +19,26 @@ class Results_model extends CI_Model {
     function _get_discrepancy_css_class($disc)
     {
         $class = '';
-        if ( $disc == 0 ) {
+
+        if ( $disc < 0.1 ) {
             $class = 'd10';
-        } elseif ( $disc < 0.1 ) {
-            $class = 'd09';
         } elseif ( $disc < 0.2 ) {
-            $class = 'd08';
+            $class = 'd09';
         } elseif ( $disc < 0.3 ) {
-            $class = 'd07';
+            $class = 'd08';
         } elseif ( $disc < 0.4 ) {
-            $class = 'd06';
+            $class = 'd07';
         } elseif ( $disc < 0.5 ) {
-            $class = 'd05';
+            $class = 'd06';
         } elseif ( $disc < 0.6 ) {
-            $class = 'd04';
+            $class = 'd05';
         } elseif ( $disc < 0.7 ) {
-            $class = 'd03';
+            $class = 'd04';
         } elseif ( $disc < 0.8 ) {
-            $class = 'd02';
+            $class = 'd03';
         } elseif ( $disc < 0.9 ) {
+            $class = 'd02';
+        } elseif ( $disc < 1.0 ) {
             $class = 'd01';
         } else {
             $class = 'd00';

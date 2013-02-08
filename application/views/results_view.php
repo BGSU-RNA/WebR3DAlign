@@ -216,17 +216,17 @@
                             <table id='legend' class="span6">
                             <caption>Discrepancy color legend (low is better)</caption>
                             <tr>
-                            <td class="legend d10">0.0</td>
-                            <td class="legend d09">&lt;0.1</td>
-                            <td class="legend d08">&lt;0.2</td>
-                            <td class="legend d07">&lt;0.3</td>
-                            <td class="legend d06">&lt;0.4</td>
-                            <td class="legend d05">&lt;0.5</td>
-                            <td class="legend d04">&lt;0.6</td>
-                            <td class="legend d03">&lt;0.7</td>
-                            <td class="legend d02">&lt;0.8</td>
-                            <td class="legend d01">&lt;0.9</td>
-                            <td class="legend d00">&gt;0.9</td>
+                            <td class="legend d10">&lt;0.1</td>
+                            <td class="legend d09">&lt;0.2</td>
+                            <td class="legend d08">&lt;0.3</td>
+                            <td class="legend d07">&lt;0.4</td>
+                            <td class="legend d06">&lt;0.5</td>
+                            <td class="legend d05">&lt;0.6</td>
+                            <td class="legend d04">&lt;0.7</td>
+                            <td class="legend d03">&lt;0.8</td>
+                            <td class="legend d02">&lt;0.9</td>
+                            <td class="legend d01">&lt;1.0</td>
+                            <td class="legend d00">&gt;=1.1</td>
                             </tr>
                             </table>
                     <table class="table table-bordered table-condensed basepair-table">
