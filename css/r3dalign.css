@@ -38,6 +38,7 @@ footer {
 .r3dalign-results #basepairs, .r3dalign-results pre {
   max-height: 470px;
   overflow:auto;
+  resize: both;
 }
 .r3dalign-results pre {
   font-size: 0.6em;
