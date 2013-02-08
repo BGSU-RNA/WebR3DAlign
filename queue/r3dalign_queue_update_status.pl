@@ -23,10 +23,11 @@ my $result_file = $config{results_dir} . "/$input/$input.pdb";
 my $error_file  = $config{results_dir} . "/$input/$input" . "_error.txt";
 
 my $status = 0;
-if (-e $result_file) {
-    $status = 1; # found results
-} elsif (-e $error_file) {
+# check for errors first in case only the first iteration(s) were successful
+if (-e $error_file) {
     $status = -2; # found matlab error report
+} elsif (-e $result_file) {
+    $status = 1; # found results
 } else {
     $status = -1; # no output files, the job timed out
 }
