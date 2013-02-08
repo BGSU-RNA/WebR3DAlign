@@ -223,6 +223,8 @@ var Events = (function($) {
         if ( i == 2 ) {
             t[i+1].prop('checked', false).prop('disabled', 'disabled');
             t[i].prop('checked', false);
+        } else if ( i == 3 ) {
+            t[i].prop('checked', false);
         }
     }
 
