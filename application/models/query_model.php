@@ -50,6 +50,9 @@ class Query_model extends CI_Model {
         $pdb_uploaded1 = (isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) ? 1 : NULL;
         $pdb_uploaded2 = (isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) ? 1 : NULL;
 
+        $pdb_uploaded_filename1 = (isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) ? $_FILES[$name1]['name'] : NULL;
+        $pdb_uploaded_filename2 = (isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) ? $_FILES[$name2]['name'] : NULL;
+
         $nt_ch1 = $this->_remove_duplicates($this->input->post('mol1_nts'),
                                             $this->input->post('mol1_chains'));
         $nt_ch2 = $this->_remove_duplicates($this->input->post('mol2_nts'),
@@ -67,6 +70,9 @@ class Query_model extends CI_Model {
             'pdb_uploaded1' => $pdb_uploaded1,
             'pdb2' => $this->input->post('pdb2'),
             'pdb_uploaded2' => $pdb_uploaded2,
+
+            'pdb_uploaded_filename1' => $pdb_uploaded_filename1,
+            'pdb_uploaded_filename2' => $pdb_uploaded_filename2,
 
             'seed'          => 'NWseed',
             'seed_uploaded' => 0,

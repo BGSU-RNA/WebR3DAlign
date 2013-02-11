@@ -149,7 +149,7 @@
                 <dl>
                   <dt>Molecule 1 (green)</dt>
                   <?php if ($parameters['pdb_uploaded1']): ?>
-                    <dd>user supplied file</dd>
+                    <dd>user supplied file <strong><?=$parameters['pdb_uploaded_filename1']?></strong></dd>
                   <?php else: ?>
                     <dd>
                       <strong>PDB id:</strong> <a class="pdb_info"><?=$parameters['pdb1']?></a>,
@@ -160,7 +160,7 @@
 
                   <dt>Molecule 2 (red)</dt>
                   <?php if ($parameters['pdb_uploaded2']): ?>
-                    <dd>user supplied file</dd>
+                    <dd>user supplied file <strong><?=$parameters['pdb_uploaded_filename2']?></strong></dd>
                   <?php else: ?>
                     <dd>
                       <strong>PDB id:</strong> <a class="pdb_info"><?=$parameters['pdb2']?></a>,
