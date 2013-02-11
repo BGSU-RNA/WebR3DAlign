@@ -63,7 +63,6 @@ class Query_model extends CI_Model {
             'status' => '0',
             'email' => $this->input->post('email') ? $this->input->post('email') : NULL,
 
-            'time_submitted' => date("Y-m-d H:m:s"),
             'time_completed' => NULL,
 
             'pdb1' => $this->input->post('pdb1'),
