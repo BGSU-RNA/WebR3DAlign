@@ -371,7 +371,7 @@ EOD;
                 $text = <<<EOD
 Disc{3}     = $discrepancy3;
 NeighMin{3} = $neighborhoods3;
-Band{3}     = 'foobar';
+Band{3}     = $bandwidth3;
 CliqMeth{3} = '$clique_method3';
 EOD;
                 fwrite($fh, "$text\n");
