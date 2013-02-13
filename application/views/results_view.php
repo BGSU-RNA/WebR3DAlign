@@ -15,7 +15,7 @@
           <script type="text/javascript">
             jmolInitialize(" /jmol");
             jmolSetAppletColor("#f3f3f3");
-            jmolApplet(450, "load <?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb; hide a1l; spacefill off; frame all; select 1.1; color lime; select 1.2; color darkolivegreen; select 1.3; color red; select 1.4; color darkred; select all; display all;");
+            jmolApplet(450, "load <?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb; hide a1l; spacefill off; frame all; select 1.1; color [230,159,0]; select 1.2; color translucent [230,159,0]; select 1.3; color [0,114,178]; select 1.4; color translucent [0,114,178]; select all; display all;");
           </script>
 
           <button class="btn" id="toggle_stereo">Stereo</button>
@@ -24,7 +24,7 @@
           <button class="btn" id="toggle_aligned">Hide unaligned nucleotides</button>
 
           <p>
-          <small>Unaligned nucleotides are dimly colored.</small>
+          <small>Unaligned nucleotides are translucent.</small>
           </p>
 
         </div> <!-- span6, left panel -->
@@ -147,7 +147,7 @@
                 <br>
 
                 <dl>
-                  <dt>Molecule 1 (green)</dt>
+                  <dt style="color: rgb(230,159,0)">Molecule 1</dt>
                   <?php if ($parameters['pdb_uploaded1']): ?>
                     <dd>user supplied file <strong><?=$parameters['pdb_uploaded_filename1']?></strong></dd>
                   <?php else: ?>
@@ -158,7 +158,7 @@
                     </dd>
                   <?php endif; ?>
 
-                  <dt>Molecule 2 (red)</dt>
+                  <dt style="color: rgb(0,114,178)">Molecule 2</dt>
                   <?php if ($parameters['pdb_uploaded2']): ?>
                     <dd>user supplied file <strong><?=$parameters['pdb_uploaded_filename2']?></strong></dd>
                   <?php else: ?>
