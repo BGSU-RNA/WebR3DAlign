@@ -226,7 +226,7 @@
                             <td class="legend d03">&lt;0.8</td>
                             <td class="legend d02">&lt;0.9</td>
                             <td class="legend d01">&lt;1.0</td>
-                            <td class="legend d00">&gt;=1.1</td>
+                            <td class="legend d00">&gt;=1.0</td>
                             </tr>
                             </table>
                     <table class="table table-bordered table-condensed basepair-table">
