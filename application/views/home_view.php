@@ -317,14 +317,13 @@
   <div>
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdbId}}</a>
-    is represented by
+    belongs to the <a href="{{url}}" target="_blank">equivalence class</a>
+    represented by
     <a class="{{popoverClass}}">{{representative}}</a>
-    along with
+    and consisting of
     {{numStructures}} other
     structure{{#if manyStructures}}s{{/if}}
-    ({{pdbList}}),
-    which together form an
-    <a href="{{url}}" target="_blank">equivalence class</a>.
+    ({{pdbList}}).
   </div>
 </script>
 
