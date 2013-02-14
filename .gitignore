@@ -56,3 +56,4 @@ application/cache/*
 queue/r3dalign_queue_config.pl
 matlab/importConfig.m
 *.app
+PrecomputedData
