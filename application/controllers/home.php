@@ -10,6 +10,11 @@ class Home extends CI_Controller {
 		$this->load->view('home_view');
 		$this->load->view('footer', $data);
 	}
+
+	public function gallery()
+	{
+	    header( 'Location: http://rna.bgsu.edu/main/r3dalign-help/gallery-of-featured-alignments/' ) ;
+	}
 }
 
 /* End of file home.php */

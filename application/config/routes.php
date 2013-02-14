@@ -40,6 +40,7 @@
 
 $route['results/(:any)'] = "results/view/$1";
 $route['query/new'] = "query/new_query";
+$route['gallery'] = "home/gallery";
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
