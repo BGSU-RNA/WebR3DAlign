@@ -137,7 +137,7 @@
                 <small>
                   <i class="icon-info-sign"></i> Blue (low geometric discrepancy) indicates high 3D similarity.
                   Red (high geometric discrepancy) indicates low 3D similarity.
-                  <a href="http://rna.bgsu.edu/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">More</a>
+                  <a href="http://rna.bgsu.edu/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">More Bar Diagram Help</a>
                 </small>
 
                 <?php else: ?>
@@ -212,7 +212,7 @@
                     Basepair comparison is not available for this query. Please
                     send us the query id if you believe this is a mistake.
                   <?php else: ?>
-
+                            <a href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-basepair-table-help/" target="_blank">Basepair Table Help</a>
                             <table id='legend' class="span6">
                             <caption>Discrepancy color legend (low is better)</caption>
                             <tr>
