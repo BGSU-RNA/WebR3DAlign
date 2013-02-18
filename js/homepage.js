@@ -441,7 +441,7 @@ var Validator = (function($) {
     {
         $this = $(elem);
 
-        var nts = $this.val();
+        var nts = $this.val().trim();
         // no need to query the server, resolve right away
         if ( nts == 'all' ) {
             my._incrementSuccessCounter();

@@ -307,7 +307,7 @@ class Query_model extends CI_Model {
                 fwrite($fh, 'Chain1{' . $i . "} = '");
                 fwrite($fh, $chains[$i-1] . "';\n");
                 fwrite($fh, 'Nts1{' . $i . "}   = '");
-                fwrite($fh, $nts[$i-1] . "';\n");
+                fwrite($fh, trim($nts[$i-1]) . "';\n");
                 $i++;
             }
         }
@@ -326,7 +326,7 @@ class Query_model extends CI_Model {
                 fwrite($fh, 'Chain2{' . $i . "} = '");
                 fwrite($fh, $chains[$i-1] . "';\n");
                 fwrite($fh, 'Nts2{' . $i . "}   = '");
-                fwrite($fh, $nts[$i-1] . "';\n");
+                fwrite($fh, trim($nts[$i-1]) . "';\n");
                 $i++;
             }
         }
