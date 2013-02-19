@@ -67,7 +67,7 @@ class Results extends CI_Controller {
         $this->email->subject("R3D Align query $query_id has been aborted");
 
         $message = "Your R3D Align query has been aborted. For more information please visit "
-                    . site_url("results/view/$query_id");
+                    . site_url("results/$query_id");
 
         $this->email->message($message);
 
