@@ -293,42 +293,34 @@ class Query_model extends CI_Model {
             fwrite($fh, "pdb2 = '$pdb2';\n");
         }
 
-        if ($pdb_uploaded1) {
-            fwrite($fh, "Chain1{1} = 'all';\n");
-            fwrite($fh, "Nts1{1}   = 'all';\n");
-        } else {
-            $nt_ch1 = $this->_remove_duplicates($this->input->post('mol1_nts'),
-                                                $this->input->post('mol1_chains'));
-            $nts    = $nt_ch1['nts'];
-            $chains = $nt_ch1['chains'];
+        // Chains and nucleotides 1
+        $nt_ch1 = $this->_remove_duplicates($this->input->post('mol1_nts'),
+                                            $this->input->post('mol1_chains'));
+        $nts    = $nt_ch1['nts'];
+        $chains = $nt_ch1['chains'];
 
-            $i = 1;
-            foreach($chains as $chain) {
-                fwrite($fh, 'Chain1{' . $i . "} = '");
-                fwrite($fh, $chains[$i-1] . "';\n");
-                fwrite($fh, 'Nts1{' . $i . "}   = '");
-                fwrite($fh, trim($nts[$i-1]) . "';\n");
-                $i++;
-            }
+        $i = 1;
+        foreach($chains as $chain) {
+            fwrite($fh, 'Chain1{' . $i . "} = '");
+            fwrite($fh, $chains[$i-1] . "';\n");
+            fwrite($fh, 'Nts1{' . $i . "}   = '");
+            fwrite($fh, trim($nts[$i-1]) . "';\n");
+            $i++;
         }
 
-        if ($pdb_uploaded2) {
-            fwrite($fh, "Chain2{1} = 'all';\n");
-            fwrite($fh, "Nts2{1}   = 'all';\n");
-        } else {
-            $nt_ch2 = $this->_remove_duplicates($this->input->post('mol2_nts'),
-                                                $this->input->post('mol2_chains'));
-            $nts    = $nt_ch2['nts'];
-            $chains = $nt_ch2['chains'];
+        // Chains and nucleotides 2
+        $nt_ch2 = $this->_remove_duplicates($this->input->post('mol2_nts'),
+                                            $this->input->post('mol2_chains'));
+        $nts    = $nt_ch2['nts'];
+        $chains = $nt_ch2['chains'];
 
-            $i = 1;
-            foreach($chains as $chain) {
-                fwrite($fh, 'Chain2{' . $i . "} = '");
-                fwrite($fh, $chains[$i-1] . "';\n");
-                fwrite($fh, 'Nts2{' . $i . "}   = '");
-                fwrite($fh, trim($nts[$i-1]) . "';\n");
-                $i++;
-            }
+        $i = 1;
+        foreach($chains as $chain) {
+            fwrite($fh, 'Chain2{' . $i . "} = '");
+            fwrite($fh, $chains[$i-1] . "';\n");
+            fwrite($fh, 'Nts2{' . $i . "}   = '");
+            fwrite($fh, trim($nts[$i-1]) . "';\n");
+            $i++;
         }
 
         $discrepancy1   = $this->input->post('discrepancy1');

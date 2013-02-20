@@ -254,6 +254,37 @@
     });
 </script>
 
+<script id="upload-input-fragment" type="text/x-handlebars-template">
+  <div class="form-inline fragment">
+
+    <div class="input-prepend">
+      <span class="add-on">
+        <i class="icon-question-sign" data-html="true"
+           data-original-title="Select a chain to align.<br>
+                                Nucleotides and chains are not validated<br>
+                                in uploaded files.<br>
+                                Example: C"></i>
+      </span>
+
+    <input name="{{chainSelectName}}" class="span2" type="text" autocomplete="off" placeholder="select a chain">
+    </div>
+
+    <div class="input-append input-prepend">
+      <span class="add-on">
+        <i class="icon-question-sign" data-html="true"
+           data-original-title="Enter nucleotides to align.<br>
+                                Ranges can be specified using a colon<br>
+                                and can be separated by commas.<br>
+                                Example: 2:20,62:69,110:119"></i>
+      </span>
+      <input class="input-medium nt-validate" autocomplete="off" name="{{ntsInputName}}" type="text" placeholder="leave blank to use all">
+      <button class="btn minus-fragment" type="button"><i class="icon-minus-sign"></i></button>
+      <button class="btn plus-fragment" type="button"><i class="icon-plus-sign"></i></button>
+    </div>
+
+  </div>
+</script>
+
 <script id="chain-fragment" type="text/x-handlebars-template">
   <div class="form-inline fragment">
 

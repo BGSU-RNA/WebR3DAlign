@@ -10,6 +10,21 @@ var Util = (function($) {
     my.popoverClass = "pdb_info";
 
 
+    my.createUploadCustomInput = function(data)
+    {
+        data.chainSelectName = data.div.replace('.', '') + '_chains[]';
+        data.ntsInputName = data.div.replace('.', '') + '_nts[]';
+
+        var source   = $("#upload-input-fragment").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+
+        $(data.div + '_fragments').children().remove();
+        $(data.div + "_fragments").append(html);
+
+        $('.fragment .icon-question-sign').tooltip();
+    }
+
     my.createSelectDropdownForChains = function(data)
     {
         data.chainSelectName = data.div.replace('.', '') + '_chains[]';
@@ -347,12 +362,16 @@ var Events = (function($) {
         $('#upload_pdb1').change(function(){
             $('.mol1_fragments').children().remove();
             $(".mol1").children().remove();
+            data.div = '.mol1';
+            Util.createUploadCustomInput(data);
             $("#pdb1").val('');
         });
 
         $('#upload_pdb2').change(function(){
             $('.mol2_fragments').children().remove();
             $(".mol2").children().remove();
+            data.div = '.mol2';
+            Util.createUploadCustomInput(data);
             $("#pdb2").val('');
         });
 
@@ -396,6 +415,7 @@ var Validator = (function($) {
             }
 
             my.replaceEmptyNucleotideFields();
+            my.replaceEmptyChainFields();
 
             // construct an array of deferred objects
             deferreds = my.checkNucleotides();
@@ -485,6 +505,18 @@ var Validator = (function($) {
     {
         for (var i = 1; i <= 2; i++) {
             $("input[name='mol" + i + "_nts[]']").each(function(){
+                $this = $(this);
+                if ( $this.val() == '' ) {
+                    $this.val('all');
+                }
+            });
+        }
+    }
+
+    my.replaceEmptyChainFields = function()
+    {
+        for (var i = 1; i <= 2; i++) {
+            $("input[name='mol" + i + "_chains[]']").each(function(){
                 $this = $(this);
                 if ( $this.val() == '' ) {
                     $this.val('all');
