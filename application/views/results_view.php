@@ -212,7 +212,10 @@
                     Basepair comparison is not available for this query. Please
                     send us the query id if you believe this is a mistake.
                   <?php else: ?>
-                            <a href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-basepair-table-help/" target="_blank">Basepair Table Help</a>
+                            <small>
+                              <i class="icon-info-sign"></i>
+                              <a href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-basepair-table-help/" target="_blank">Basepair Table Help</a>
+                            </small>
                             <table id='legend' class="span6">
                             <caption>Discrepancy color legend (low is better)</caption>
                             <tr>
