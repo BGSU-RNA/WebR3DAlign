@@ -98,7 +98,7 @@ MAIN:
                                  "end; quit";
             my $work = "ulimit -t $TIMEOUT;";
             $work .= "$MATLAB -nodesktop -r \"$matlab_command\"; ";
-            $work .= "mv $R3DALIGN_DIR" . "/$query_id* $RESULTS_DIR" . "/$query_id; ";
+            $work .= "mv -f $R3DALIGN_DIR" . "/$query_id* $RESULTS_DIR" . "/$query_id; ";
 
             $work .= '/usr/bin/perl ' . $RealBin . "/r3dalign_queue_update_status.pl $query_id";
             $work_queues{$tid}->enqueue($work);
