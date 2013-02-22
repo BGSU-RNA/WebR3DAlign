@@ -115,6 +115,7 @@ class Query_model extends CI_Model {
         $this->db->select()
                  ->from('query')
                  ->where('status', 1) // successful queries
+                 ->order_by('time_completed', 'desc') // get most recent results
                  ->limit(1);
 
         $ignore = array('id', 'query_id', 'time_submitted', 'time_completed',
