@@ -132,9 +132,20 @@ class Query_model extends CI_Model {
         $query = $this->db->get();
 
         if ( $query->num_rows() > 0 ) {
-            // copy over all resulting files with new names
 
             $result = $query->row();
+
+            // make sure the result doesn't have to be recomputed
+            $this->db->select()
+                     ->from('critical_updates')
+                     ->where('date >', $result->time_completed)
+                     ->limit(1);
+            $query2 = $this->db->get();
+            if ( $query2->num_rows() ) {
+                return FALSE;
+            }
+
+            // copy over all resulting files with new names
             $source = $this->config->item('results_folder') . $result->query_id;
             $sourceHandle = opendir($source);
 
