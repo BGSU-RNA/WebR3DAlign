@@ -57,3 +57,7 @@ queue/r3dalign_queue_config.pl
 matlab/importConfig.m
 *.app
 PrecomputedData
+Neighborhoods
+Sequence\ Alignments
+R3D\ Align\ Output
+PDBFiles
