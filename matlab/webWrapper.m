@@ -47,7 +47,7 @@ function [AlNTs1, AlNTs2] = webWrapper(pdb1,Chain1,Nts1, pdb2,Chain2,Nts2, Disc3
 
     end
 
-    disp('Done');
+    fprintf('\nDone\n');
 
 end
 
