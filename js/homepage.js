@@ -479,7 +479,7 @@ var Validator = (function($) {
         query = {
             pdb: $('#pdb' + i).val(),
             nts: nts,
-            chain: $('select[name="mol' + i + '_chains[]"]').val()
+            chain: $this.parent().siblings('select[name="mol' + i + '_chains[]"]').val()
         };
 
         var deferred = $.ajax({
