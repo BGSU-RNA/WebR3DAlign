@@ -248,23 +248,26 @@ class Query_model extends CI_Model {
         $query = $this->db->get();
 
         if ($query->num_rows() == 0 ) {
-            return 'not found';
+            $status = 'not found';
+            $time_submitted = '';
         } else {
             $result = $query->row();
             if ( $result->status == 0 ) {
-                return 'submitted';
+                $status = 'submitted';
             } elseif ( $result->status == -1 ) {
-                return 'aborted';
+                $status = 'aborted';
             } elseif ( $result->status == -2 ) {
-                return 'crashed';
+                $status = 'crashed';
             } elseif ( $result->status == 1 ) {
-                return 'done';
+                $status = 'done';
             } elseif ( $result->status == 2 ) {
-                return 'active';
+                $status = 'active';
             } else {
-                return 'unknown';
+                $status = 'unknown';
             }
+            $time_submitted = $result->time_submitted;
         }
+        return array('status' => $status, 'time_submitted' => $time_submitted);
 
     }
 

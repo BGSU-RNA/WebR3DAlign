@@ -7,9 +7,11 @@ class Results extends CI_Controller {
         $this->load->model('Query_model', '', TRUE);
         $this->load->model('Results_model', '', TRUE);
 
-        $status = $this->Query_model->get_query_status($query_id);
+        $query_status = $this->Query_model->get_query_status($query_id);
+        $status = $query_status['status'];
 
-        $data['status']   = $status;
+        $data = array();
+        $data = array_merge($data, $query_status);
         $data['query_id'] = $query_id;
         $data['title']    = "Query $query_id";
         $this->load->view('header', $data);

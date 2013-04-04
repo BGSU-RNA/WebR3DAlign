@@ -9,7 +9,10 @@
       <div class="row">
 
         <div class="span12 well interstitial">
-          <h3>Thank you for using R3D Align.</h3>
+          <h3>
+            Query <?=$query_id?>
+            <small>submitted on <?php echo date('Y-m-d H:i:s', strtotime($time_submitted));?></small>
+          </h3>
 
           <?php if ( $status == 'submitted' ): ?>
             <p class="text-info">
@@ -28,14 +31,14 @@
 
           <p>
             You can <strong>bookmark</strong> this page and return later to view your results.
-            All R3D Align results are stored indefinitely, so feel free to
+            All R3D Align <strong>results are stored indefinitely</strong>, so feel free to
             share the url to refer to these results.
           </p>
 
           <p>
             Processing usually takes 3-10 minutes.
             After 30 minutes of CPU time all queries are aborted.
-            Please consider downloading the <a href="https://github.com/BGSU-RNA/R3DAlign">standalone R3D Align program</a>
+            Please consider downloading the <a href="https://github.com/BGSU-RNA/R3DAlign" target="_blank">standalone R3D Align program</a>
             for computationally-intensive tasks.
           </p>
 
