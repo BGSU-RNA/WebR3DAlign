@@ -40,7 +40,6 @@
           </script>
 
           <button class="btn" id="toggle_stereo">Stereo</button>
-          <button class="btn" id="jmol_rotate_y">Rotate</button>
           <button class="btn" id="toggle_labels">Labels on</button>
           <button class="btn" id="toggle_aligned">Hide unaligned nucleotides</button>
 
@@ -329,7 +328,4 @@
         $(this).html('Labels on');
     });
 
-    $('#jmol_rotate_y').on('click', function(){
-        jmolScript("move 0 360 0 0 0 0 0 0 2");
-    });
 </script>
