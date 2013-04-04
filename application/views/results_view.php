@@ -15,12 +15,12 @@
             <small>
               <?php
                 if ( $time_completed != '' and $time_completed != '' ) {
-                    $difference = strtotime($time_completed) - strtotime($time_completed);
+                    $difference = strtotime($time_completed) - strtotime($time_submitted);
                     $mins = abs(floor($difference / 60));
-                    if ( $mins == 0 ) {
-                        echo "run time less than a minute";
+                    if ( $mins <= 1 ) {
+                        echo "finished in less than a minute";
                     } elseif ( $mins < 120 ) {
-                        echo "run time $mins minutes";
+                        echo "finished in $mins minutes";
                     } else {
                         # job took suspiciously long, so don't show the report
                         echo "run time not recorded";
