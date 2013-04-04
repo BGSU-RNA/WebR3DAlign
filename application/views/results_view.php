@@ -42,6 +42,7 @@
           <button class="btn" id="toggle_stereo">Stereo</button>
           <button class="btn" id="toggle_labels">Labels on</button>
           <button class="btn" id="toggle_aligned">Hide unaligned nucleotides</button>
+          <button class="btn" id="jmol_reset">Reset</button>
 
           <p>
           <small>Unaligned nucleotides are translucent.</small>
@@ -326,6 +327,13 @@
     }, function() {
         jmolScript("labels off");
         $(this).html('Labels on');
+    });
+
+    $('#jmol_reset').click(function(){
+        jmolScript("reset; hide a1l; wireframe 0.15; spacefill off; frame all;" +
+                   "select 1.1; color [230,159,0]; select 1.2; color translucent [230,159,0];" +
+                   "select 1.3; color [0,114,178]; select 1.4; color translucent [0,114,178];" +
+                   "select all; display all;");
     });
 
 </script>
