@@ -9,9 +9,9 @@
       <div class="row">
 
         <div class="span12 well interstitial">
-          <h3>Thank you for using R3D Align.</h3>
+          <h3>Query <?=$query_id?></h3>
 
-          <p class="text-error">
+          <p class="text-error lead">
             There was a problem with your query. The error has been logged and will be examined.
           </p>
 
