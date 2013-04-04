@@ -11,15 +11,18 @@
         <div class="span12 well interstitial">
           <h3>
             Query <?=$query_id?>
-            <small>submitted on <?php echo date('Y-m-d H:i:s', strtotime($time_submitted));?></small>
+            <small>
+              submitted at <?php echo date('H:i:s', strtotime($time_submitted));?>
+                        on <?php echo date('Y-m-d', strtotime($time_submitted));?>
+            </small>
           </h3>
 
           <?php if ( $status == 'submitted' ): ?>
-            <p class="text-info">
+            <p class="text-info lead">
               Your job request has been successfully submitted.
             </p>
           <?php else: ?>
-            <p class="text-info">
+            <p class="text-info lead">
               Your job request is being processed.
             </p>
           <?php endif; ?>
@@ -42,7 +45,7 @@
             for computationally-intensive tasks.
           </p>
 
-          <a href="<?=$baseurl?>">Submit another query</a>
+          <a href="<?=$baseurl?>" target="_blank">Submit another query</a>
 
           <br><br>
 
