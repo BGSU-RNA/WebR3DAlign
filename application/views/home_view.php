@@ -57,6 +57,7 @@
         <div class="span4">
           <input type="text" tabIndex="1" data-provide="typeahead" class="typeahead span2"
                  autocomplete="off" placeholder="Enter PDB id" id="pdb1" name="pdb1"
+                 data-original-title="Last sync on <?php echo date('F j, Y', strtotime('last Saturday'));?>"
                  data-structure="1">
           <span class="help-inline"><em>or upload a file</em></span>
           <br>
@@ -83,6 +84,7 @@
         <div class="span4">
           <input type="text" tabIndex="2" data-provide="typeahead" class="typeahead span2"
                  autocomplete="off" placeholder="Enter PDB id" id="pdb2" name="pdb2"
+                 data-original-title="Last sync on <?php echo date('F j, Y', strtotime('last Saturday'));?>"
                  data-structure="2">
           <span class="help-inline"><em>or upload a file</em></span>
           <br>
