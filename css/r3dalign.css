@@ -46,6 +46,10 @@ footer {
   background-color: white;
 }
 
+.r3dalign-results a.muted {
+  text-decoration: underline;
+}
+
 /*hide extra whitespace in the bar diagram*/
 .r3dalign-results a.thumbnail {
     overflow: hidden;

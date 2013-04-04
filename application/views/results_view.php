@@ -45,7 +45,15 @@
           <button class="btn" id="jmol_reset">Reset</button>
 
           <p>
-          <small>Unaligned nucleotides are translucent.</small>
+          <small>
+            Unaligned nucleotides are translucent.
+            <br>
+            <span class="muted">
+              Right click to view <a class="muted" href="http://jmol.sourceforge.net" target="_blank">Jmol</a> menu.
+              For more information refer to the
+              <a class="muted" href="http://chemapps.stolaf.edu/jmol/docs/" target="_blank">Jmol scripting help</a>.
+            </span>
+          </small>
           </p>
 
         </div> <!-- span6, left panel -->
