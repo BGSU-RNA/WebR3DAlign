@@ -10,7 +10,28 @@
 
         <div class="span6"> <!-- left panel -->
 
-          <h3>Query <?=$query_id?></h3>
+          <h3>
+            Query <?=$query_id?>
+            <small>
+              <?php
+                if ( $time_completed != '' and $time_completed != '' ) {
+                    $difference = strtotime($time_completed) - strtotime($time_completed);
+                    $mins = abs(floor($difference / 60));
+                    if ( $mins == 0 ) {
+                        echo "run time less than a minute";
+                    } elseif ( $mins < 120 ) {
+                        echo "run time $mins minutes";
+                    } else {
+                        # job took suspiciously long, so don't show the report
+                        echo "run time not recorded";
+                    }
+                } else {
+                    echo "run time not recorded";
+                }
+
+              ?>
+            </small>
+          </h3>
 
           <script type="text/javascript">
             jmolInitialize(" /jmol");

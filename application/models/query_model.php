@@ -250,6 +250,7 @@ class Query_model extends CI_Model {
         if ($query->num_rows() == 0 ) {
             $status = 'not found';
             $time_submitted = '';
+            $time_completed = '';
         } else {
             $result = $query->row();
             if ( $result->status == 0 ) {
@@ -266,8 +267,11 @@ class Query_model extends CI_Model {
                 $status = 'unknown';
             }
             $time_submitted = $result->time_submitted;
+            $time_completed = $result->time_completed;
         }
-        return array('status' => $status, 'time_submitted' => $time_submitted);
+        return array('status'         => $status,
+                     'time_submitted' => $time_submitted,
+                     'time_completed' => $time_completed);
 
     }
 
