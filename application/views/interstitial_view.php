@@ -12,7 +12,7 @@
           <h3>
             Query <?=$query_id?>
             <small>
-              submitted at <?php echo date('H:i:s', strtotime($time_submitted));?>
+              submitted at <?php echo date('H:i', strtotime($time_submitted));?>
                         on <?php echo date('Y-m-d', strtotime($time_submitted));?>
             </small>
           </h3>
