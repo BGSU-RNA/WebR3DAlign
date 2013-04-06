@@ -233,7 +233,6 @@
       </div>
     </div> <!-- row form controls -->
 
-
     </form>
     </div> <!-- content -->
   </div> <!-- container -->
@@ -318,6 +317,7 @@
 
 <script id="representative-structure" type="text/x-handlebars-template">
   <div>
+    <small>
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdbId}}</a>
     represents
@@ -325,33 +325,39 @@
     other structures ({{pdbList}})
     together forming an
     <a href="{{url}}" target="_blank">equivalence class</a>.
+    </small>
   </div>
 </script>
 
 <script id="single-member" type="text/x-handlebars-template">
   <div>
+    <small>
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdbId}}</a>
     is the single member of an
     <a href="{{url}}" target="_blank">equivalence class</a>.
+    </small>
   </div>
 </script>
 
 <script id="the-only-other-member" type="text/x-handlebars-template">
   {{! 1A4D is represented by 1A51, which together form NR_all_39400.1 }}
   <div>
+    <small>
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdbId}}</a>
     is represented by
     <a class="{{popoverClass}}">{{representative}}</a>,
     which together form an
     <a href="{{url}}" target="_blank">equivalence class</a>.
+    </small>
   </div>
 </script>
 
 <script id="regular-member" type="text/x-handlebars-template">
   {{! special case 3KLV }}
   <div>
+    <small>
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdbId}}</a>
     belongs to the <a href="{{url}}" target="_blank">equivalence class</a>
@@ -361,6 +367,7 @@
     {{numStructures}} other
     structure{{#if manyStructures}}s{{/if}}
     ({{pdbList}}).
+    </small>
   </div>
 </script>
 
