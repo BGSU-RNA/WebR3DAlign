@@ -184,11 +184,25 @@
        </div>
 
        <div class="span3">
+
+         <div class="btn-group dropup suggest-parameters">
+           <button class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+             Suggest parameters
+             <span class="caret"></span>
+           </button>
+           <ul class="dropdown-menu">
+             <li><a id="parameters_small">Small (&lt;50 nts)</a></li>
+             <li><a id="parameters_medium">Medium (50-200 nts)</a></li>
+             <li><a id="parameters_large">Large (&gt;200 nts)</a></li>
+           </ul>
+         </div>
+
+         <br>
+
          <small>
-            <i class="icon-question-sign"></i> Choose among 3 sets of default
+            <i class="icon-question-sign"></i> Choose among 3 sets of
             parameters that usually work well for
-            large, medium, and small structures
-            by clicking the "Suggest parameters" button.
+            large, medium, and small structures.
             <a href="http://rna.bgsu.edu/main/r3dalign-help#advanced-parameters" target="_blank">More</a>
          </small>
        </div>
@@ -197,17 +211,7 @@
 
     <div class="row well well-small form-inline"> <!-- form controls -->
 
-      <div class="btn-group dropup">
-        <a class="btn dropdown-toggle small" data-toggle="dropdown" href="#">
-          Suggest parameters
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a id="parameters_small">Small (&lt;50 nts)</a></li>
-          <li><a id="parameters_medium">Medium (50-200 nts)</a></li>
-          <li><a id="parameters_large">Large (&gt;200 nts)</a></li>
-        </ul>
-      </div>
+      <button class="btn" id="toggle_advanced">Advanced parameters</button>
 
       <div class="btn-group dropup">
         <a class="btn dropdown-toggle small" data-toggle="dropdown" href="#">

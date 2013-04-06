@@ -330,6 +330,11 @@ var Events = (function($) {
 
         my.loadDefaultParameters('large');
 
+        $("#toggle_advanced").on('click', function(evt){
+            evt.preventDefault();
+            $('.advanced-options').slideToggle();
+        });
+
         $("#reset").on('click', function(evt){
             evt.preventDefault();
             my.reset();
