@@ -338,4 +338,12 @@
                    "select all; display all;");
     });
 
+    // to dismiss popovers when clicking outside
+    $('html').click(function (e) {
+        if (isVisible) {
+            $('.pdb_info').popover('destroy');
+            isVisible = false;
+        }
+    });
+
 </script>
