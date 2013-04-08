@@ -240,8 +240,8 @@
 
 
 <script type="text/javascript" src="<?php echo base_url(); ?>js/handlebars-1.0.rc.1.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/main.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/homepage.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/main.js?v=1.1"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/homepage.js?v=1.1"></script>
 
 
 <!-- Handlebars templates -->
