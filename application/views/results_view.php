@@ -28,7 +28,6 @@
                 } else {
                     echo "run time not recorded";
                 }
-
               ?>
             </small>
           </h3>
@@ -50,51 +49,56 @@
               <a class="muted" href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-and-jmol/" target="_blank">More Help</a>
           </small>
 
+          <br>
+
+          <div class="btn-group" id="download">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              Download
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <?php if (file_exists($results_folder . "$query_id/$query_id.pdb")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb"
+                       target='_blank' download="<?=$query_id?>.pdb">3D superposition (.pdb)</a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (file_exists($results_folder . "$query_id/$query_id.fasta")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.fasta"
+                       target='_blank' download="<?=$query_id?>.fasta">3D alignment (.fasta)</a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (file_exists($results_folder . "$query_id/$query_id.pdf")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdf"
+                       target='_blank' download="<?=$query_id?>.pdf">Standard Bar Diagram (.pdf)</a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (file_exists($results_folder . "$query_id/$query_id" . "_int.pdf")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>_int.pdf"
+                       target='_blank' download="<?=$query_id?>_int.pdf">Basepair Bar Diagram (.pdf)</a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (file_exists($results_folder . "$query_id/$query_id.csv")): ?>
+                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.csv"
+                       target='_blank' download="<?=$query_id?>.csv">Basepair comparison (.csv)</a>
+                </li>
+              <?php endif; ?>
+            </ul>
+          </div>
+
         </div> <!-- span6, left panel -->
 
         <div class="span6" id="tabbed_content"> <!-- right panel -->
 
             <!-- tab menu -->
-            <ul class="nav nav-tabs" id="nav">
+            <ul class="nav nav-pills" id="nav">
               <li class="active"><a href="#overview">Overview</a></li>
               <li><a href="#basepairs">Basepairs</a></li>
+              <li><a href="#stats">Statistics</a></li>
               <li><a href="#alignment">Alignment</a></li>
-
-              <li class="dropdown">
-                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-                Download <b class="caret"></b></a>
-                <ul class="dropdown-menu" role="menu">
-                  <?php if (file_exists($results_folder . "$query_id/$query_id.pdb")): ?>
-                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb"
-                           target='_blank' download="<?=$query_id?>.pdb">3D superposition (.pdb)</a>
-                    </li>
-                  <?php endif; ?>
-
-                  <?php if (file_exists($results_folder . "$query_id/$query_id.fasta")): ?>
-                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.fasta"
-                           target='_blank' download="<?=$query_id?>.fasta">3D alignment (.fasta)</a>
-                    </li>
-                  <?php endif; ?>
-
-                  <?php if (file_exists($results_folder . "$query_id/$query_id.pdf")): ?>
-                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdf"
-                           target='_blank' download="<?=$query_id?>.pdf">Standard Bar Diagram (.pdf)</a>
-                    </li>
-                  <?php endif; ?>
-
-                  <?php if (file_exists($results_folder . "$query_id/$query_id" . "_int.pdf")): ?>
-                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>_int.pdf"
-                           target='_blank' download="<?=$query_id?>_int.pdf">Basepair Bar Diagram (.pdf)</a>
-                    </li>
-                  <?php endif; ?>
-
-                  <?php if (file_exists($results_folder . "$query_id/$query_id.csv")): ?>
-                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.csv"
-                           target='_blank' download="<?=$query_id?>.csv">Basepair comparison (.csv)</a>
-                    </li>
-                  <?php endif; ?>
-                </ul>
-              </li>
             </ul>
 
             <?php
@@ -117,59 +121,10 @@
 
               <!-- overview panel -->
               <div class="tab-pane active" id="overview">
-                <h4>Local geometric similarity</h4>
 
-                <?php if ($bar_diagram != ''): ?>
+                <h4>Query summary</h4>
 
-                <small>
-                <ul class="nav nav-tabs" id="nav-diagrams">
-                  <li class="active"><a href="#standard-diagram">Standard Bar Diagram</a></li>
-                  <li><a href="#advanced-diagram">Basepair Bar Diagram</a></li>
-                </ul>
-                </small>
-
-                <div class="tab-content">
-
-                  <div class="tab-pane active" id="standard-diagram">
-                    <ul class="thumbnails">
-                      <li>
-                        <a href="#" class="thumbnail">
-                          <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$bar_diagram?>" class="fancybox r3dalign-results-crop span6">
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div class="tab-pane" id="advanced-diagram">
-
-                  <?php if ( $advanced_diagram != '' ): ?>
-                    <ul class="thumbnails">
-                      <li>
-                        <a href="#" class="thumbnail">
-                          <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>_int.png" class="fancybox span6">
-                        </a>
-                      </li>
-                    </ul>
-                  <?php else: ?>
-                    Advanced diagram is not available for this query.
-                  <?php endif; ?>
-                  </div>
-
-                </div>
-
-                <small>
-                  <i class="icon-info-sign"></i> Blue (low geometric discrepancy) indicates high 3D similarity.
-                  Red (high geometric discrepancy) indicates low 3D similarity.
-                  <a href="http://rna.bgsu.edu/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">More Bar Diagram Help</a>
-                </small>
-
-                <?php else: ?>
-                  Bar diagram is not available for this query.
-                <?php endif; ?>
-
-                <br>
-
-                <dl>
+                <dl class="dl-horizontal">
                   <dt style="color: rgb(230,159,0)">Molecule 1</dt>
                   <?php if ($parameters['pdb_uploaded1']): ?>
                     <dd>user supplied file <strong><?=$parameters['pdb_uploaded_filename1']?></strong></dd>
@@ -216,17 +171,60 @@
                       &beta; = <?=$parameters['bandwidth3']?>
                   </dd>
                   <?php endif; ?>
-
                 </dl>
 
-                <!-- AddThis Button BEGIN -->
-                <span class="addthis_toolbox addthis_default_style">
-                <a href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4fb19f2d543502ad" class="addthis_button_compact at300m"><span class="at16nc at300bs at15nc at15t_compact at16t_compact"><span class="at_a11y">More Sharing Services</span></span>Share</a>
-                <div class="atclear"></div>
-                </span>
-                <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-                <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fb19f2d543502ad"></script>
-                <!-- AddThis Button END -->
+                <h4>Local geometric similarity</h4>
+
+                <?php if ($bar_diagram != ''): ?>
+
+                <small>
+                <ul class="nav nav-tabs" id="nav-diagrams">
+                  <li class="active"><a href="#standard-diagram">Standard Bar Diagram</a></li>
+                  <li><a href="#advanced-diagram">Basepair Bar Diagram</a></li>
+                </ul>
+                </small>
+
+                <div class="tab-content">
+
+                  <div class="tab-pane active" id="standard-diagram">
+                    <small class="muted">
+                      Blue (low geometric discrepancy) indicates high 3D similarity.
+                      Red (high geometric discrepancy) indicates low 3D similarity.
+                      <a class="muted" href="http://rna.bgsu.edu/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">Bar Diagram Help</a>
+                    </small>
+                    <ul class="thumbnails">
+                      <li>
+                        <a href="#" class="thumbnail">
+                          <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$bar_diagram?>" class="fancybox r3dalign-results-crop span6">
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="tab-pane fade" id="advanced-diagram">
+                    <small class="muted">
+                      The arcs indicate basepairing interactions and are colored by type.
+                      <a class="muted" href="http://rna.bgsu.edu/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">Bar Diagram Help</a>
+                    </small>
+
+                  <?php if ( $advanced_diagram != '' ): ?>
+                    <ul class="thumbnails">
+                      <li>
+                        <a href="#" class="thumbnail">
+                          <img src="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>_int.png" class="fancybox span6">
+                        </a>
+                      </li>
+                    </ul>
+                  <?php else: ?>
+                    Advanced diagram is not available for this query.
+                  <?php endif; ?>
+                  </div>
+
+                </div>
+
+                <?php else: ?>
+                  Bar diagram is not available for this query.
+                <?php endif; ?>
 
               </div> <!-- overview panel -->
 
@@ -235,9 +233,10 @@
                     Basepair comparison is not available for this query. Please
                     send us the query id if you believe this is a mistake.
                   <?php else: ?>
-                            <small>
-                              <i class="icon-info-sign"></i>
-                              <a href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-basepair-table-help/" target="_blank">Basepair Table Help</a>
+                            <small class="muted">
+                              Basepair interactions are annotated according to the
+                              Leontis-Westhof nomenclature and are colored by type.
+                              <a href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-basepair-table-help/" target="_blank" class="muted">Basepair Table Help</a>
                             </small>
                             <table id='legend' class="span6">
                             <caption>Discrepancy color legend (low is better)</caption>
@@ -269,6 +268,21 @@
                     <pre><?=$alignment?></pre>
                   <?php endif ?>
               </div>
+
+              <div class="tab-pane" id="stats">
+                  <h4>Summary statistics</h4>
+                  <?php if ( !is_null($summary_table) ): ?>
+                    <?=$summary_table?>
+                    <small class="muted">
+                      Global discrepancy is calculated based on all aligned nucleotides.
+                    </small>
+                  <?php else: ?>
+                    <p>
+                      Summary statistics is not available for this query.
+                    </p>
+                  <?php endif;?>
+              </div>
+
           </div> <!-- tab-content -->
         </div> <!-- span6, right panel -->
       </div> <!-- row -->

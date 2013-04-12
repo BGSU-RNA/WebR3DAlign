@@ -22,6 +22,7 @@ class Results extends CI_Controller {
             $data['basepair_table'] = $this->Results_model->get_basepair_comparison($query_id);
             $data['alignment'] = $this->Results_model->get_alignment($query_id);
             $data['parameters'] = $this->Results_model->get_query_parameters($query_id);
+            $data['summary_table'] = $this->Results_model->get_summary_table($query_id);
             $this->load->view('results_view', $data);
 
         } elseif ( $status == 'submitted' or $status == 'active' ) {

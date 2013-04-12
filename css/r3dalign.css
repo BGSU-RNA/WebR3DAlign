@@ -45,9 +45,27 @@ footer {
   font-family: monospace;
   background-color: white;
 }
-
+.r3dalign-results .summary-stats td {
+    text-align: center;
+}
+.r3dalign-results table tr td:first-child {
+    font-weight: bold;
+    text-align: left;
+}
 .r3dalign-results a.muted {
   text-decoration: underline;
+}
+.r3dalign-results dt {
+  width: auto;
+}
+.r3dalign-results dd {
+  margin-left: 90px;
+}
+.r3dalign-results .nav {
+  margin-bottom: 10px;
+}
+.r3dalign-results #download {
+  margin-top: 5px;
 }
 
 /*hide extra whitespace in the bar diagram*/
