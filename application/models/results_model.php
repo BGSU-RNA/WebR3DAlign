@@ -146,7 +146,7 @@ class Results_model extends CI_Model {
             "Percentage of structure 1 basepairs aligned"   => 'perc_bp_aligned1',
             "Percentage of structure 2 basepairs aligned"   => 'perc_bp_aligned2',
             "Mean local neighborhood discrepancy"           => 'local_disc',
-            "Global, rigid-body geometric discrepancy"      => 'global_disc'
+            "Global discrepancy of all aligned nucleotides" => 'global_disc'
         );
 
         $data = array();
@@ -204,7 +204,7 @@ class Results_model extends CI_Model {
 
         // Global discrepancy
         $colspan2['data'] = number_format($data['global_disc'], 2) . ' &Aring/nucleotide';
-        $this->table->add_row('Global discrepancy', $colspan2);
+        $this->table->add_row('Global, rigid-body geometric discrepancy', $colspan2);
 
         return $this->table->generate();
     }
