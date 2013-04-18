@@ -49,46 +49,6 @@
               <a class="muted" href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-and-jmol/" target="_blank">More Help</a>
           </small>
 
-          <br>
-
-          <div class="btn-group" id="download">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              Download
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <?php if (file_exists($results_folder . "$query_id/$query_id.pdb")): ?>
-                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb"
-                       target='_blank' download="<?=$query_id?>.pdb">3D superposition (.pdb)</a>
-                </li>
-              <?php endif; ?>
-
-              <?php if (file_exists($results_folder . "$query_id/$query_id.fasta")): ?>
-                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.fasta"
-                       target='_blank' download="<?=$query_id?>.fasta">3D alignment (.fasta)</a>
-                </li>
-              <?php endif; ?>
-
-              <?php if (file_exists($results_folder . "$query_id/$query_id.pdf")): ?>
-                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdf"
-                       target='_blank' download="<?=$query_id?>.pdf">Standard Bar Diagram (.pdf)</a>
-                </li>
-              <?php endif; ?>
-
-              <?php if (file_exists($results_folder . "$query_id/$query_id" . "_int.pdf")): ?>
-                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>_int.pdf"
-                       target='_blank' download="<?=$query_id?>_int.pdf">Basepair Bar Diagram (.pdf)</a>
-                </li>
-              <?php endif; ?>
-
-              <?php if (file_exists($results_folder . "$query_id/$query_id.csv")): ?>
-                <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.csv"
-                       target='_blank' download="<?=$query_id?>.csv">Basepair comparison (.csv)</a>
-                </li>
-              <?php endif; ?>
-            </ul>
-          </div>
-
         </div> <!-- span6, left panel -->
 
         <div class="span6" id="tabbed_content"> <!-- right panel -->
@@ -99,6 +59,7 @@
               <li><a href="#basepairs">Basepairs</a></li>
               <li><a href="#stats">Statistics</a></li>
               <li><a href="#alignment">Alignment</a></li>
+              <li><a href="#download">Download</a></li>
             </ul>
 
             <?php
@@ -282,6 +243,42 @@
                     </p>
                   <?php endif;?>
               </div>
+
+              <!-- download panel -->
+              <div class="tab-pane well" id="download">
+                Select a file to be downloaded:
+                <ul>
+                  <?php if (file_exists($results_folder . "$query_id/$query_id.pdb")): ?>
+                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdb"
+                           target='_blank' download="<?=$query_id?>.pdb">3D superposition (.pdb)</a>
+                    </li>
+                  <?php endif; ?>
+
+                  <?php if (file_exists($results_folder . "$query_id/$query_id.fasta")): ?>
+                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.fasta"
+                           target='_blank' download="<?=$query_id?>.fasta">3D alignment (.fasta)</a>
+                    </li>
+                  <?php endif; ?>
+
+                  <?php if (file_exists($results_folder . "$query_id/$query_id.pdf")): ?>
+                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.pdf"
+                           target='_blank' download="<?=$query_id?>.pdf">Standard Bar Diagram (.pdf)</a>
+                    </li>
+                  <?php endif; ?>
+
+                  <?php if (file_exists($results_folder . "$query_id/$query_id" . "_int.pdf")): ?>
+                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>_int.pdf"
+                           target='_blank' download="<?=$query_id?>_int.pdf">Basepair Bar Diagram (.pdf)</a>
+                    </li>
+                  <?php endif; ?>
+
+                  <?php if (file_exists($results_folder . "$query_id/$query_id.csv")): ?>
+                    <li><a href="<?=$baseurl?>data/results/<?=$query_id?>/<?=$query_id?>.csv"
+                           target='_blank' download="<?=$query_id?>.csv">Basepair comparison (.csv)</a>
+                    </li>
+                  <?php endif; ?>
+                </ul>
+              </div> <!-- download panel -->
 
           </div> <!-- tab-content -->
         </div> <!-- span6, right panel -->
