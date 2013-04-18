@@ -2,6 +2,14 @@
   <div class="container r3dalign-homepage">
     <div class="content">
 
+<noscript>
+<div class="alert alert-error">
+Please enable javascript in your browser settings because it is required for R3D Align
+presubmission validation. If you continue using the site without javascript,
+please make sure that all input data are correct.
+</div>
+</noscript>
+
 <div id="myCarousel" class="carousel slide">
   <!-- Carousel items -->
   <div class="carousel-inner">

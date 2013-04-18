@@ -32,6 +32,12 @@
             </small>
           </h3>
 
+          <noscript>
+            <div class="alert alert-error">
+              Please enable Javascript in your browser settings to view the alignment in 3D.
+            </div>
+          </noscript>
+
           <script type="text/javascript">
             jmolInitialize(" /jmol");
             jmolSetAppletColor("#f3f3f3");
