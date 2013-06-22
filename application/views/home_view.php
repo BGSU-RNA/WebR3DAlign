@@ -20,7 +20,7 @@ please make sure that all input data are correct.
         based on the method described by
         <a href="http://www.ncbi.nlm.nih.gov/pubmed/20929913" target="_blank">Rahrig et al., 2010</a>.
         The webserver is described in 
-        <a href="http://nar.oxfordjournals.org/content/early/2013/05/28/nar.gkt417.full.html">Rahrig et al., 2013</a>.
+        <a href="http://nar.oxfordjournals.org/content/41/W1/W15.full" target="_blank">Rahrig et al., 2013</a>.
         <br>
         Refer to <a href="http://rna.bgsu.edu/main/r3dalign-help" target="_blank">help</a>
         and don't hesitate to <a href="">contact us</a> if you have questions.
