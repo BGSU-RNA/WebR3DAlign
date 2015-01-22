@@ -183,8 +183,8 @@ class Results_model extends CI_Model {
 
         // Percentage of aligned nucleotides
         $this->table->add_row('Percentage of aligned nucleotides',
-                              number_format($data['perc_nt_aligned1'], 1) . '%',
-                              number_format($data['perc_nt_aligned2'], 1) . '%');
+                              number_format(floatval($data['perc_nt_aligned1']), 1) . '%',
+                              number_format(floatval($data['perc_nt_aligned2']), 1) . '%');
 
         // Number of basepairs
         $this->table->add_row('Number of basepairs', $data['num_bp1'], $data['num_bp2']);
@@ -195,15 +195,15 @@ class Results_model extends CI_Model {
 
         // Percentage of aligned basepairs
         $this->table->add_row('Percentage of aligned basepairs',
-                              number_format($data['perc_bp_aligned1'], 1) . '%',
-                              number_format($data['perc_bp_aligned2'], 1) . '%');
+                              number_format(floatval($data['perc_bp_aligned1']), 1) . '%',
+                              number_format(floatval($data['perc_bp_aligned2']), 1) . '%');
 
         // Local discrepancy
-        $colspan2['data'] = number_format($data['local_disc'], 2) . ' &Aring/nucleotide';
+        $colspan2['data'] = number_format(floatval($data['local_disc']), 2) . ' &Aring/nucleotide';
         $this->table->add_row('Mean local discrepancy', $colspan2);
 
         // Global discrepancy
-        $colspan2['data'] = number_format($data['global_disc'], 2) . ' &Aring/nucleotide';
+        $colspan2['data'] = number_format(floatval($data['global_disc']), 2) . ' &Aring/nucleotide';
         $this->table->add_row('Global, rigid-body geometric discrepancy', $colspan2);
 
         return $this->table->generate();
