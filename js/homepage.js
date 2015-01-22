@@ -1,11 +1,12 @@
+var RNA_3D_HUB_URL = location.protocol + "//" + location.hostname + "rna3dhub";
 var Util = (function($) {
-    var my = {},
-             urls = {
-                        getStructureInfo:        'http://rna.bgsu.edu/rna3dhub/apiv1/get_structure_info/',
-                        getEquivalentStructures: 'http://rna.bgsu.edu/rna3dhub/apiv1/get_equivalent_structures/',
-                        equivalenceClass:        'http://rna.bgsu.edu/rna3dhub/nrlist/view/',
-                        rna3dhubPdb:             'http://rna.bgsu.edu/rna3dhub/pdb/'
-                     };
+  var my = {},
+      urls = {
+        getStructureInfo:        RNA_3D_HUB_URL + '/apiv1/get_structure_info/',
+        getEquivalentStructures: RNA_3D_HUB_URL + '/apiv1/get_equivalent_structures/',
+        equivalenceClass:        RNA_3D_HUB_URL + '/nrlist/view/',
+        rna3dhubPdb:             RNA_3D_HUB_URL + '/pdb/'
+      };
 
     my.popoverClass = "pdb_info";
 
@@ -390,8 +391,8 @@ var Events = (function($) {
 var Validator = (function($) {
     var my = {},
              urls = {
-                        isValidPdb:  'http://rna.bgsu.edu/rna3dhub/apiv1/is_valid_pdb/',
-                        validateNts: 'http://rna.bgsu.edu/rna3dhub/apiv1/validate_nts'
+                        isValidPdb:  RNA_3D_HUB_URL + '/apiv1/is_valid_pdb/',
+                        validateNts: RNA_3D_HUB_URL + '/apiv1/validate_nts'
                      };
 
     my.popoverClass = "";
