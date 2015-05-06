@@ -7,7 +7,8 @@ function LookUpPDBInfo() {
     re = /[a-zA-Z0-9]{4}/;
     pdb = re.exec(a.text());
 
-    $.post('http://rna.bgsu.edu/rna3dhub/rest/getPdbInfo', {
+    var loc = window.location.protocol + '//' + window.location.hostname;
+    $.post(loc + '/rna3dhub/rest/getPdbInfo', {
         pdb: pdb[0]
     }, function (data) {
         console.log(data);

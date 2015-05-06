@@ -1,4 +1,6 @@
+var HERE = window.location.protocol + '//' + window.location.hostname;
 var RNA_3D_HUB_URL = location.protocol + "//" + location.hostname + "rna3dhub";
+
 var Util = (function($) {
   var my = {},
       urls = {
@@ -627,10 +629,8 @@ var Examples = (function($) {
 
     var my = {};
 
-    // r3dalign or r3dalign_dev
-    var environment = window.location.href.split('/')[3];
 
-    my.url_results = 'http://rna.bgsu.edu/r3dalign/results/';
+    my.url_results = HERE + '/r3dalign/results/';
 
     my._set_results_url = function(query_id)
     {
