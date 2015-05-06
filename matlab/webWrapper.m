@@ -96,7 +96,7 @@ function sendNotification(email, subject, message)
         setpref('Internet', 'E_mail', email{i});
         setpref('Internet', 'SMTP_Server', config.server);
         setpref('Internet', 'SMTP_Username', config.login);
-        % setpref('Internet', 'SMTP_Password', config.password);
+        setpref('Internet', 'SMTP_Password', config.password);
 
         % Gmail server
         props = java.lang.System.getProperties;
