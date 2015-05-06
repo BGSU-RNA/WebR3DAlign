@@ -19,10 +19,10 @@ please make sure that all input data are correct.
         pairwise alignments of RNA 3D structures</strong>
         based on the method described by
         <a href="http://www.ncbi.nlm.nih.gov/pubmed/20929913" target="_blank">Rahrig et al., 2010</a>.
-        The webserver is described in 
+        The webserver is described in
         <a href="http://nar.oxfordjournals.org/content/41/W1/W15.full" target="_blank">Rahrig et al., 2013</a>.
         <br>
-        Refer to <a href="http://rna.bgsu.edu/main/r3dalign-help" target="_blank">help</a>
+        Refer to <a href="<?=$this->config->item('home_url')?>/main/r3dalign-help" target="_blank">help</a>
         and don't hesitate to <a href="">contact us</a> if you have questions.
     </div>
     <div class="item hero-unit">
@@ -34,10 +34,10 @@ please make sure that all input data are correct.
     </div>
     <div class="item hero-unit">
         <strong>
-        <a href="http://rna.bgsu.edu/rna3dhub" target="_blank">RNA 3D Hub</a> integration.
+        <a href="<?=$this->config->item('home_url')?>/rna3dhub" target="_blank">RNA 3D Hub</a> integration.
         </strong>
         R3D Align is integrated with the
-         <a href="http://rna.bgsu.edu/rna3dhub/nrlist" target="_blank">Non-redundant Lists</a>
+         <a href="<?=$this->config->item('home_url')?>/rna3dhub/nrlist" target="_blank">Non-redundant Lists</a>
         where all RNA 3D structures are organized into <strong><em>equivalence classes</em></strong>
         according to organism, sequence and 3D similarity, and structure quality considerations.
         Each class is <strong><em>represented</em></strong> by a single structure.
@@ -213,7 +213,7 @@ please make sure that all input data are correct.
             <i class="icon-question-sign"></i> Choose among 3 sets of
             parameters that usually work well for
             large, medium, and small structures.
-            <a href="http://rna.bgsu.edu/main/r3dalign-help#advanced-parameters" target="_blank">More</a>
+            <a href="<?=$this->config->item('home_url')?>/main/r3dalign-help#advanced-parameters" target="_blank">More</a>
          </small>
        </div>
 
@@ -386,7 +386,7 @@ please make sure that all input data are correct.
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdbId}}</a>
     hasn't been included in the
-    <a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Lists</a>.
+    <a href="<?=$this->config->item('home_url')?>/rna3dhub/nrlist">Non-redundant Lists</a>.
     Either it does not have any complete nucleotides,
     or it hasn't been processed yet.
   </div>
@@ -409,7 +409,7 @@ $(function() {
 
     $('.typeahead').typeahead({
         source: function (query, process) {
-            return $.get('http://rna.bgsu.edu/rna3dhub/apiv1/get_all_rna_pdb_ids', { query: query }, function (data) {
+            return $.get('<?=$this->config->item('home_url')?>/rna3dhub/apiv1/get_all_rna_pdb_ids', { query: query }, function (data) {
                 return process(data.pdb_ids);
             });
         }

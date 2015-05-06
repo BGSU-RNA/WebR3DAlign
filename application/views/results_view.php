@@ -52,7 +52,7 @@
           <small class="muted">
               Unaligned nucleotides are translucent.
               Right click to view <a class="muted" href="http://jmol.sourceforge.net" target="_blank">Jmol</a> menu.
-              <a class="muted" href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-and-jmol/" target="_blank">More Help</a>
+              <a class="muted" href="<?=$this->config->item('home_url')?>/main/r3dalign-help/r3d-align-and-jmol/" target="_blank">More Help</a>
           </small>
 
         </div> <!-- span6, left panel -->
@@ -157,7 +157,7 @@
                     <small class="muted">
                       Blue (low geometric discrepancy) indicates high 3D similarity.
                       Red (high geometric discrepancy) indicates low 3D similarity.
-                      <a class="muted" href="http://rna.bgsu.edu/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">Bar Diagram Help</a>
+                      <a class="muted" href="<?=$this->config->item('home_url')?>/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">Bar Diagram Help</a>
                     </small>
                     <ul class="thumbnails">
                       <li>
@@ -171,7 +171,7 @@
                   <div class="tab-pane fade" id="advanced-diagram">
                     <small class="muted">
                       The arcs indicate basepairing interactions and are colored by type.
-                      <a class="muted" href="http://rna.bgsu.edu/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">Bar Diagram Help</a>
+                      <a class="muted" href="<?=$this->config->item('home_url')?>/main/r3dalign-help/r3dalign-bar-diagram/" target="_blank">Bar Diagram Help</a>
                     </small>
 
                   <?php if ( $advanced_diagram != '' ): ?>
@@ -203,7 +203,7 @@
                             <small class="muted">
                               Basepair interactions are annotated according to the
                               Leontis-Westhof nomenclature and are colored by type.
-                              <a href="http://rna.bgsu.edu/main/r3dalign-help/r3d-align-basepair-table-help/" target="_blank" class="muted">Basepair Table Help</a>
+                              <a href="<?=$this->config->item('home_url')?>/main/r3dalign-help/r3d-align-basepair-table-help/" target="_blank" class="muted">Basepair Table Help</a>
                             </small>
                             <table id='legend' class="span6">
                             <caption>Discrepancy color legend (low is better)</caption>

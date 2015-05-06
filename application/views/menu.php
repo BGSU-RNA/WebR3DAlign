@@ -12,19 +12,19 @@
           <ul class="nav">
             <li><a href="<?php echo site_url('gallery');?>">Gallery of Featured Alignments</a></li>
             <li><a href="https://github.com/BGSU-RNA/R3DAlign">Standalone Program</a></li>
-            <li><a href="http://rna.bgsu.edu/main/r3dalign-help" target="_blank">Help</a></li>
-            <li><a href="http://rna.bgsu.edu/main/contact-us">Contact Us</a></li>
+            <li><a href="<?=$this->config->item('home_url')?>/main/r3dalign-help" target="_blank">Help</a></li>
+            <li><a href="<?=$this->config->item('home_url')?>/main/contact-us">Contact Us</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 RNA 3D Hub
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="http://rna.bgsu.edu/rna3dhub/pdb">RNA Structure Atlas</a></li>
-                <li><a href="http://rna.bgsu.edu/rna3dhub/nrlist">Non-redundant Lists</a></li>
-                <li><a href="http://rna.bgsu.edu/rna3dhub/motifs">RNA 3D Motif Atlas</a></li>
+                <li><a href="<?=$this->config->item('home_url')?>/rna3dhub/pdb">RNA Structure Atlas</a></li>
+                <li><a href="<?=$this->config->item('home_url')?>/rna3dhub/nrlist">Non-redundant Lists</a></li>
+                <li><a href="<?=$this->config->item('home_url')?>/rna3dhub/motifs">RNA 3D Motif Atlas</a></li>
                 <li class="divider"></li>
-                <li><a href="http://rna.bgsu.edu/rna3dhub">RNA 3D Hub Home</a></li>
+                <li><a href="<?=$this->config->item('home_url')?>/rna3dhub">RNA 3D Hub Home</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -33,11 +33,11 @@
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="http://rna.bgsu.edu">RNA BGSU Home</a></li>
+                <li><a href="<?=$this->config->item('home_url')?>">RNA BGSU Home</a></li>
                 <li class="divider"></li>
-                <li><a href="http://rna.bgsu.edu/FR3D/basepairs">Basepair Catalog</a></li>
-                <li><a href="http://rna.bgsu.edu/webfr3d">WebFR3D</a></li>
-                <li><a href="http://rna.bgsu.edu/jar3d">JAR3D</a></li>
+                <li><a href="<?=$this->config->item('home_url')?>/FR3D/basepairs">Basepair Catalog</a></li>
+                <li><a href="<?=$this->config->item('home_url')?>/webfr3d">WebFR3D</a></li>
+                <li><a href="<?=$this->config->item('home_url')?>/jar3d">JAR3D</a></li>
                 <li class="divider"></li>
                 <li><a href="https://github.com/BGSU-RNA/WebR3DAlign">Github</a></li>
               </ul>
