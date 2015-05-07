@@ -1,4 +1,4 @@
-var RNA_3D_HUB_URL = location.protocol + "//" + location.hostname + "rna3dhub";
+var RNA_3D_HUB_URL = location.protocol + "//" + location.hostname + "/rna3dhub";
 var Util = (function($) {
   var my = {},
       urls = {
