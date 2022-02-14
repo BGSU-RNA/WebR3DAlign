@@ -49,6 +49,9 @@ $SIG{'INT'} = $SIG{'TERM'} =
         $IDLE_QUEUE->insert(0, -1);
     };
 
+my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+my $now = sprintf("%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $mon+1, $mday, $hour, $min, $sec);
+print("r3dalign queue is starting at ",$now,"\n");
 
 ### Main Processing Section ###
 MAIN:
@@ -90,12 +93,22 @@ MAIN:
 
             mark_as_queued($query_id);
 
+
+            my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+            my $now = sprintf("%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $mon+1, $mday, $hour, $min, $sec);
+            print("r3dalign job is starting at ",$now,"\n");
+
+
             my $matlab_command = "try, cd $R3DALIGN_DIR;" .
-                                 "addpath('FR3D', 'R3DAlign', 'PrecomputedData', 'PDBFiles');" .
+                                 "addpath('FR3D', 'R3DAlign', 'PrecomputedData', 'FR3DSource', 'PDBFiles');" .
+                                 "addpath(genpath(pwd));" .
                                  "addpath('$MATLAB_DIR');" .
                                  "addpath('$RESULTS_DIR" . "/$query_id');" .
                                  "query; catch err, disp('Critical error');" .
                                  "end; quit";
+
+            print($matlab_command);
+
             my $work = "ulimit -t $TIMEOUT;";
             $work .= "$MATLAB -nodesktop -r \"$matlab_command\"; ";
             $work .= "mv -f $R3DALIGN_DIR" . "/$query_id* $RESULTS_DIR" . "/$query_id; ";
@@ -135,7 +148,7 @@ sub worker
 
     # Work loop
      while (! $TERM) {
-        # Indicate that were are ready to do work
+        # Indicate that we are ready to do work
         printf("Idle     -> %2d\n", $tid);
         $IDLE_QUEUE->enqueue($tid);
 
