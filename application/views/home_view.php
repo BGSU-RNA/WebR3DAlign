@@ -51,6 +51,13 @@ please make sure that all input data are correct.
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
 
+    <div class='alert'>
+      <h4>We are transitioning to mmCIF files</h4>
+      <p>We are upgrading our site to include new 
+        RNA 3D structures distributed in mmCIF format. This may cause some alignments to fail. If this happens, please download the standalone version.
+       Follow us on <a href="https://twitter.com/rna3dhub">Twitter</a> to hear when the updated version becomes available.
+      </p>
+    </div>
 
     <form enctype="multipart/form-data" action="<?php echo base_url();?>query/new" name="main" method="post">
 
