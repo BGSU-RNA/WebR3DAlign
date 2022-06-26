@@ -37,6 +37,7 @@ my $MATLAB       = $config{matlab_app};
 my $MATLAB_DIR   = $config{matlab_dir};
 my $RESULTS_DIR  = $config{results_dir};
 my $R3DALIGN_DIR = $config{r3dalign_dir};
+my $PIPELINE_MAT = '/usr/local/pipeline/hub-core/FR3D/PrecomputedData';
 
 ### Signal Handling ###
 
@@ -96,18 +97,20 @@ MAIN:
 
             my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
             my $now = sprintf("%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $mon+1, $mday, $hour, $min, $sec);
+            print("r3dalign is starting a job\n");
             print("r3dalign job is starting at ",$now,"\n");
 
 
             my $matlab_command = "try, cd $R3DALIGN_DIR;" .
-                                 "addpath('FR3D', 'R3DAlign', 'PrecomputedData', 'FR3DSource', 'PDBFiles');" .
+                                 "addpath('FR3D', 'R3DAlign', 'FR3D/FR3DSource', 'PDBFiles');" .
                                  "addpath(genpath(pwd));" .
                                  "addpath('$MATLAB_DIR');" .
+                                 "addpath('$PIPELINE_MAT');" .
                                  "addpath('$RESULTS_DIR" . "/$query_id');" .
                                  "query; catch err, disp('Critical error');" .
                                  "end; quit";
 
-            print($matlab_command);
+            print($matlab_command,"\n");
 
             my $work = "ulimit -t $TIMEOUT;";
             $work .= "$MATLAB -nodesktop -r \"$matlab_command\"; ";
