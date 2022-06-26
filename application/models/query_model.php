@@ -44,14 +44,21 @@ class Query_model extends CI_Model {
 
     function new_query($query_id)
     {
-        $name1 = 'upload_pdb1';
-        $name2 = 'upload_pdb2';
+        //Comment out code allowing the user to upload files
+        //$name1 = 'upload_pdb1';
+        //$name2 = 'upload_pdb2';
 
-        $pdb_uploaded1 = (isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) ? 1 : NULL;
-        $pdb_uploaded2 = (isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) ? 1 : NULL;
+        //$pdb_uploaded1 = (isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) ? 1 : NULL;
+        //$pdb_uploaded2 = (isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) ? 1 : NULL;
 
-        $pdb_uploaded_filename1 = (isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) ? $_FILES[$name1]['name'] : NULL;
-        $pdb_uploaded_filename2 = (isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) ? $_FILES[$name2]['name'] : NULL;
+        //$pdb_uploaded_filename1 = (isset($_FILES[$name1]) && !empty($_FILES[$name1]['name'])) ? $_FILES[$name1]['name'] : NULL;
+        //$pdb_uploaded_filename2 = (isset($_FILES[$name2]) && !empty($_FILES[$name2]['name'])) ? $_FILES[$name2]['name'] : NULL;
+
+        //Always NULL
+        $pdb_uploaded1 = NULL;
+        $pdb_uploaded2 = NULL;
+        $pdb_uploaded_filename1 = NULL;
+        $pdb_uploaded_filename2 = NULL;
 
         $nt_ch1 = $this->_remove_duplicates($this->input->post('mol1_nts'),
                                             $this->input->post('mol1_chains'));
