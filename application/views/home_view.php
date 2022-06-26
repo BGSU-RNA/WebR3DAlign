@@ -27,17 +27,18 @@ please make sure that all input data are correct.
     </div>
     <div class="item hero-unit">
         <strong>Quickstart.</strong>
-        Specify two RNA 3D structures that you would like to align and hit submit.
+        Specify two RNA 3D structures that you would like to align.
+        You can leave your email address if you wish to be notified once the results are ready.
+        Click Submit.
         You will be redirected to an interstitial page that you can bookmark.
         Processing usually takes 3-10 minutes.
-        You can leave your email address if you wish to be notified once the results are ready.
     </div>
     <div class="item hero-unit">
         <strong>
         <a href="<?=$this->config->item('home_url')?>/rna3dhub" target="_blank">RNA 3D Hub</a> integration.
         </strong>
         R3D Align is integrated with the
-         <a href="<?=$this->config->item('home_url')?>/rna3dhub/nrlist" target="_blank">Non-redundant Lists</a>
+         <a href="<?=$this->config->item('home_url')?>/rna3dhub/nrlist" target="_blank">Representative sets</a>
         where all RNA 3D structures are organized into <strong><em>equivalence classes</em></strong>
         according to organism, sequence and 3D similarity, and structure quality considerations.
         Each class is <strong><em>represented</em></strong> by a single structure.
@@ -50,14 +51,6 @@ please make sure that all input data are correct.
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
-
-    <div class='alert'>
-      <h4>We are transitioning to mmCIF files</h4>
-      <p>We are upgrading our site to include new 
-        RNA 3D structures distributed in mmCIF format. This may cause some alignments to fail. If this happens, please download the standalone version.
-       Follow us on <a href="https://twitter.com/rna3dhub">Twitter</a> to hear when the updated version becomes available.
-      </p>
-    </div>
 
     <form enctype="multipart/form-data" action="<?php echo base_url();?>query/new" name="main" method="post">
 
@@ -74,11 +67,9 @@ please make sure that all input data are correct.
         <div class="span4">
           <input type="text" tabIndex="1" data-provide="typeahead" class="typeahead span2"
                  autocomplete="off" placeholder="Enter PDB id" id="pdb1" name="pdb1"
-                 data-original-title="Last sync on <?php echo date('F j, Y', strtotime('last Saturday'));?>"
                  data-structure="1">
-          <span class="help-inline"><em>or upload a file</em></span>
-          <br>
-          <input type="file" name="upload_pdb1" id="upload_pdb1" />
+          <input type="text" name="upload_pdb1" id="upload_pdb1" placeholder="Leave blank"/>
+
         </div> <!-- pdb selection -->
 
         <div class="span8 mol1_fragments"></div> <!-- fragment selection -->
@@ -101,11 +92,9 @@ please make sure that all input data are correct.
         <div class="span4">
           <input type="text" tabIndex="2" data-provide="typeahead" class="typeahead span2"
                  autocomplete="off" placeholder="Enter PDB id" id="pdb2" name="pdb2"
-                 data-original-title="Last sync on <?php echo date('F j, Y', strtotime('last Saturday'));?>"
                  data-structure="2">
-          <span class="help-inline"><em>or upload a file</em></span>
-          <br>
-          <input type="file" name="upload_pdb2" id="upload_pdb2" />
+          <input type="text" name="upload_pdb2" id="upload_pdb2" placeholder="Leave blank"/>
+
         </div> <!-- pdb selection -->
 
         <div class="span8 mol2_fragments"></div> <!-- fragment selection -->
@@ -312,7 +301,7 @@ please make sure that all input data are correct.
 
     <select name="{{chainSelectName}}" class="span4">
       {{#each rna_compounds}}
-        <option value="{{chain}}">{{chain}}: {{compound}} ({{length}} nts)</option>
+        <option value="{{chain_name}}">{{chain_name}}: {{compound}} ({{length}} nts)</option>
       {{/each}}
     </select>
 
@@ -393,7 +382,7 @@ please make sure that all input data are correct.
     <span class="label label-info">Redundancy report</span>
     <a class="{{popoverClass}}">{{pdbId}}</a>
     hasn't been included in the
-    <a href="<?=$this->config->item('home_url')?>/rna3dhub/nrlist">Non-redundant Lists</a>.
+    <a href="<?=$this->config->item('home_url')?>/rna3dhub/nrlist">Representative sets</a>.
     Either it does not have any complete nucleotides,
     or it hasn't been processed yet.
   </div>
