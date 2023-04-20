@@ -289,6 +289,7 @@ class Query_model extends CI_Model {
 
         fwrite($fh, "Query.Name = '{$query_id}';\n");
         fwrite($fh, "Query.Type = 'web';\n");
+        fwrite($fh, "Query.LoadFinal = 0;\n");
 
         if ( $this->input->post('email') ) {
             $email = $this->input->post('email');
