@@ -16,6 +16,8 @@
     <script src="<?=$baseurl?>jmol/Jmol.js" type="text/javascript"></script>
     <script type="text/javascript" src="<?=$baseurl?>css/fancybox/jquery.fancybox.pack.js"></script>
 
+    <link rel="shortcut icon" href="http://rna.bgsu.edu/rna3dhub/icons/A_icon.png">
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
