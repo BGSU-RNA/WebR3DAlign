@@ -101,7 +101,7 @@ function sendNotification(email, subject, message)
         % Gmail server
         props = java.lang.System.getProperties;
         % props.setProperty('mail.smtp.auth','true');
-        props.setProperty('mail.smtp.socketFactory.class', 'javax.net.ssl.SSLSocketFactory');
+        % props.setProperty('mail.smtp.socketFactory.class', 'javax.net.ssl.SSLSocketFactory'); % 2023-04-20 CLZ
         props.setProperty('mail.smtp.socketFactory.port','25');
 
         sendmail(email{i}, subject, message);
