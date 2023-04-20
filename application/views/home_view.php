@@ -23,7 +23,7 @@ please make sure that all input data are correct.
         <a href="http://nar.oxfordjournals.org/content/41/W1/W15.full" target="_blank">Rahrig et al., 2013</a>.
         <br>
         Refer to <a href="<?=$this->config->item('home_url')?>/main/r3dalign-help" target="_blank">help</a>
-        and don't hesitate to <a href="">contact us</a> if you have questions.
+        and don't hesitate to contact us if you have questions.
     </div>
     <div class="item hero-unit">
         <strong>Quickstart.</strong>
