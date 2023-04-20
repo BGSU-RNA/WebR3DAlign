@@ -33,7 +33,6 @@
           </p>
 
           <p>
-            You can <strong>bookmark</strong> this page and return later to view your results.
             All R3D Align <strong>results are stored indefinitely</strong>, so feel free to
             share the url to refer to these results.
           </p>
